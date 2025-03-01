@@ -1,0 +1,231 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\mycode\\staticclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:mycode\\staticclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\thisaddin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:thisaddin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\mycode\\code1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:mycode\\code1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\mycode\\\u805A\u5149\u706F.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:mycode\\\u805A\u5149\u706F.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|\u63D2\u4EF6||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|c:\\users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "\u805A\u5149\u706F\u8BBE\u7F6E.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
+              "RelativeToolTip": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAuwDQAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T07:26:48.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "\u805A\u5149\u706F\u8BBE\u7F6E.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T07:04:50.033Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "\u63D2\u4EF6",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\\u63D2\u4EF6.csproj",
+              "RelativeDocumentMoniker": "\u63D2\u4EF6.csproj",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\\u63D2\u4EF6.csproj",
+              "RelativeToolTip": "\u63D2\u4EF6.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-01T07:02:36.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "\u805A\u5149\u706F.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyCode\\\u805A\u5149\u706F.cs",
+              "RelativeDocumentMoniker": "MyCode\\\u805A\u5149\u706F.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyCode\\\u805A\u5149\u706F.cs",
+              "RelativeToolTip": "MyCode\\\u805A\u5149\u706F.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAUwCAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T06:26:10.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "\u6570\u636E\u5BF9\u6BD4.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
+              "RelativeToolTip": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAmwEMAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T00:42:39.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T10:41:32.435Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "\u67E5\u8BE2.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u67E5\u8BE2.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
+              "RelativeToolTip": "MyForm\\\u67E5\u8BE2.cs",
+              "ViewState": "AgIAAB0BAAAAAAAAAAAcwCcBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T10:42:12.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AMG.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\AMG.cs",
+              "RelativeDocumentMoniker": "AMG.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\AMG.cs",
+              "RelativeToolTip": "AMG.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAIAxwCIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T10:06:53.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AMG.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\AMG.cs",
+              "RelativeDocumentMoniker": "AMG.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\AMG.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "AMG.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T10:00:03.609Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StaticClass.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
+              "RelativeDocumentMoniker": "MyCode\\StaticClass.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
+              "RelativeToolTip": "MyCode\\StaticClass.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T09:57:03.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Code1.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyCode\\Code1.cs",
+              "RelativeDocumentMoniker": "MyCode\\Code1.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\MyCode\\Code1.cs",
+              "RelativeToolTip": "MyCode\\Code1.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T09:56:32.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ThisAddIn.cs",
+              "DocumentMoniker": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\ThisAddIn.cs",
+              "RelativeDocumentMoniker": "ThisAddIn.cs",
+              "ToolTip": "C:\\Users\\\u8F9B\u9E4F\\source\\repos\\\u63D2\u4EF6\\ThisAddIn.cs",
+              "RelativeToolTip": "ThisAddIn.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T09:55:00.056Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

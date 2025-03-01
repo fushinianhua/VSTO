@@ -1,0 +1,17 @@
+C:\Users\辛鹏\source\repos\插件\bin\Debug\插件.dll
+C:\Users\辛鹏\source\repos\插件\bin\Debug\插件.pdb
+C:\Users\辛鹏\source\repos\插件\bin\Debug\插件.dll.manifest
+C:\Users\辛鹏\source\repos\插件\bin\Debug\插件.vsto
+C:\Users\辛鹏\source\repos\插件\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.csproj.AssemblyReference.cache
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.Properties.Resources.resources
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.csproj.GenerateResource.cache
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.csproj.CoreCompileInputs.cache
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.csproj.Up2Date
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.dll
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.pdb
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.AMG.resources
+C:\Users\辛鹏\source\repos\插件\bin\Debug\插件.dll.config
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.MyCode.查询.resources
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.MyForm.数据对比.resources
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.MyForm.聚光灯设置.resources
