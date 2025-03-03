@@ -38,16 +38,16 @@
             this.RadioButton2 = new System.Windows.Forms.RadioButton();
             this.RadioButton1 = new System.Windows.Forms.RadioButton();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
-            this.PictureBox3 = new System.Windows.Forms.PictureBox();
             this.PictureBox2 = new System.Windows.Forms.PictureBox();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PictureBox3 = new System.Windows.Forms.PictureBox();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar1)).BeginInit();
             this.GroupBox2.SuspendLayout();
             this.GroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel1
@@ -93,6 +93,7 @@
             this.Button1.TabIndex = 10;
             this.Button1.Text = "OK";
             this.Button1.UseVisualStyleBackColor = false;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Label1
             // 
@@ -163,18 +164,6 @@
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "颜色";
             // 
-            // PictureBox3
-            // 
-            this.PictureBox3.BackColor = System.Drawing.Color.White;
-            this.PictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PictureBox3.Image = global::插件.Properties.Resources.更换;
-            this.PictureBox3.Location = new System.Drawing.Point(18, 168);
-            this.PictureBox3.Name = "PictureBox3";
-            this.PictureBox3.Size = new System.Drawing.Size(20, 20);
-            this.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBox3.TabIndex = 8;
-            this.PictureBox3.TabStop = false;
-            // 
             // PictureBox2
             // 
             this.PictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -195,6 +184,18 @@
             this.PictureBox1.TabIndex = 0;
             this.PictureBox1.TabStop = false;
             // 
+            // PictureBox3
+            // 
+            this.PictureBox3.BackColor = System.Drawing.Color.White;
+            this.PictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PictureBox3.Image = global::插件.Properties.Resources.更换;
+            this.PictureBox3.Location = new System.Drawing.Point(18, 168);
+            this.PictureBox3.Name = "PictureBox3";
+            this.PictureBox3.Size = new System.Drawing.Size(20, 20);
+            this.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox3.TabIndex = 8;
+            this.PictureBox3.TabStop = false;
+            // 
             // 聚光灯设置
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -208,15 +209,16 @@
             this.Controls.Add(this.GroupBox1);
             this.Name = "聚光灯设置";
             this.Text = "聚光灯设置";
+            this.Load += new System.EventHandler(this.聚光灯设置_Load);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar1)).EndInit();
             this.GroupBox2.ResumeLayout(false);
             this.GroupBox2.PerformLayout();
             this.GroupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

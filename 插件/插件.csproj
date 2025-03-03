@@ -104,6 +104,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -191,6 +192,7 @@
     <Compile Include="AMG.Designer.cs">
       <DependentUpon>AMG.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyCode\MouseScrollHook.cs" />
     <Compile Include="MyForm\查询.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,6 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\更换.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\聚光灯关.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

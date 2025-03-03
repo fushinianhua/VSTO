@@ -39,7 +39,7 @@
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.group2 = this.Factory.CreateRibbonGroup();
-            this.splitButton1 = this.Factory.CreateRibbonSplitButton();
+            this.聚光灯 = this.Factory.CreateRibbonSplitButton();
             this.button3 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
@@ -73,16 +73,17 @@
             // 
             // group2
             // 
-            this.group2.Items.Add(this.splitButton1);
+            this.group2.Items.Add(this.聚光灯);
             this.group2.Name = "group2";
             // 
-            // splitButton1
+            // 聚光灯
             // 
-            this.splitButton1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.splitButton1.Image = global::插件.Properties.Resources.聚光灯开;
-            this.splitButton1.Items.Add(this.button3);
-            this.splitButton1.Label = "聚光灯";
-            this.splitButton1.Name = "splitButton1";
+            this.聚光灯.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.聚光灯.Image = global::插件.Properties.Resources.聚光灯开;
+            this.聚光灯.Items.Add(this.button3);
+            this.聚光灯.Label = "聚光灯";
+            this.聚光灯.Name = "聚光灯";
+            this.聚光灯.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.聚光灯_Click);
             // 
             // button3
             // 
@@ -114,7 +115,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonSplitButton splitButton1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSplitButton 聚光灯;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
     }
 

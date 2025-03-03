@@ -26,12 +26,12 @@ namespace 插件.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public string 聚光灯状态 {
+        public string 聚光灯选择状态 {
             get {
-                return ((string)(this["聚光灯状态"]));
+                return ((string)(this["聚光灯选择状态"]));
             }
             set {
-                this["聚光灯状态"] = value;
+                this["聚光灯选择状态"] = value;
             }
         }
         
@@ -56,6 +56,18 @@ namespace 插件.Properties {
             }
             set {
                 this["透明度"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool 聚光灯开关状态 {
+            get {
+                return ((bool)(this["聚光灯开关状态"]));
+            }
+            set {
+                this["聚光灯开关状态"] = value;
             }
         }
     }
