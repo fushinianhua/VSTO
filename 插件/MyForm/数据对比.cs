@@ -17,9 +17,9 @@ namespace 插件.MyForm
         public 数据对比()
         {
             InitializeComponent();
-            KeyPreview = true;
-            KeyDown += Form2_KeyDown;
+           
         }
+        private Excel.Application excelapp;
 
         private bool _Is相同项标识 = false;
         private bool _Is不同项标识 = false;
@@ -52,6 +52,8 @@ namespace 插件.MyForm
         {
             if (_Is相同项标识 = _Is相同项标识 = false)
             { 清除标识.Enabled = false; }
+            else
+            { 清除标识.Enabled = true; }
         }
 
         private void 相同项_Click(object sender, EventArgs e)
@@ -94,6 +96,9 @@ namespace 插件.MyForm
             清除标识.Enabled = false;
             导出不同项.Enabled = false;
             导出相同项.Enabled = false;
+            KeyPreview = true;
+            KeyDown += Form2_KeyDown;
+            excelapp = StaticClass.ExcelApp;
         }
 
         private void Form2_KeyDown(object sender, KeyEventArgs e)
@@ -140,8 +145,9 @@ namespace 插件.MyForm
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            this.Hide();
             // 使用 InputBox 方法提示用户选择单元格
-            object result = StaticClass.ExcelApp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8 // Type 8 表示返回一个 Range 对象
+            object result = excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8 // Type 8 表示返回一个 Range 对象
             );
 
             // 检查用户是否取消了选择
@@ -153,18 +159,20 @@ namespace 插件.MyForm
                 {
                     区域一 = selectedRange;
                     string str = selectedRange.Address.ToString().Replace("$", "");
-                    textBox1.Text = str;
+                    区域1Box.Text = str;
 
                     // 释放 COM 对象
                     Marshal.ReleaseComObject(selectedRange);
                 }
             }
+            this.Show();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            this.Hide();
             // 使用 InputBox 方法提示用户选择单元格
-            object result = StaticClass.ExcelApp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8 // Type 8 表示返回一个 Range 对象
+            object result = excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8 // Type 8 表示返回一个 Range 对象
             );
 
             // 检查用户是否取消了选择
@@ -176,16 +184,79 @@ namespace 插件.MyForm
                 {
                     区域二 = selectedRange;
                     string str = selectedRange.Address.ToString().Replace("$", "");
-                    textBox2.Text = str;
+                    区域2Box.Text = str;
 
                     // 释放 COM 对象
                     Marshal.ReleaseComObject(selectedRange);
                 }
             }
+            this.Show();
         }
 
         private void 对比数据_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (string.IsNullOrEmpty(区域1Box.Text))
+                {
+                    MessageBox.Show("区域一未选择");
+                }
+                if (string.IsNullOrEmpty(区域2Box.Text))
+                {
+                    MessageBox.Show("区域二未选择");
+                }
+                object[,] valuesArray1 = 区域一.Value2 as object[,];
+                object[,] valuesArray2 = 区域二.Value2 as object[,];
+                // 直接将单元格区域的值加载到数组中
+             //   object[,] valuesArray1 = 区域一.Value2;
+             //  object[,] valuesArray2 = 区域一.Value2;
+                HashSet<object> list = new HashSet<object>();
+                for (int i = 1; i <= valuesArray2.GetLength(0); i++)
+                {
+                    list.Add(valuesArray2[i, 1]);
+                }
+                // 存储相同的值和区域一中不同的值
+                List<object> sameValues = new List<object>();
+                List<object> differentValues1 = new List<object>();
+
+                // 遍历区域一的值
+                for (int i = 1; i <= valuesArray1.GetLength(0); i++)
+                {
+                    object value = valuesArray1[i, 1];
+                    if (list.Contains(value))
+                    {
+                        sameValues.Add(value);
+                    }
+                    else
+                    {
+                        differentValues1.Add(value);
+                    }
+                }
+                // 创建 HashSet 存储区域一的值，用于快速查找
+                HashSet<object> set1 = new HashSet<object>(sameValues.Concat(differentValues1));
+
+                // 存储区域二中不同的值
+                List<object> differentValues2 = new List<object>();
+                for (int i = 1; i <= valuesArray2.GetLength(0); i++)
+                {
+                    object value = valuesArray2[i, 1];
+                    if (!set1.Contains(value))
+                    {
+                        differentValues2.Add(value);
+                    }
+                }
+                区域一Text.AppendText(differentValues1.ToArray().ToString());
+                区域二Text.AppendText(differentValues2.ToArray().ToString());
+                相同项Text.AppendText(sameValues.ToArray().ToString());
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
         }
 
         private void 退出_Click(object sender, EventArgs e)

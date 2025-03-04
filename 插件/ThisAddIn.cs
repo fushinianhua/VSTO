@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 
 using System.Runtime.InteropServices;
-using ExcelMouseScrollVSTO;
+
 
 namespace 插件
 {
@@ -23,7 +23,7 @@ namespace 插件
         private Range _lastHighlightedRange;
         private Color _highlightColor = Color.LightBlue;
         private 聚光灯 _聚光灯;
-        private MouseScrollHook mouseHook;
+        private MouseWheelHandler mouseHook;
         //private KeyboardNavigationHandler _keyboardHandler;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -32,15 +32,15 @@ namespace 插件
             _聚光灯 = new 聚光灯(this.Application);
 
             excelApp = this.Application;
-            //mouseHook = new MouseScrollHook(this.Application);
-            //mouseHook.StartHook();
+         //   mouseHook = new MouseScrollHook(this.Application);
+           // mouseHook.StartHook();
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
             if (mouseHook != null)
             {
-                mouseHook.StopHook();
+               // mouseHook.SetHook();
             }
             _聚光灯?.UnsubscribeEvents();
         }
