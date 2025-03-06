@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace 插件.MyForm
 {
@@ -143,29 +144,40 @@ namespace 插件.MyForm
         private Excel.Range 区域一 = null;
         private Excel.Range 区域二 = null;
 
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
+        private const uint SWP_SHOWWINDOW = 0x0040;
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            // 获取 Excel 窗口句柄
+            IntPtr excelHwnd = (IntPtr)excelapp.Hwnd;
+            Form form = new 数据对比();
+            form.Hide();
+            //
+            //// 使用 InputBox 方法提示用户选择单元格
+            //object result = excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8 // Type 8 表示返回一个 Range 对象
+            //);
             this.Hide();
-            // 使用 InputBox 方法提示用户选择单元格
-            object result = excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8 // Type 8 表示返回一个 Range 对象
-            );
+            // 确保 Excel 窗口显示
+            SetWindowPos(excelHwnd, IntPtr.Zero, 0, 0, 0, 0, SWP_SHOWWINDOW);
+            //// 检查用户是否取消了选择
+            //if (result != null)
+            //{
+            //    // 将结果转换为 Range 对象    
 
-            // 检查用户是否取消了选择
-            if (result != null)
-            {
-                // 将结果转换为 Range 对象
+            //    if (result is Excel.Range selectedRange)
+            //    {
+            //        区域一 = selectedRange;
+            //        string str = selectedRange.Address.ToString().Replace("$", "");
+            //        区域1Box.Text = str;
 
-                if (result is Excel.Range selectedRange)
-                {
-                    区域一 = selectedRange;
-                    string str = selectedRange.Address.ToString().Replace("$", "");
-                    区域1Box.Text = str;
-
-                    // 释放 COM 对象
-                    Marshal.ReleaseComObject(selectedRange);
-                }
-            }
-            this.Show();
+            //        // 释放 COM 对象
+            //        Marshal.ReleaseComObject(selectedRange);
+            //    }
+            //}
+            Thread.Sleep(1000);
+            form.Show();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

@@ -201,7 +201,7 @@ namespace 插件.MyForm
                 catch (COMException)
                 {
                     // 当处理合并单元格时可能会抛出 COM 异常，此处记录日志方便调试
-                    System.Diagnostics.Debug.WriteLine("处理合并单元格时发生COM异常");
+                   Debug.WriteLine("处理合并单元格时发生COM异常");
                 }
                 finally
                 {
