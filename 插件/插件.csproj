@@ -192,7 +192,9 @@
     <Compile Include="AMG.Designer.cs">
       <DependentUpon>AMG.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyCode\MouseScrollHook.cs" />
+    <Compile Include="MyCode\FocusMonitor.cs" />
+    <Compile Include="MyCode\MouseHook.cs" />
+    <Compile Include="MyCode\NativeMethods.cs" />
     <Compile Include="MyForm\拆分工作表.cs">
       <SubType>Form</SubType>
     </Compile>

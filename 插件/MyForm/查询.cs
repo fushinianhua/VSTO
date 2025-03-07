@@ -66,111 +66,100 @@ namespace 插件.MyCode
         {
             try
             {
-                DateTime t0 = DateTime.Now; // 统计时间
+                DateTime t0 = DateTime.Now; // 记录开始时间
 
-                string item = comboBox1.SelectedItem.ToString();
-                string item2 = comboBox2.SelectedItem.ToString();
-                string item3 = comboBox3.SelectedItem.ToString();
-                string item4 = comboBox4.SelectedItem.ToString();
+                string item = comboBox1.SelectedItem?.ToString();
+                string item2 = comboBox2.SelectedItem?.ToString();
+                string item3 = comboBox3.SelectedItem?.ToString();
+                string item4 = comboBox4.SelectedItem?.ToString();
 
-                long writenum = long.Parse(textBox5.Text);
-                long Source_rows, This_rows;
-                // 禁用关闭按钮 JDForm.colsebotton.Enabled = false;
+                if (item == null || item2 == null || item3 == null || item4 == null)
+                {
+                    MessageBox.Show("请从所有下拉框中选择一个选项。");
+                    return;
+                }
+
+                if (!long.TryParse(textBox5.Text, out long writenum))
+                {
+                    MessageBox.Show("textBox5 中的输入无效，请输入有效的数字。");
+                    return;
+                }
+
                 string SourceKeyCol = Code1.StrtoW(Col1.Text);
                 string SourceValueCol = Code1.StrtoW(Col2.Text);
                 string ThisKeyCol = Code1.StrtoW(Col3.Text);
                 string ThisValueCol = Code1.StrtoW(Col4.Text);
-                Dictionary<string, object> MapDict = new Dictionary<string, object>();
+
                 Worksheet SourceSheet = (Worksheet)WKs[item].Worksheets[item2];
                 Worksheet ThisSheet = (Worksheet)WKs[item3].Worksheets[item4];
-                Source_rows = SourceSheet.UsedRange.Rows.Count;
-                This_rows = ThisSheet.UsedRange.Rows.Count;
+
+                long Source_rows = SourceSheet.UsedRange.Rows.Count;
+                long This_rows = ThisSheet.UsedRange.Rows.Count;
+
                 Range S_Key = SourceSheet.Range[SourceKeyCol + "1"].Resize[Source_rows];
                 Range S_Value = SourceSheet.Range[SourceValueCol + "1"].Resize[Source_rows];
                 Range T_Key = ThisSheet.Range[ThisKeyCol + "1"].Resize[This_rows];
-                int step = 1000;
-                long JDCount = Source_rows + This_rows - writenum + 1;
+                Range T_Value = ThisSheet.Range[ThisValueCol + "1"].Resize[This_rows]; // 目标值列
 
-                if (!checkBox2.Checked)
+                Dictionary<string, object> MapDict = BuildMapDict(SourceSheet, S_Key, S_Value, Source_rows);
+
+                progressBar1.Maximum = (int)(This_rows - writenum + 1);
+
+                for (long n = writenum; n <= This_rows; n++)
                 {
-                    for (long n = 1; n <= Source_rows; n++)
+                    string key = T_Key[n, 1].Value2?.ToString();
+                    if (string.IsNullOrEmpty(key))
                     {
-                        string key = S_Key[n, 1].Value2.ToString();
-                        if (!MapDict.ContainsKey(key))
-                        {
-                            MapDict.Add(key, S_Value[n, 1].Value2);
-                        }
+                        continue; // 如果键为空，跳过
                     }
-                }
-                else
-                {
-                    for (long n = 1; n <= Source_rows; n++)
+
+                    // 检查目标单元格是否已经有数据
+                    if (T_Value[n, 1].Value2 == null || string.IsNullOrEmpty(T_Value[n, 1].Value2.ToString()))
                     {
-                        string key = S_Key[n, 1].Value2.ToString();
-                        if (!MapDict.ContainsKey(key))
+                        if (MapDict.ContainsKey(key))
                         {
-                            MapDict.Add(key, S_Value[n, 1].Value2);
+                            T_Value[n, 1].Value2 = MapDict[key]; // 写入新值
                         }
                         else
                         {
-                            MapDict[key] = MapDict[key] + textBox7.Text + S_Value[n, 1].Value2;
+                            T_Value[n, 1].Value2 = textBox6.Text; // 写入默认值
                         }
                     }
-                }
-                object[,] Result = new object[This_rows - writenum + 1, 1];
 
-                //替换
-                if (!checkBox1.Checked)
-                {
-                    for (long n = writenum; n <= This_rows; n++)
-                    {
-                        string key = T_Key[n, 1].Value2.ToString();
-                        if (string.IsNullOrEmpty(key))
-                        {
-                            Result[n - writenum, 0] = MapDict[key];
-                        }
-                        else
-                        {
-                            Result[n - writenum, 0] = key;
-                        }
-
-                    }
+                    progressBar1.Value = (int)(n - writenum + 1);
                 }
-                else
-                {
-                    for (long n = writenum; n <= This_rows; n++)
-                    {
-                        string key = T_Key[n, 1].Value2.ToString();
-                        if (string.IsNullOrEmpty(key))
-                        {
-                            if (!MapDict.ContainsKey(key))
-                            {
-                                Result[n - writenum, 0] = textBox6.Text;
-                            }
-                            else
-                            {
-                                Result[n - writenum, 0] = MapDict[key];
-                            }
-                        }
-                        else 
-                        {
-                            Result[n - writenum, 0] = MapDict[key];
-                        }
 
-                    }
-                }
-                progressBar1.Value = 100;
                 TimeSpan timeSpan = DateTime.Now.Subtract(t0);
                 double totalSeconds = timeSpan.TotalSeconds;
                 textBox1.Text = totalSeconds + "秒";
-                Range resultRange = ThisSheet.Range[ThisValueCol + writenum].Resize[This_rows - writenum + 1, 1];
-                resultRange.Value2 = Result;
+
                 this.Close();
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("发生错误: " + ex.Message);
+            }
         }
 
+        private Dictionary<string, object> BuildMapDict(Worksheet SourceSheet, Range S_Key, Range S_Value, long Source_rows)
+        {
+            Dictionary<string, object> MapDict = new Dictionary<string, object>();
+            for (long n = 1; n <= Source_rows; n++)
+            {
+                string key = S_Key[n, 1].Value2?.ToString();
+                if (string.IsNullOrEmpty(key)) continue;
+
+                if (!MapDict.ContainsKey(key))
+                {
+                    MapDict.Add(key, S_Value[n, 1].Value2);
+                }
+                else if (checkBox2.Checked)
+                {
+                    MapDict[key] = MapDict[key] + textBox7.Text + S_Value[n, 1].Value2;
+                }
+            }
+            return MapDict;
+        }
         private void Col1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try

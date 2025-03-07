@@ -58,6 +58,7 @@ namespace 插件.MyForm
             _isSpotlightEnabled = StaticClass.聚光开关状态;
             if (_isSpotlightEnabled)
             {
+                //MouseHook.MouseWheelScrolled += OnMouseWheelScrolled;
 
                 // 当工作表中的选择区域发生改变时，触发 OnSelectionChanged 方法
                 _excelApp.SheetSelectionChange += OnSelectionChanged;
@@ -67,6 +68,7 @@ namespace 插件.MyForm
             }
             else
             {
+                //MouseHook.MouseWheelScrolled -= OnMouseWheelScrolled;
                 // 当工作表中的选择区域发生改变时，触发 OnSelectionChanged 方法
                 _excelApp.SheetSelectionChange -= OnSelectionChanged;
                 // 当 Excel 窗口大小调整时，触发 ExcelApp_WindowResize 方法
@@ -75,6 +77,11 @@ namespace 插件.MyForm
             }
 
             }
+
+        private void OnMouseWheelScrolled()
+        {
+            ApplyHighlight(_excelApp.Selection as Excel.Range);
+        }
 
         private void 状态ValueChanged(object sender, StaticClass.状态ChangedEventArgs e)
         {
