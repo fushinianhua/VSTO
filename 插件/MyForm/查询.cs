@@ -13,10 +13,6 @@ using 插件.MyForm;
 
 using Microsoft.Office.Interop.Excel;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Microsoft.SqlServer.Server;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-
 namespace 插件.MyCode
 {
     public partial class 查询 : Form
@@ -119,21 +115,25 @@ namespace 插件.MyCode
                         {
                             MapDict[key] = MapDict[key] + textBox7.Text + S_Value[n, 1].Value2;
                         }
-                        if (n % step == 0)
-                        {
-                        }
                     }
                 }
                 object[,] Result = new object[This_rows - writenum + 1, 1];
+
+                //替换
                 if (!checkBox1.Checked)
                 {
                     for (long n = writenum; n <= This_rows; n++)
                     {
                         string key = T_Key[n, 1].Value2.ToString();
-                        Result[n - writenum, 0] = MapDict[key];
-                        if (n % step == 0)
+                        if (string.IsNullOrEmpty(key))
                         {
+                            Result[n - writenum, 0] = MapDict[key];
                         }
+                        else
+                        {
+                            Result[n - writenum, 0] = key;
+                        }
+
                     }
                 }
                 else
@@ -141,17 +141,22 @@ namespace 插件.MyCode
                     for (long n = writenum; n <= This_rows; n++)
                     {
                         string key = T_Key[n, 1].Value2.ToString();
-                        if (!MapDict.ContainsKey(key))
+                        if (string.IsNullOrEmpty(key))
                         {
-                            Result[n - writenum, 0] = textBox6.Text;
+                            if (!MapDict.ContainsKey(key))
+                            {
+                                Result[n - writenum, 0] = textBox6.Text;
+                            }
+                            else
+                            {
+                                Result[n - writenum, 0] = MapDict[key];
+                            }
                         }
-                        else
+                        else 
                         {
                             Result[n - writenum, 0] = MapDict[key];
                         }
-                        if (n % step == 0)
-                        {
-                        }
+
                     }
                 }
                 progressBar1.Value = 100;
@@ -380,7 +385,8 @@ namespace 插件.MyCode
                 }
             }
             catch
-            { }
+            {
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

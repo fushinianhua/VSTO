@@ -32,3 +32,4 @@ D:\Github_project\VSTO\插件\obj\Debug\插件.csproj.CoreCompileInputs.cache
 D:\Github_project\VSTO\插件\obj\Debug\插件.csproj.Up2Date
 D:\Github_project\VSTO\插件\obj\Debug\插件.dll
 D:\Github_project\VSTO\插件\obj\Debug\插件.pdb
+C:\Users\辛鹏\source\repos\插件\obj\Debug\插件.MyForm.拆分工作表.resources

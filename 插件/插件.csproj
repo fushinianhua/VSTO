@@ -193,6 +193,12 @@
       <DependentUpon>AMG.cs</DependentUpon>
     </Compile>
     <Compile Include="MyCode\MouseScrollHook.cs" />
+    <Compile Include="MyForm\拆分工作表.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\拆分工作表.Designer.cs">
+      <DependentUpon>拆分工作表.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\查询.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +225,9 @@
     </Compile>
     <EmbeddedResource Include="AMG.resx">
       <DependentUpon>AMG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\拆分工作表.resx">
+      <DependentUpon>拆分工作表.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\查询.resx">
       <DependentUpon>查询.cs</DependentUpon>

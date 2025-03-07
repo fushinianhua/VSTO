@@ -48,6 +48,7 @@
             this.区域1Box = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.colorComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,6 +56,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.colorComboBox);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -169,6 +171,7 @@
             // 
             // 相同项Text
             // 
+            this.相同项Text.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.相同项Text.Location = new System.Drawing.Point(422, 133);
             this.相同项Text.Multiline = true;
             this.相同项Text.Name = "相同项Text";
@@ -177,6 +180,7 @@
             // 
             // 区域二Text
             // 
+            this.区域二Text.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.区域二Text.Location = new System.Drawing.Point(214, 133);
             this.区域二Text.Multiline = true;
             this.区域二Text.Name = "区域二Text";
@@ -185,6 +189,7 @@
             // 
             // 区域一Text
             // 
+            this.区域一Text.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.区域一Text.Location = new System.Drawing.Point(10, 133);
             this.区域一Text.Multiline = true;
             this.区域一Text.Name = "区域一Text";
@@ -193,10 +198,10 @@
             // 
             // 退出
             // 
-            this.退出.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.退出.Location = new System.Drawing.Point(504, 62);
+            this.退出.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.退出.Location = new System.Drawing.Point(397, 62);
             this.退出.Name = "退出";
-            this.退出.Size = new System.Drawing.Size(94, 26);
+            this.退出.Size = new System.Drawing.Size(77, 23);
             this.退出.TabIndex = 7;
             this.退出.Text = "退出";
             this.退出.UseVisualStyleBackColor = true;
@@ -204,10 +209,10 @@
             // 
             // 对比数据
             // 
-            this.对比数据.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.对比数据.Location = new System.Drawing.Point(346, 62);
+            this.对比数据.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.对比数据.Location = new System.Drawing.Point(302, 62);
             this.对比数据.Name = "对比数据";
-            this.对比数据.Size = new System.Drawing.Size(106, 26);
+            this.对比数据.Size = new System.Drawing.Size(71, 23);
             this.对比数据.TabIndex = 6;
             this.对比数据.Text = "对比数据";
             this.对比数据.UseVisualStyleBackColor = true;
@@ -269,6 +274,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "区域一(O)";
             // 
+            // colorComboBox
+            // 
+            this.colorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.colorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.colorComboBox.FormattingEnabled = true;
+            this.colorComboBox.Location = new System.Drawing.Point(483, 66);
+            this.colorComboBox.Name = "colorComboBox";
+            this.colorComboBox.Size = new System.Drawing.Size(97, 21);
+            this.colorComboBox.TabIndex = 19;
+            // 
             // 数据对比
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -280,7 +295,6 @@
             this.Name = "数据对比";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form2";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -311,5 +325,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox colorComboBox;
     }
 }

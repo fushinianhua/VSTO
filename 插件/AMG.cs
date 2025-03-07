@@ -66,5 +66,14 @@ namespace 插件
                 聚光灯.Image = Resources.聚光灯关;
             }
         }
+
+        private void button4_Click(object sender, RibbonControlEventArgs e)
+        {
+            Form form =new 拆分工作表();
+            if (form != null)
+            {
+                form.ShowDialog();
+            }
+        }
     }
 }
