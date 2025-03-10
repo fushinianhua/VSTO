@@ -16,6 +16,10 @@ namespace 插件
     public partial class AMG
     {
         private bool 开光状态;
+        public static Form 查询form = null;
+        public static Form 对比form = null;
+        public static Form 拆分form = null;
+        public static Form 聚光灯form = null;
         private void AMG_Load(object sender, RibbonUIEventArgs e)
         {
             开光状态 = Settings.Default.聚光灯开关状态;
@@ -25,26 +29,49 @@ namespace 插件
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
-            System.Windows.Forms.Form form = new 查询();
-            if (form != null)
+            try
             {
-                form.ShowDialog();
+
+                if (查询form == null)
+                {
+                    查询form = new 查询();
+                }
+                查询form.Show();
+            }
+            catch (Exception)
+            {
             }
         }
 
         private void button2_Click(object sender, RibbonControlEventArgs e)
         {
-            System.Windows.Forms.Form form = new 数据对比();
-            if (form != null)
+            try
             {
-                form.ShowDialog();
+                if (对比form == null)
+                {
+                    对比form = new 数据对比();
+                }
+                对比form.Show();
+            }
+            catch (Exception)
+            {
             }
         }
 
         private void button3_Click(object sender, RibbonControlEventArgs e)
         {
-            Form form = new 聚光灯设置();
-            form.ShowDialog();
+            try
+            {
+                if (聚光灯form == null)
+                {
+                    聚光灯form = new 聚光灯设置();
+                }
+                聚光灯form.Show();
+
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void 聚光灯_Click(object sender, RibbonControlEventArgs e)
@@ -69,11 +96,18 @@ namespace 插件
 
         private void button4_Click(object sender, RibbonControlEventArgs e)
         {
-            Form form =new 拆分工作表();
-            if (form != null)
+            try
             {
-                form.ShowDialog();
+                if (拆分form == null)
+                {
+                    拆分form = new 拆分工作表();
+                }
+                拆分form.Show();
             }
+            catch (Exception)
+            {
+            }
+
         }
     }
 }

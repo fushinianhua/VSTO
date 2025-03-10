@@ -2,7 +2,13 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files %28x86%29\Microsoft Office\root\Office16\EXCEL.exe</StartProgram>
-    <StartArguments>"C:\Users\Administrator\Desktop\工作簿1%282%29.xlsx"</StartArguments>
+    <StartProgram>C:\Program Files\Microsoft Office\root\Office16\EXCEL.exe</StartProgram>
+    <StartArguments>"C:\Users\辛鹏\Desktop\工作簿12.xlsx"</StartArguments>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PublishUrlHistory>publish\</PublishUrlHistory>
+    <InstallUrlHistory />
+    <SupportUrlHistory />
   </PropertyGroup>
 </Project>

@@ -51,10 +51,10 @@ namespace 插件.MyCode
                 comboBox3.SelectedIndex = 0;
             }
             checkBox1.Checked = true;
-            textBox5.Text = "2";
+            textBox5.Text = "0";
             textBox6.Text = "无";
             textBox7.Text = "重";
-            progressBar1.PerformStep();
+            progressBar1.Value=100;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -85,50 +85,62 @@ namespace 插件.MyCode
                     return;
                 }
 
-                string SourceKeyCol = Code1.StrtoW(Col1.Text);
-                string SourceValueCol = Code1.StrtoW(Col2.Text);
-                string ThisKeyCol = Code1.StrtoW(Col3.Text);
-                string ThisValueCol = Code1.StrtoW(Col4.Text);
+                string SourceKeyCol = Code1.StrtoW(Col1.Text);//源文件的key列
+                string SourceValueCol = Code1.StrtoW(Col2.Text);//源文件的值列
+                string ThisKeyCol = Code1.StrtoW(Col3.Text);//目标文件的key列
+                string ThisValueCol = Code1.StrtoW(Col4.Text);//模板文件的值列
 
-                Worksheet SourceSheet = (Worksheet)WKs[item].Worksheets[item2];
-                Worksheet ThisSheet = (Worksheet)WKs[item3].Worksheets[item4];
+                Worksheet SourceSheet = (Worksheet)WKs[item].Worksheets[item2];//源文件
+                Worksheet ThisSheet = (Worksheet)WKs[item3].Worksheets[item4];//目标文件
 
-                long Source_rows = SourceSheet.UsedRange.Rows.Count;
-                long This_rows = ThisSheet.UsedRange.Rows.Count;
+                long Source_rows = SourceSheet.Range["B1"].End[XlDirection.xlDown].Row;//源文件的最后一行
+                long This_rows = ThisSheet.Range["B1"].End[XlDirection.xlDown].Row;//目标文件的最后一行
 
                 Range S_Key = SourceSheet.Range[SourceKeyCol + "1"].Resize[Source_rows];
                 Range S_Value = SourceSheet.Range[SourceValueCol + "1"].Resize[Source_rows];
                 Range T_Key = ThisSheet.Range[ThisKeyCol + "1"].Resize[This_rows];
                 Range T_Value = ThisSheet.Range[ThisValueCol + "1"].Resize[This_rows]; // 目标值列
-
-                Dictionary<string, object> MapDict = BuildMapDict(SourceSheet, S_Key, S_Value, Source_rows);
-
-                progressBar1.Maximum = (int)(This_rows - writenum + 1);
-
-                for (long n = writenum; n <= This_rows; n++)
+                Dictionary<string, string> keyValues = 获取数据(S_Key, S_Value, Source_rows);
+                if (keyValues.Count > 0)
                 {
-                    string key = T_Key[n, 1].Value2?.ToString();
-                    if (string.IsNullOrEmpty(key))
+                    for (int i =2; i <= This_rows; i++)
                     {
-                        continue; // 如果键为空，跳过
-                    }
+                        Excel.Range rng = T_Key.Rows[i];
+                        string kry = rng.Value2?.ToString();
 
-                    // 检查目标单元格是否已经有数据
-                    if (T_Value[n, 1].Value2 == null || string.IsNullOrEmpty(T_Value[n, 1].Value2.ToString()))
-                    {
-                        if (MapDict.ContainsKey(key))
+                        Excel.Range rng2 = T_Value.Rows[i];
+                        try
                         {
-                            T_Value[n, 1].Value2 = MapDict[key]; // 写入新值
+                            if (keyValues.ContainsKey(kry))
+                            {
+                                string newValue = keyValues[kry];
+                                string currentValue = rng2.Value2?.ToString();
+                                if (string.IsNullOrEmpty(currentValue))
+                                {
+                                    rng2.Value2 = newValue;
+                                }
+                            }
+                            else
+                            {
+                                if (checkBox1.Checked)
+                                {
+                                    string newText = textBox6.Text;
+                                    string currentValue = rng2.Value2?.ToString();
+                                    if (currentValue != newText)
+                                    {
+                                        rng2.Value2 = newText;
+                                    }
+                                }
+                            }
                         }
-                        else
+                        finally
                         {
-                            T_Value[n, 1].Value2 = textBox6.Text; // 写入默认值
+                            // 释放 COM 对象
+                            Marshal.ReleaseComObject(rng);
+                            Marshal.ReleaseComObject(rng2);
                         }
                     }
-
-                    progressBar1.Value = (int)(n - writenum + 1);
                 }
-
                 TimeSpan timeSpan = DateTime.Now.Subtract(t0);
                 double totalSeconds = timeSpan.TotalSeconds;
                 textBox1.Text = totalSeconds + "秒";
@@ -140,25 +152,26 @@ namespace 插件.MyCode
                 MessageBox.Show("发生错误: " + ex.Message);
             }
         }
-
-        private Dictionary<string, object> BuildMapDict(Worksheet SourceSheet, Range S_Key, Range S_Value, long Source_rows)
+        private Dictionary<string, string> 获取数据(Excel.Range KeyCol, Excel.Range ValueCol, long RowCount)
         {
-            Dictionary<string, object> MapDict = new Dictionary<string, object>();
-            for (long n = 1; n <= Source_rows; n++)
+            Dictionary<string, string> 数据 = new Dictionary<string, string>();
+            for (int i = 2; i <= RowCount; i++)
             {
-                string key = S_Key[n, 1].Value2?.ToString();
-                if (string.IsNullOrEmpty(key)) continue;
+                Excel.Range rng = KeyCol.Rows[i];
+                Excel.Range rng2 = ValueCol.Rows[i];
+                string key = rng.Value2?.ToString();
+                string value = rng2.Value2?.ToString();
 
-                if (!MapDict.ContainsKey(key))
+                if (!string.IsNullOrEmpty(key) && !数据.ContainsKey(key))
                 {
-                    MapDict.Add(key, S_Value[n, 1].Value2);
+                    数据.Add(key, value);
                 }
-                else if (checkBox2.Checked)
-                {
-                    MapDict[key] = MapDict[key] + textBox7.Text + S_Value[n, 1].Value2;
-                }
+
+                // 释放 COM 对象
+                Marshal.ReleaseComObject(rng);
+                Marshal.ReleaseComObject(rng2);
             }
-            return MapDict;
+            return 数据;
         }
         private void Col1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -267,7 +280,7 @@ namespace 插件.MyCode
                     Col1.Items.Clear();
                     Col2.Items.Clear();
                     Worksheet WS = (Worksheet)WKs[item].Worksheets[item2];
-                    long ColNum = WS.UsedRange.Columns.Count;
+                    long ColNum = WS.Cells[1, WS.Columns.Count].End[XlDirection.xlToLeft].Column;
                     for (int i = 1; i < ColNum + 1; i++)
                     {
                         Range range = (Range)WS.Cells[1, i];
@@ -275,12 +288,7 @@ namespace 插件.MyCode
                         {
                             Col1.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
                             Col2.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
-                        }
-                        else
-                        {
-                            Col1.Items.Add($"{i}.null");
-                            Col2.Items.Add($"{i}.null");
-                        }
+                        }                       
                     }
                 }
             }
@@ -322,22 +330,18 @@ namespace 插件.MyCode
                     Col3.Items.Clear();
                     Col4.Items.Clear();
                     Worksheet WS = (Worksheet)WKs[item3].Worksheets[item4];
-                    long ColNum = WS.UsedRange.Columns.Count;
+                    long ColNum = WS.Cells[1, WS.Columns.Count].End[XlDirection.xlToLeft].Column;
                     for (int i = 1; i < ColNum + 1; i++)
                     {
                         Range range = (Range)WS.Cells[1, i];
-                        if (range.Value2 != "")
+                        if (range.Value2 != "" && range.Value2 != null)
                         {
                             Col3.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
                             Col4.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
                         }
-                        else
-                        {
-                            Col3.Items.Add($"{i}.null");
-                            Col4.Items.Add($"{i}.null");
-                        }
+
                     }
-                    Col4.Items.Add($"{ColNum}.空白尾列");
+                    Col4.Items.Add($"{ColNum+1}.空白尾列");
                 }
             }
             catch (Exception ex)
@@ -363,15 +367,14 @@ namespace 插件.MyCode
                 Range range = (Range)WS.Range[ThisValueCol + ":" + ThisValueCol];
                 int count = (int)StaticClass.ExcelApp.WorksheetFunction.CountA(range);
                 Marshal.ReleaseComObject(range);
-                if (count >= WriteNum)
-                {
+               
                     DialogResult result = MessageBox.Show("填充列已有数据,确认覆盖写入结果,\r,点击继续，中断操作点击取消。", "是否继续", MessageBoxButtons.OKCancel);
-                    if (result == DialogResult.Cancel)
+                    if (result == DialogResult.OK )
                     {
                         Run();
                     }
                     else { return; }
-                }
+                
             }
             catch
             {
@@ -416,6 +419,11 @@ namespace 插件.MyCode
             {
                 comboBox3.SelectedIndex = 0;
             }
+        }
+
+        private void 查询_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            AMG.查询form = null;
         }
     }
 }

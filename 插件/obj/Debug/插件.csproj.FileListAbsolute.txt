@@ -51,3 +51,4 @@ D:\软件\Repository\Zhaoyang\VSTO\插件\obj\Debug\插件.csproj.CoreCompileInp
 D:\软件\Repository\Zhaoyang\VSTO\插件\obj\Debug\插件.csproj.Up2Date
 D:\软件\Repository\Zhaoyang\VSTO\插件\obj\Debug\插件.dll
 D:\软件\Repository\Zhaoyang\VSTO\插件\obj\Debug\插件.pdb
+D:\Github_project\VSTO\插件\obj\Debug\插件.MyForm.拆分工作表.resources

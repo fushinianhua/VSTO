@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.colorComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.区域1Box = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.colorComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,6 +83,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据区域";
+            // 
+            // colorComboBox
+            // 
+            this.colorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.colorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.colorComboBox.FormattingEnabled = true;
+            this.colorComboBox.Location = new System.Drawing.Point(483, 66);
+            this.colorComboBox.Name = "colorComboBox";
+            this.colorComboBox.Size = new System.Drawing.Size(97, 21);
+            this.colorComboBox.TabIndex = 19;
             // 
             // label5
             // 
@@ -175,6 +185,7 @@
             this.相同项Text.Location = new System.Drawing.Point(422, 133);
             this.相同项Text.Multiline = true;
             this.相同项Text.Name = "相同项Text";
+            this.相同项Text.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.相同项Text.Size = new System.Drawing.Size(176, 348);
             this.相同项Text.TabIndex = 10;
             // 
@@ -274,16 +285,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "区域一(O)";
             // 
-            // colorComboBox
-            // 
-            this.colorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.colorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.colorComboBox.FormattingEnabled = true;
-            this.colorComboBox.Location = new System.Drawing.Point(483, 66);
-            this.colorComboBox.Name = "colorComboBox";
-            this.colorComboBox.Size = new System.Drawing.Size(97, 21);
-            this.colorComboBox.TabIndex = 19;
-            // 
             // 数据对比
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -293,8 +294,9 @@
             this.MaximumSize = new System.Drawing.Size(634, 583);
             this.MinimumSize = new System.Drawing.Size(634, 583);
             this.Name = "数据对比";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "数据对比";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.数据对比_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

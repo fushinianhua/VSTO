@@ -23,9 +23,9 @@ namespace 插件.MyForm
         {
             InitializeComponent();
             InitializeColorComboBox();
-           
-            
-          
+
+
+
         }
         // 在类成员变量区添加
         private Color? selectColor = null; // 保存自定义颜色
@@ -94,7 +94,7 @@ namespace 插件.MyForm
             );
             if (e.Index == colors.Count - 1)
             {
-                using (var brush = new SolidBrush( Color.White))
+                using (var brush = new SolidBrush(Color.White))
                 {
                     e.Graphics.FillRectangle(brush, colorRect);
                 }
@@ -224,7 +224,7 @@ namespace 插件.MyForm
             SwitchToThisWindow(excelHandle, true);
             this.Hide();
             Range rng = (Range)excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8);
-            rng.Resize[uniqueKeys1.Count+uniqueKeys2.Count].Value2=不同Rng.ToArray();
+            rng.Resize[uniqueKeys1.Count + uniqueKeys2.Count].Value2 = 不同Rng.ToArray();
             this.Show();
         }
 
@@ -287,15 +287,28 @@ namespace 插件.MyForm
                 object result = excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8); // Type 8 表示返回一个 Range 对象                                                                                                      
                 if (result != null)  // 检查用户是否取消了选择
                 {
-                    if (result is Excel.Range selectedRange)
+                    if (result is Range selectedRange)
                     {
+                        int rowIndex = 0;
                         // 获取选择区域所在的工作表
-                        Excel.Worksheet selectedWorksheet = selectedRange.Worksheet;
+                        Worksheet selectedWorksheet = selectedRange.Worksheet;
                         // 获取工作簿
-                        Excel.Workbook selectedWorkbook = selectedWorksheet.Parent;
-                        // 构建完整的地址信息，格式为 [工作簿名称]工作表名称!单元格地址
-                        区域一 = selectedRange;
+                        Workbook selectedWorkbook = selectedWorksheet.Parent;
+
+                        Range r = selectedWorksheet.Rows[selectedWorksheet.Rows.Count];
+                        if (r != null)
+                        {
+                            rowIndex = r.End[XlDirection.xlUp].Row;
+                        }
+                        else
+                        {
+                            rowIndex = selectedWorksheet.Rows.Count;
+                        }
+                        int columnCount = selectedRange.Columns.Count;
+                        Range rng = selectedWorksheet.Range[selectedRange.Cells[1, 1], selectedRange.Cells[rowIndex, columnCount]];
+                        区域一 = rng;
                         区域1Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange); ;
+
                     }
                 }
                 this.Show();
@@ -322,16 +335,28 @@ namespace 插件.MyForm
                 {
                     // 将结果转换为 Range 对象
 
-                    if (result is Excel.Range selectedRange)
+                    if (result is Range selectedRange)
                     {
-                        区域二 = selectedRange;
+                        int rowIndex = 0;
                         // 获取选择区域所在的工作表
                         Worksheet selectedWorksheet = selectedRange.Worksheet;
                         // 获取工作簿
                         Workbook selectedWorkbook = selectedWorksheet.Parent;
-                        // 构建完整的地址信息，格式为 [工作簿名称]工作表名称!单元格地址
-                        区域二 = selectedRange;
-                        区域2Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange); ;
+
+                        Range r = selectedWorksheet.Rows[selectedWorksheet.Rows.Count];
+                        if (r != null)
+                        {
+                            rowIndex = r.End[XlDirection.xlUp].Row;
+                        }
+                        else
+                        {
+                            rowIndex = selectedWorksheet.Rows.Count;
+                        }
+                        int columnCount = selectedRange.Columns.Count;
+                        Range rng = selectedWorksheet.Range[selectedRange.Cells[1, 1], selectedRange.Cells[rowIndex, columnCount]];
+                        区域二 = rng;
+                        区域2Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange);
+                  
                     }
                 }
                 this.Show();
@@ -367,8 +392,8 @@ namespace 插件.MyForm
             return $"[{workbook.Name}]{worksheet.Name}!{address}";
         }
         //保存相同和不同的单元格地址
-        private List<Range> 相同Rng = new List<Range>();
-        private List<Range> 不同Rng = new List<Range>();
+        private readonly List<Range> 相同Rng = new List<Range>();
+        private readonly List<Range> 不同Rng = new List<Range>();
         private HashSet<string> commonKeys;
         private HashSet<string> uniqueKeys1;
         private HashSet<string> uniqueKeys2;
@@ -377,195 +402,60 @@ namespace 插件.MyForm
         {
             try
             {
-                // 重置所有集合
+                // 释放之前占用的COM对象
+                ReleaseComObjects(相同Rng);
                 相同Rng.Clear();
-
+                ReleaseComObjects(不同Rng);
                 不同Rng.Clear();
+                相同项Text.Text = "";
+                区域一Text.Text = "";
+                区域一Text.Text = "";
 
-                // 基础验证（保持不变）
                 if (string.IsNullOrEmpty(区域1Box.Text) || string.IsNullOrEmpty(区域2Box.Text))
                 {
                     MessageBox.Show("请先选择两个对比区域");
                     return;
                 }
 
-                // 获取数据（保持不变）
-                object[,] data1 = 区域一.Value2 as object[,];
-                object[,] data2 = 区域二.Value2 as object[,];
+                // 使用快速数组访问
+                object[,] data1 = (object[,])区域一.Value;
+                object[,] data2 = (object[,])区域二.Value;
                 if (data1 == null || data2 == null) return;
 
-                // 构建值字典（包含单元格地址）
-                var dict1 = BuildValueDictionary(data1, 区域一);
-                var dict2 = BuildValueDictionary(data2, 区域二);
+                Task task = Task.Run(() => { 
 
-                // 计算三个数据集
-                 commonKeys = new HashSet<string>(dict1.Keys.Intersect(dict2.Keys));
-               uniqueKeys1 = new HashSet<string>(dict1.Keys.Except(dict2.Keys));
-                 uniqueKeys2 = new HashSet<string>(dict2.Keys.Except(dict1.Keys));
 
-                // 填充结果集合
-                foreach (var key in commonKeys)
-                {
-                    相同Rng.AddRange(dict1[key]); // 区域一的单元格
-                    相同Rng.AddRange(dict2[key]); // 区域二的单元格
-                }
-
-                foreach (var key in uniqueKeys1)
-                    不同Rng.AddRange(dict1[key]);
-
-                foreach (var key in uniqueKeys2)
-                    不同Rng.AddRange(dict2[key]);
-
-                // 更新界面
-                UpdateDisplay(commonKeys, uniqueKeys1, uniqueKeys2);
+                });
+            
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"处理失败: {ex.Message}");
             }
         }
-        // 构建值到单元格的映射字典
-        private Dictionary<string, List<Excel.Range>> BuildValueDictionary(object[,] data, Excel.Range baseRange)
+
+   
+
+        private void ReleaseComObjects(List<Excel.Range> ranges)
         {
-            var dict = new Dictionary<string, List<Excel.Range>>();
-
-            for (int row = 1; row <= data.GetLength(0); row++)
+            foreach (var range in ranges)
             {
-                for (int col = 1; col <= data.GetLength(1); col++)
+                if (range != null && Marshal.IsComObject(range))
                 {
-                    var value = data[row, col];
-                    var key = ConvertValueKey(value);
-                    var cell = baseRange.Cells[row, col];
-
-                    if (!dict.ContainsKey(key))
-                        dict[key] = new List<Excel.Range>();
-
-                    dict[key].Add(cell);
+                    Marshal.ReleaseComObject(range);
                 }
             }
-            return dict;
-        }// 值标准化处理
-        private string ConvertValueKey(object value)
-        {
-            if (value == null) return "∅"; // 特殊符号表示null
-            if (value is string str) return str.Trim();
-            return Convert.ToString(value);
-        }
-        // 界面更新
-        private void UpdateDisplay(
-            HashSet<string> commonKeys,
-            HashSet<string> uniqueKeys1,
-            HashSet<string> uniqueKeys2)
-        {
-            // 值显示（自动去重）
-            区域一Text.Text = string.Join(Environment.NewLine, uniqueKeys1);
-            区域二Text.Text = string.Join(Environment.NewLine, uniqueKeys2);
-            相同项Text.Text = string.Join(Environment.NewLine, commonKeys);
-
-            // 按钮状态控制
-            不同项.Enabled = 导出不同项.Enabled = uniqueKeys1.Count > 0 || uniqueKeys2.Count > 0;
-            相同项.Enabled = 导出相同项.Enabled = commonKeys.Count > 0;
-
-            // 调试信息（可选）
-            Debug.WriteLine($"相同单元格数：{相同Rng.Count}");
-            Debug.WriteLine($"区域一不同单元格数：{不同Rng.Count}");
-          
-        }
-
-        // 辅助方法：填充值集合
-        private void FillValueSet(object[,] values, HashSet<object> set)
-        {
-            for (int row = 1; row <= values.GetLength(0); row++)
-                for (int col = 1; col <= values.GetLength(1); col++)
-                    set.Add(values[row, col]);
-        }
-
-        // 辅助方法：构建值字典
-        private void BuildValueDictionary(object[,] values, Excel.Range range, Dictionary<object, List<Excel.Range>> dict)
-        {
-            for (int row = 1; row <= values.GetLength(0); row++)
-            {
-                for (int col = 1; col <= values.GetLength(1); col++)
-                {
-                    // 统一处理值的类型和 null
-                    object rawValue = values[row, col];
-                    object keyValue = rawValue == null ? null : Convert.ChangeType(rawValue, typeof(string));
-
-                    // 记录原始单元格
-                    Excel.Range cell = range.Cells[row, col];
-
-                    if (!dict.ContainsKey(keyValue))
-                        dict[keyValue] = new List<Excel.Range>();
-
-                    dict[keyValue].Add(cell); // 直接存储区域二的单元格
-                }
-            }
-        }
-        // 辅助方法：查找匹配项
-        // 修改后的 FindMatches 方法
-        private void FindMatches(
-        object[,] values,
-        Excel.Range range,
-        Dictionary<object, List<Excel.Range>> valueDict,
-        List<string> matches,
-        List<Excel.Range> matchCells,
-        List<Excel.Range> diffCells)
-        {
-            // 记录已匹配的区域二单元格
-            HashSet<Excel.Range> matchedRegion2Cells = new HashSet<Excel.Range>();
-
-            for (int row = 1; row <= values.GetLength(0); row++)
-            {
-                for (int col = 1; col <= values.GetLength(1); col++)
-                {
-                    Excel.Range cell1 = range.Cells[row, col];
-                    object rawValue = values[row, col];
-                    object keyValue = rawValue == null ? null : Convert.ChangeType(rawValue, typeof(string));
-
-                    if (valueDict.TryGetValue(keyValue, out List<Excel.Range> region2Cells))
-                    {
-                        foreach (Excel.Range cell2 in region2Cells)
-                        {
-                            // 记录配对：区域一单元格 + 区域二单元格
-                            matchCells.Add(cell1);
-                            matchCells.Add(cell2);
-                            matches.Add(rawValue?.ToString());
-
-                            // 标记区域二单元格已匹配
-                            matchedRegion2Cells.Add(cell2);
-                        }
-                    }
-                    else
-                    {
-                        diffCells.Add(cell1); // 区域一独有的单元格
-                    }
-                }
-            }
-
-            // 查找区域二独有的单元格（未匹配的）
-            foreach (var pair in valueDict)
-            {
-                foreach (Excel.Range cell in pair.Value)
-                {
-                    if (!matchedRegion2Cells.Contains(cell))
-                        diffCells.Add(cell); // 区域二独有的单元格
-                }
-            }
-        }
-        // 辅助方法：更新界面
-        private void UpdateUI(HashSet<string> 区域一独有, HashSet<string> 区域二独有, List<string> 相同值)
-        {
-            区域一Text.Text = string.Join(Environment.NewLine, 区域一独有);
-            区域二Text.Text = string.Join(Environment.NewLine, 区域二独有);
-            相同项Text.Text = string.Join(Environment.NewLine, 相同值.Distinct()); // 如需相同值去重可添加.Distinct()
-
-            不同项.Enabled = 导出不同项.Enabled = 区域一独有.Count > 0;
-            相同项.Enabled = 导出相同项.Enabled = 相同值.Count > 0;
+            System.GC.Collect(); // 强制回收释放的COM对象
         }
 
         private void 退出_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void 数据对比_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            AMG.对比form = null;
         }
     }
 }

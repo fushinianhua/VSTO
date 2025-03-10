@@ -127,5 +127,10 @@ namespace 插件.MyForm
             Settings.Default.Save();
             this.Close();
         }
+
+        private void 聚光灯设置_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           AMG. 聚光灯form=null;
+        }
     }
 }

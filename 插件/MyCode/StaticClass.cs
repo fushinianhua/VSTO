@@ -5,13 +5,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using 插件.Properties;
 
 namespace 插件.MyForm
 {
     internal class StaticClass
     {
+        
         public static Application ExcelApp;
+      
         public static string _聚光灯选择状态;
         public static bool _聚光开关状态;
         // 定义一个事件，当聚光灯颜色改变时触发

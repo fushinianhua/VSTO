@@ -44,7 +44,7 @@ namespace 插件.MyForm
             // 当 Excel 窗口大小调整时，触发 ExcelApp_WindowResize 方法
             _excelApp.WindowResize += ExcelApp_WindowResize;
             //
-         
+            _excelApp.SheetActivate += OnSheetActivated;
             //
             StaticClass.Instance.SpotlightColorChanged += ColorValueChanged;
             //
@@ -163,6 +163,24 @@ namespace 插件.MyForm
             }
         }
 
+
+        // 新增：处理工作表激活事件
+        private void OnSheetActivated(object Sh)
+        {
+            if (_isSpotlightEnabled)
+            {
+                DisableExcelUpdates();
+                try
+                {
+                    ClearHighlight();
+                    ApplyHighlight(_excelApp.Selection as Excel.Range);
+                }
+                finally
+                {
+                    EnableExcelUpdates();
+                }
+            }
+        }
         /// <summary>
         /// 当工作表中的选择区域发生改变时执行的方法
         /// </summary>
@@ -194,32 +212,32 @@ namespace 插件.MyForm
         /// </summary>
         private void ClearHighlight()
         {
-            // 如果上一次高亮显示的范围为空，则直接返回
             if (_lastHighlightedRange == null) return;
 
-            // 遍历上一次高亮显示范围中的每个区域
             foreach (Excel.Range area in _lastHighlightedRange.Areas)
             {
                 try
                 {
-                    // 将该区域内单元格的背景颜色设置为无
+                    // 检查工作表是否有效
+                    var worksheet = area.Worksheet;
+                    Marshal.ReleaseComObject(worksheet); // 释放工作表引用
                     area.Interior.ColorIndex = Excel.XlColorIndex.xlColorIndexNone;
                 }
-                catch (COMException)
+                catch (COMException ex) when (ex.ErrorCode == -2146827284) // 工作表无效
                 {
-                    // 当处理合并单元格时可能会抛出 COM 异常，此处记录日志方便调试
-                   Debug.WriteLine("处理合并单元格时发生COM异常");
+                    Debug.WriteLine("工作表已关闭，忽略高亮清除");
+                }
+                catch (COMException ex)
+                {
+                    Debug.WriteLine($"清除高亮时发生COM异常: {ex.Message}");
                 }
                 finally
                 {
-                    // 释放该区域的 COM 对象资源，避免内存泄漏
                     ReleaseComObject(area);
                 }
             }
 
-            // 释放上一次高亮显示范围的 COM 对象资源
             ReleaseComObject(_lastHighlightedRange);
-            // 将上一次高亮显示范围置为 null
             _lastHighlightedRange = null;
         }
 
@@ -231,74 +249,58 @@ namespace 插件.MyForm
         {
             if (target == null || !_isSpotlightEnabled) return;
 
-            // 判断是否选择了整行或整列
-            bool isWholeRow = target.Columns.Count == _excelApp.Columns.Count;
-            bool isWholeColumn = target.Rows.Count == _excelApp.Rows.Count;
-            if (isWholeRow || isWholeColumn)
+            // 确保目标在工作表的活动窗口中
+            if (target.Worksheet.Name != _excelApp.ActiveSheet.Name)
             {
+                Debug.WriteLine("目标不在活动工作表，跳过高亮");
                 return;
             }
 
-            // 禁用 Excel 的屏幕更新和事件触发，避免操作过程中界面闪烁和不必要的事件响应
             DisableExcelUpdates();
             try
             {
-                // 获取当前 Excel 窗口的可见范围
                 var visibleRange = _excelApp.ActiveWindow.VisibleRange;
                 try
                 {
-                    // 根据静态类中存储的聚光灯状态，选择不同的高亮显示方式
                     switch (StaticClass.聚光灯状态)
                     {
                         case "1":
-                            // 只高亮显示目标单元格所在的行
                             _lastHighlightedRange = CalculateRowRange(target, visibleRange);
                             break;
                         case "2":
-                            // 只高亮显示目标单元格所在的列
                             _lastHighlightedRange = CalculateColumnRange(target, visibleRange);
                             break;
                         case "3":
-                            // 同时高亮显示目标单元格所在的行和列
                             var rowsRange = CalculateRowRange(target, visibleRange);
                             var colsRange = CalculateColumnRange(target, visibleRange);
-                            try
-                            {
-                                _lastHighlightedRange = _excelApp.Union(rowsRange, colsRange);
-                            }
-                            finally
-                            {
-                                ReleaseComObject(rowsRange);
-                                ReleaseComObject(colsRange);
-                            }
+                            _lastHighlightedRange = _excelApp.Union(rowsRange, colsRange);
+                            ReleaseComObject(rowsRange);
+                            ReleaseComObject(colsRange);
                             break;
                         default:
-                            // 当聚光灯状态为未知值时，记录日志并返回，不进行高亮显示操作
-                            System.Diagnostics.Debug.WriteLine($"未知的聚光灯状态: {StaticClass.聚光灯状态}");
+                            Debug.WriteLine($"未知状态: {StaticClass.聚光灯状态}");
                             return;
                     }
 
-                    // 将最终确定的高亮显示范围的背景颜色设置为静态类中存储的聚光灯颜色
                     _lastHighlightedRange.Interior.Color = StaticClass.聚光灯颜色;
                     target.Interior.Color = Color.White;
                 }
                 finally
                 {
-                    // 释放可见范围的 COM 对象资源
                     ReleaseComObject(visibleRange);
                 }
             }
             catch (Exception ex)
             {
-                // 当应用高亮显示过程中发生异常时，记录异常信息方便调试
-                System.Diagnostics.Debug.WriteLine($"应用高亮显示时发生异常: {ex.Message}");
+                Debug.WriteLine($"应用高亮异常: {ex.Message}");
             }
             finally
             {
-                // 恢复 Excel 的屏幕更新和事件触发
                 EnableExcelUpdates();
             }
         }
+
+        
 
         /// <summary>
         /// 计算目标单元格所在行的高亮显示范围
