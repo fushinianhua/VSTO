@@ -14,6 +14,8 @@ using Microsoft.Office.Interop.Excel;
 using Button = System.Windows.Forms.Button;
 using System.Diagnostics;
 using Rectangle = System.Drawing.Rectangle;
+using System.Collections.Concurrent;
+using System.Collections;
 
 namespace 插件.MyForm
 {
@@ -119,29 +121,35 @@ namespace 插件.MyForm
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
         private Excel.Application excelapp;
-
-
+        private Range 相同Rng = null;
+        private Range 不同Rng = null;
 
         private void 相同项_Click(object sender, EventArgs e)
         {
             清除标识.Enabled = true;
             Range combinedRange = null;
             excelapp.ScreenUpdating = false;
-            excelapp.Calculation = Excel.XlCalculation.xlCalculationManual;
-            foreach (Range range in 相同Rng)
+            excelapp.Calculation =XlCalculation.xlCalculationManual;
+            if (相同项文本.Count < 1) return;
+            foreach (Range rng in 区域一单元格)
             {
-                if (combinedRange == null)
+                string value = rng.Value2;
+                if (相同项文本.Contains(value))
                 {
-                    combinedRange = range;
+                    combinedRange = excelapp.Union(combinedRange,rng);
                 }
-                else
+            }
+            foreach (Range rng in 区域二单元格)
+            {
+                string value = rng.Value2;
+                if (相同项文本.Contains(value))
                 {
-                    combinedRange = excelapp.Union(combinedRange, range);
+                    combinedRange = excelapp.Union(combinedRange, rng);
                 }
             }
             combinedRange.Interior.Color = selectColor;
             excelapp.ScreenUpdating = true;
-            excelapp.Calculation = Excel.XlCalculation.xlCalculationAutomatic;
+            excelapp.Calculation = XlCalculation.xlCalculationAutomatic;
         }
 
         private void 不同项_Click(object sender, EventArgs e)
@@ -173,7 +181,7 @@ namespace 插件.MyForm
             // 关闭屏幕更新和自动计算
             excelapp.ScreenUpdating = false;
             excelapp.Calculation = Excel.XlCalculation.xlCalculationManual;
-            foreach (Range range in 不同Rng)
+            foreach (Range range in 区域一单元格)
             {
                 if (combinedRange == null)
                 {
@@ -184,7 +192,7 @@ namespace 插件.MyForm
                     combinedRange = excelapp.Union(combinedRange, range);
                 }
             }
-            foreach (Range range in 相同Rng)
+            foreach (Range range in 区域二单元格)
             {
                 if (combinedRange == null)
                 {
@@ -212,7 +220,7 @@ namespace 插件.MyForm
             SwitchToThisWindow(excelHandle, true);
             this.Hide();
             Range rng = (Range)excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8);
-            rng.Resize[commonKeys.Count].Value2 = 相同Rng.ToArray();
+           // rng.Resize[commonKeys.Count].Value2 = 相同Rng.ToArray();
             this.Show();
         }
 
@@ -224,7 +232,7 @@ namespace 插件.MyForm
             SwitchToThisWindow(excelHandle, true);
             this.Hide();
             Range rng = (Range)excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8);
-            rng.Resize[uniqueKeys1.Count + uniqueKeys2.Count].Value2 = 不同Rng.ToArray();
+          //  rng.Resize[uniqueKeys1.Count + uniqueKeys2.Count].Value2 = 不同Rng.ToArray();
             this.Show();
         }
 
@@ -271,10 +279,12 @@ namespace 插件.MyForm
             this.Focus();
         }
 
-        private Range 区域一 = null;
-        private Range 区域二 = null;
+        private Range 区域一单元格 = null;
+        private Range 区域二单元格 = null;
 
-
+        private ConcurrentBag<string> 区域一独有 = new ConcurrentBag<string>();
+        private ConcurrentBag<string> 区域二独有 = new ConcurrentBag<string>();
+        private List<string> 相同项文本 = new List<string>();
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             try
@@ -289,25 +299,21 @@ namespace 插件.MyForm
                 {
                     if (result is Range selectedRange)
                     {
-                        int rowIndex = 0;
-                        // 获取选择区域所在的工作表
                         Worksheet selectedWorksheet = selectedRange.Worksheet;
                         // 获取工作簿
                         Workbook selectedWorkbook = selectedWorksheet.Parent;
-
-                        Range r = selectedWorksheet.Rows[selectedWorksheet.Rows.Count];
-                        if (r != null)
+                        int selectIndex = selectedRange.Rows.Count;
+                        int RowsCount = selectedWorksheet.Rows.Count;
+                        int rowIndex = selectIndex;
+                        if (selectIndex == RowsCount)
                         {
+                            Range r = selectedWorksheet.Cells[selectedWorksheet.Rows.Count, selectedRange.Column];
                             rowIndex = r.End[XlDirection.xlUp].Row;
-                        }
-                        else
-                        {
-                            rowIndex = selectedWorksheet.Rows.Count;
                         }
                         int columnCount = selectedRange.Columns.Count;
                         Range rng = selectedWorksheet.Range[selectedRange.Cells[1, 1], selectedRange.Cells[rowIndex, columnCount]];
-                        区域一 = rng;
-                        区域1Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange); ;
+                        区域一单元格 = rng;
+                        区域1Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange); 
 
                     }
                 }
@@ -337,26 +343,23 @@ namespace 插件.MyForm
 
                     if (result is Range selectedRange)
                     {
-                        int rowIndex = 0;
-                        // 获取选择区域所在的工作表
                         Worksheet selectedWorksheet = selectedRange.Worksheet;
                         // 获取工作簿
                         Workbook selectedWorkbook = selectedWorksheet.Parent;
-
-                        Range r = selectedWorksheet.Rows[selectedWorksheet.Rows.Count];
-                        if (r != null)
+                        int selectIndex = selectedRange.Rows.Count;
+                        int RowsCount = selectedWorksheet.Rows.Count;
+                        int rowIndex = selectIndex;
+                        if (selectIndex == RowsCount)
                         {
+                            Range r = selectedWorksheet.Cells[selectedWorksheet.Rows.Count, selectedRange.Column];
                             rowIndex = r.End[XlDirection.xlUp].Row;
                         }
-                        else
-                        {
-                            rowIndex = selectedWorksheet.Rows.Count;
-                        }
+
                         int columnCount = selectedRange.Columns.Count;
                         Range rng = selectedWorksheet.Range[selectedRange.Cells[1, 1], selectedRange.Cells[rowIndex, columnCount]];
-                        区域二 = rng;
+                        区域二单元格 = rng;
                         区域2Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange);
-                  
+
                     }
                 }
                 this.Show();
@@ -392,41 +395,77 @@ namespace 插件.MyForm
             return $"[{workbook.Name}]{worksheet.Name}!{address}";
         }
         //保存相同和不同的单元格地址
-        private readonly List<Range> 相同Rng = new List<Range>();
-        private readonly List<Range> 不同Rng = new List<Range>();
-        private HashSet<string> commonKeys;
-        private HashSet<string> uniqueKeys1;
-        private HashSet<string> uniqueKeys2;
+       
+        private static ConcurrentBag<int> _concurrentBag = new ConcurrentBag<int>();
 
+        // 使用线程安全的集合
+        ConcurrentBag<string> 数据1 = new ConcurrentBag<string>();
+        ConcurrentBag<Range> 数据1单元格 = new ConcurrentBag<Range>();
+        ConcurrentBag<string> 数据2 = new ConcurrentBag<string>();
+        ConcurrentBag<Range> 数据2单元格 = new ConcurrentBag<Range>();
         private void 对比数据_Click(object sender, EventArgs e)
         {
             try
             {
-                // 释放之前占用的COM对象
-                ReleaseComObjects(相同Rng);
-                相同Rng.Clear();
-                ReleaseComObjects(不同Rng);
-                不同Rng.Clear();
                 相同项Text.Text = "";
                 区域一Text.Text = "";
-                区域一Text.Text = "";
-
+                区域二Text.Text = "";
                 if (string.IsNullOrEmpty(区域1Box.Text) || string.IsNullOrEmpty(区域2Box.Text))
                 {
                     MessageBox.Show("请先选择两个对比区域");
                     return;
                 }
-
                 // 使用快速数组访问
-                object[,] data1 = (object[,])区域一.Value;
-                object[,] data2 = (object[,])区域二.Value;
+                object[,] data1 = (object[,])区域一单元格.Value;
+                object[,] data2 = (object[,])区域二单元格.Value;
                 if (data1 == null || data2 == null) return;
-
-                Task task = Task.Run(() => { 
-
-
+                CountdownEvent countdownEvent = new CountdownEvent(2);
+                List<string> D1=  数据1.ToList();
+                List<string> D2 = 数据2.ToList();
+                // 启动任务处理 data1
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    try
+                    {
+                        获取单元格数据(data1, 数据1, 数据1单元格);
+                    }
+                    finally
+                    {
+                        // 任务完成，发出信号
+                        countdownEvent.Signal();
+                    }
                 });
-            
+                // 启动任务处理 data2
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    try
+                    {
+                        获取单元格数据(data2, 数据2, 数据1单元格);
+                    }
+                    finally
+                    {
+                        // 任务完成，发出信号
+                        countdownEvent.Signal();
+                    }
+                });
+                countdownEvent.Wait();//把区域的所有数据提取完成
+                相同项文本 = 数据1.Intersect(数据2).ToList();//求出相同项
+                HashSet<string> text1 = new HashSet<string>();
+                HashSet<string> text2 = new HashSet<string>();
+                
+                if (相同项文本 != null)
+                {
+
+                    D1= 数据1.Where(str => !数据2.Contains(str)).ToList();
+                    D2 = 数据2.Where(str => !数据1.Contains(str)).ToList();
+                }
+                区域一Text.Text = string.Join(Environment.NewLine, D1.ToArray());
+                区域二Text.Text = string.Join(Environment.NewLine, D2.ToArray());
+                相同项Text.Text = string.Join(Environment.NewLine, 相同项文本.ToArray());
+
+
+                MessageBox.Show(数据1.Count.ToString());
+                MessageBox.Show(数据2.Count.ToString());
             }
             catch (Exception ex)
             {
@@ -434,8 +473,21 @@ namespace 插件.MyForm
             }
         }
 
-   
-
+        private void 获取单元格数据(object[,] data, ConcurrentBag<string> 数据, ConcurrentBag<Range> 数据单元格)
+        {
+            try
+            {
+                for (int i = 1; i <= data.GetLength(1); i++)
+                {
+                    for (int j = 1; j <= data.GetLength(0); j++)
+                    {
+                        object o = data[j, i];
+                        数据.Add(o.ToString());
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
         private void ReleaseComObjects(List<Excel.Range> ranges)
         {
             foreach (var range in ranges)
