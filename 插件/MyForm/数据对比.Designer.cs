@@ -195,6 +195,7 @@
             this.区域二Text.Location = new System.Drawing.Point(214, 133);
             this.区域二Text.Multiline = true;
             this.区域二Text.Name = "区域二Text";
+            this.区域二Text.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.区域二Text.Size = new System.Drawing.Size(176, 348);
             this.区域二Text.TabIndex = 9;
             // 
@@ -204,6 +205,7 @@
             this.区域一Text.Location = new System.Drawing.Point(10, 133);
             this.区域一Text.Multiline = true;
             this.区域一Text.Name = "区域一Text";
+            this.区域一Text.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.区域一Text.Size = new System.Drawing.Size(176, 348);
             this.区域一Text.TabIndex = 8;
             // 

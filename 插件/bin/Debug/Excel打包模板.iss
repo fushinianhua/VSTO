@@ -92,7 +92,7 @@ UninstallDisplayName=卸载{#MyAppName}
 ;Filename: "cmd.exe"; Parameters: "/c MsiExec.exe /x {{2D7ADA3D-B870-4189-ADB8-4DEA2E7C457E}/quiet"; WorkingDir: "{app}"; Flags: runhidden
  
 //Filename: "{app}/MyProg.exe"; Description: "{cm:LaunchProgram,我的程序}"; Flags: nowait postinstall skipifsilent
- Filename: "https://www.vbashuo.top/questions"; Description: "查看安装问题指南，必看！"; Flags: postinstall shellexec skipifsilent
+// Filename: "https://www.vbashuo.top/questions"; Description: "查看安装问题指南，必看！"; Flags: postinstall shellexec skipifsilent
  
 [Code]
 //欢迎页默认选中同意按钮

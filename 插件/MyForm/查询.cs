@@ -49,8 +49,7 @@ namespace 插件.MyCode
             {
                 comboBox1.SelectedIndex = 0;
                 comboBox3.SelectedIndex = 0;
-            }
-            checkBox1.Checked = true;
+            }          
             textBox5.Text = "0";
             textBox6.Text = "无";
             textBox7.Text = "重";

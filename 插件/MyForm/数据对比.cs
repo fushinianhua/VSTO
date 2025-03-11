@@ -126,91 +126,149 @@ namespace 插件.MyForm
 
         private void 相同项_Click(object sender, EventArgs e)
         {
-            清除标识.Enabled = true;
-            Range combinedRange = null;
-            excelapp.ScreenUpdating = false;
-            excelapp.Calculation =XlCalculation.xlCalculationManual;
-            if (相同项文本.Count < 1) return;
-            foreach (Range rng in 区域一单元格)
+            try
             {
-                string value = rng.Value2;
-                if (相同项文本.Contains(value))
+                if (标记单元格 != null)
                 {
-                    combinedRange = excelapp.Union(combinedRange,rng);
+                    Marshal.ReleaseComObject(标记单元格);
                 }
+
+                清除标识.Enabled = true;
+                Range combinedRange = null;
+                excelapp.ScreenUpdating = false;
+                excelapp.Calculation = XlCalculation.xlCalculationManual;
+                if (相同项文本.Count < 1) return;
+                foreach (Range rng in 区域一单元格)
+                {
+                    string value = rng.Value2?.ToString();
+                    if (相同项文本.Contains(value))
+                    {
+                        if (combinedRange == null)
+                        {
+                            combinedRange = rng;
+                        }
+                        else
+                        {
+                            combinedRange = excelapp.Union(combinedRange, rng);
+                        }
+                    }
+                }
+                foreach (Range rng in 区域二单元格)
+                {
+                    string value = rng.Value2?.ToString();
+                    if (相同项文本.Contains(value))
+                    {
+                        if (combinedRange == null)
+                        {
+                            combinedRange = rng;
+                        }
+                        else
+                        {
+                            combinedRange = excelapp.Union(combinedRange, rng);
+                        }
+
+                    }
+                }
+                标记单元格 = combinedRange;
+                combinedRange.Interior.Color = selectColor;
+                excelapp.ScreenUpdating = true;
+                excelapp.Calculation = XlCalculation.xlCalculationAutomatic;
             }
-            foreach (Range rng in 区域二单元格)
+            catch (Exception)
             {
-                string value = rng.Value2;
-                if (相同项文本.Contains(value))
-                {
-                    combinedRange = excelapp.Union(combinedRange, rng);
-                }
+
+                throw;
             }
-            combinedRange.Interior.Color = selectColor;
-            excelapp.ScreenUpdating = true;
-            excelapp.Calculation = XlCalculation.xlCalculationAutomatic;
         }
 
         private void 不同项_Click(object sender, EventArgs e)
         {
-
-            清除标识.Enabled = true;
-            Range combinedRange = null;
-            excelapp.ScreenUpdating = false;
-            excelapp.Calculation = Excel.XlCalculation.xlCalculationManual;
-            foreach (Range range in 不同Rng)
+            try
             {
-                if (combinedRange == null)
+                if (标记单元格 != null)
                 {
-                    combinedRange = range;
+                    Marshal.ReleaseComObject(标记单元格);
                 }
-                else
+
+                清除标识.Enabled = true;
+                Range combinedRange = null;
+                excelapp.ScreenUpdating = false;
+                excelapp.Calculation = Excel.XlCalculation.xlCalculationManual;
+                if (区域一独有.Count < 1 && 区域二独有.Count < 1) return;
+                if (!(区域一独有.Count < 1))
                 {
-                    combinedRange = excelapp.Union(combinedRange, range);
+                    foreach (Range rng in 区域一单元格)
+                    {
+                        string value = rng.Value2?.ToString();
+                        if (!相同项文本.Contains(value))
+                        {
+                            if (combinedRange == null)
+                            {
+                                combinedRange = rng;
+                            }
+                            else
+                            {
+                                combinedRange = excelapp.Union(combinedRange, rng);
+                            }
+                        }
+                    }
+
                 }
+                if (!(区域二独有.Count < 1))
+                {
+                    foreach (Range rng in 区域二单元格)
+                    {
+                        string value = rng.Value2?.ToString();
+                        if (!相同项文本.Contains(value))
+                        {
+                            if (combinedRange == null)
+                            {
+                                combinedRange = rng;
+                            }
+                            else
+                            {
+                                combinedRange = excelapp.Union(combinedRange, rng);
+                            }
+
+                        }
+                    }
+                }
+                标记单元格 = combinedRange;
+                combinedRange.Interior.Color = selectColor;
+                excelapp.ScreenUpdating = true;
+                excelapp.Calculation = Excel.XlCalculation.xlCalculationAutomatic;
             }
-            combinedRange.Interior.Color = selectColor;
-            excelapp.ScreenUpdating = true;
-            excelapp.Calculation = Excel.XlCalculation.xlCalculationAutomatic;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+        private Range 标记单元格 = null;
 
         private void 清除标识_Click(object sender, EventArgs e)
         {
-            Range combinedRange = null;
-            // 关闭屏幕更新和自动计算
-            excelapp.ScreenUpdating = false;
-            excelapp.Calculation = Excel.XlCalculation.xlCalculationManual;
-            foreach (Range range in 区域一单元格)
+            try
             {
-                if (combinedRange == null)
-                {
-                    combinedRange = range;
-                }
-                else
-                {
-                    combinedRange = excelapp.Union(combinedRange, range);
-                }
+                  excelapp.ScreenUpdating = false;
+                excelapp.Calculation = XlCalculation.xlCalculationManual;
+
+                标记单元格.Interior.Color = XlColorIndex.xlColorIndexNone;
+
+
+
+                // 关闭屏幕更新和自动计算
+                excelapp.ScreenUpdating = true;
+                excelapp.Calculation = Excel.XlCalculation.xlCalculationAutomatic;
+                Button button = (Button)sender;
+                button.Enabled = false;
             }
-            foreach (Range range in 区域二单元格)
+            catch (Exception)
             {
-                if (combinedRange == null)
-                {
-                    combinedRange = range;
-                }
-                else
-                {
-                    combinedRange = excelapp.Union(combinedRange, range);
-                }
+
+                throw;
             }
 
-            combinedRange.Interior.Color = XlColorIndex.xlColorIndexNone;
-
-            // 关闭屏幕更新和自动计算
-            excelapp.ScreenUpdating = true;
-            excelapp.Calculation = Excel.XlCalculation.xlCalculationAutomatic;
-            Button button = (Button)sender;
-            button.Enabled = false;
         }
 
         private void 导出相同项_Click(object sender, EventArgs e)
@@ -220,7 +278,8 @@ namespace 插件.MyForm
             SwitchToThisWindow(excelHandle, true);
             this.Hide();
             Range rng = (Range)excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8);
-           // rng.Resize[commonKeys.Count].Value2 = 相同Rng.ToArray();
+            Range targetRange = rng.Resize[相同项文本.Count,1];
+            targetRange.Value2 = 相同项文本.ToArray();
             this.Show();
         }
 
@@ -232,7 +291,9 @@ namespace 插件.MyForm
             SwitchToThisWindow(excelHandle, true);
             this.Hide();
             Range rng = (Range)excelapp.InputBox(Prompt: "请选择单元格", Title: "选择单元格", Default: "", Type: 8);
-          //  rng.Resize[uniqueKeys1.Count + uniqueKeys2.Count].Value2 = 不同Rng.ToArray();
+            区域一独有.AddRange(区域二独有);
+            Excel.Range targetRange = rng.Resize[区域二独有.Count,1];
+            targetRange.Value2 = 区域二独有.ToArray();
             this.Show();
         }
 
@@ -282,8 +343,8 @@ namespace 插件.MyForm
         private Range 区域一单元格 = null;
         private Range 区域二单元格 = null;
 
-        private ConcurrentBag<string> 区域一独有 = new ConcurrentBag<string>();
-        private ConcurrentBag<string> 区域二独有 = new ConcurrentBag<string>();
+        private List<string> 区域一独有 = new List<string>();
+        private List<string> 区域二独有 = new List<string>();
         private List<string> 相同项文本 = new List<string>();
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -313,7 +374,7 @@ namespace 插件.MyForm
                         int columnCount = selectedRange.Columns.Count;
                         Range rng = selectedWorksheet.Range[selectedRange.Cells[1, 1], selectedRange.Cells[rowIndex, columnCount]];
                         区域一单元格 = rng;
-                        区域1Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange); 
+                        区域1Box.Text = BuildSmartAddress(excelapp, selectedWorkbook, selectedWorksheet, selectedRange);
 
                     }
                 }
@@ -395,18 +456,43 @@ namespace 插件.MyForm
             return $"[{workbook.Name}]{worksheet.Name}!{address}";
         }
         //保存相同和不同的单元格地址
-       
-        private static ConcurrentBag<int> _concurrentBag = new ConcurrentBag<int>();
-
         // 使用线程安全的集合
         ConcurrentBag<string> 数据1 = new ConcurrentBag<string>();
-        ConcurrentBag<Range> 数据1单元格 = new ConcurrentBag<Range>();
+
         ConcurrentBag<string> 数据2 = new ConcurrentBag<string>();
-        ConcurrentBag<Range> 数据2单元格 = new ConcurrentBag<Range>();
+
         private void 对比数据_Click(object sender, EventArgs e)
         {
             try
             {
+                if (数据1.Count>0)
+                {
+                    string item;
+                    while (数据1.TryTake(out item))
+                    {
+                     
+                    }
+                }
+                if (数据2.Count > 0) {
+                    string item;
+                    while (数据2.TryTake(out item))
+                    {
+
+                    }
+                }
+                if (区域一独有.Count > 0)
+                {
+                    区域一独有.Clear();
+                }
+                if (区域二独有.Count > 0)
+                {
+                    区域二独有.Clear();
+                }
+                if (相同项文本.Count > 0)
+                {
+                    相同项文本.Clear();
+                }
+
                 相同项Text.Text = "";
                 区域一Text.Text = "";
                 区域二Text.Text = "";
@@ -420,14 +506,13 @@ namespace 插件.MyForm
                 object[,] data2 = (object[,])区域二单元格.Value;
                 if (data1 == null || data2 == null) return;
                 CountdownEvent countdownEvent = new CountdownEvent(2);
-                List<string> D1=  数据1.ToList();
-                List<string> D2 = 数据2.ToList();
+
                 // 启动任务处理 data1
                 ThreadPool.QueueUserWorkItem(_ =>
                 {
                     try
                     {
-                        获取单元格数据(data1, 数据1, 数据1单元格);
+                        获取单元格数据(data1, 数据1);
                     }
                     finally
                     {
@@ -440,7 +525,7 @@ namespace 插件.MyForm
                 {
                     try
                     {
-                        获取单元格数据(data2, 数据2, 数据1单元格);
+                        获取单元格数据(data2, 数据2);
                     }
                     finally
                     {
@@ -450,22 +535,17 @@ namespace 插件.MyForm
                 });
                 countdownEvent.Wait();//把区域的所有数据提取完成
                 相同项文本 = 数据1.Intersect(数据2).ToList();//求出相同项
-                HashSet<string> text1 = new HashSet<string>();
-                HashSet<string> text2 = new HashSet<string>();
-                
-                if (相同项文本 != null)
+           if (相同项文本 != null)
                 {
 
-                    D1= 数据1.Where(str => !数据2.Contains(str)).ToList();
-                    D2 = 数据2.Where(str => !数据1.Contains(str)).ToList();
+                    区域一独有 = 数据1.Where(str => !数据2.Contains(str)).ToList();
+                    区域二独有 = 数据2.Where(str => !数据1.Contains(str)).ToList();
                 }
-                区域一Text.Text = string.Join(Environment.NewLine, D1.ToArray());
-                区域二Text.Text = string.Join(Environment.NewLine, D2.ToArray());
+                相同项.Enabled = 导出相同项.Enabled = 相同项文本.Count > 1;
+                不同项.Enabled = 导出不同项.Enabled = 区域二独有.Count > 1 || 区域一独有.Count > 1;
+                区域一Text.Text = string.Join(Environment.NewLine, 区域一独有.ToArray());
+                区域二Text.Text = string.Join(Environment.NewLine, 区域二独有.ToArray());
                 相同项Text.Text = string.Join(Environment.NewLine, 相同项文本.ToArray());
-
-
-                MessageBox.Show(数据1.Count.ToString());
-                MessageBox.Show(数据2.Count.ToString());
             }
             catch (Exception ex)
             {
@@ -473,7 +553,7 @@ namespace 插件.MyForm
             }
         }
 
-        private void 获取单元格数据(object[,] data, ConcurrentBag<string> 数据, ConcurrentBag<Range> 数据单元格)
+        private void 获取单元格数据(object[,] data, ConcurrentBag<string> 数据)
         {
             try
             {
@@ -482,7 +562,11 @@ namespace 插件.MyForm
                     for (int j = 1; j <= data.GetLength(0); j++)
                     {
                         object o = data[j, i];
-                        数据.Add(o.ToString());
+                        string str = o.ToString();
+                        if (!数据.Contains(str))
+                        { 
+                            数据.Add(str);
+                        }                
                     }
                 }
             }

@@ -33,6 +33,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.保存 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.浏览 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.桌面路径 = new System.Windows.Forms.TextBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
@@ -47,7 +48,7 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.关键字con = new System.Windows.Forms.ComboBox();
+            this.关键字com = new System.Windows.Forms.ComboBox();
             this.关键列com = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -55,7 +56,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.浏览 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -130,6 +130,17 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "保存选项";
+            // 
+            // 浏览
+            // 
+            this.浏览.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.浏览.Location = new System.Drawing.Point(298, 89);
+            this.浏览.Name = "浏览";
+            this.浏览.Size = new System.Drawing.Size(26, 20);
+            this.浏览.TabIndex = 12;
+            this.浏览.Text = "——";
+            this.浏览.UseVisualStyleBackColor = true;
+            this.浏览.Click += new System.EventHandler(this.浏览_Click);
             // 
             // textBox2
             // 
@@ -219,7 +230,7 @@
             this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.关键字con);
+            this.groupBox2.Controls.Add(this.关键字com);
             this.groupBox2.Controls.Add(this.关键列com);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -279,15 +290,15 @@
             this.checkBox1.Text = "保留格式";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // 关键字con
+            // 关键字com
             // 
-            this.关键字con.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.关键字con.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.关键字con.FormattingEnabled = true;
-            this.关键字con.Location = new System.Drawing.Point(261, 31);
-            this.关键字con.Name = "关键字con";
-            this.关键字con.Size = new System.Drawing.Size(116, 23);
-            this.关键字con.TabIndex = 3;
+            this.关键字com.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.关键字com.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.关键字com.FormattingEnabled = true;
+            this.关键字com.Location = new System.Drawing.Point(261, 31);
+            this.关键字com.Name = "关键字com";
+            this.关键字com.Size = new System.Drawing.Size(116, 23);
+            this.关键字com.TabIndex = 3;
             // 
             // 关键列com
             // 
@@ -366,17 +377,6 @@
             this.label1.Text = "表头行数";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // 浏览
-            // 
-            this.浏览.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.浏览.Location = new System.Drawing.Point(298, 89);
-            this.浏览.Name = "浏览";
-            this.浏览.Size = new System.Drawing.Size(26, 20);
-            this.浏览.TabIndex = 12;
-            this.浏览.Text = "——";
-            this.浏览.UseVisualStyleBackColor = true;
-            this.浏览.Click += new System.EventHandler(this.浏览_Click);
-            // 
             // 拆分工作表
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -414,7 +414,7 @@
         private System.Windows.Forms.Button 保存;
         private System.Windows.Forms.ComboBox 关键列com;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox 关键字con;
+        private System.Windows.Forms.ComboBox 关键字com;
         private System.Windows.Forms.TextBox 桌面路径;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.ComboBox 后缀com;
