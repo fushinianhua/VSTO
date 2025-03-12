@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Tools.Excel;
 using Microsoft.Office.Tools.Ribbon;
 using System;
 using System.Collections.Generic;
@@ -107,6 +108,67 @@ namespace 插件
             catch (Exception)
             {
             }
+
+        }
+
+        private void button5_Click(object sender, RibbonControlEventArgs e)//升序
+        {
+            //ExecuteCommandSafely("SortAscendingExcel");
+            Globals.ThisAddIn.Application.CommandBars.ExecuteMso("SortAscendingExcel");
+        }
+
+        private void button6_Click(object sender, RibbonControlEventArgs e)//降序
+        {
+            // ExecuteCommandSafely("SortDescendingExcel");
+            Globals.ThisAddIn.Application.CommandBars.ExecuteMso("SortDescendingExcel");
+        }
+
+        private void 重新应用_Click(object sender, RibbonControlEventArgs e)
+        {
+           // ExecuteCommandSafely("FilterReapply");
+        }
+        private bool 是否筛选=false;
+        private void 筛选_Click(object sender, RibbonControlEventArgs e)
+        {
+            if (是否筛选)
+            {
+                清除();
+                return;
+            }
+            是否筛选 = true;
+            // 获取当前工作表的UsedRange
+            Range usedRange =(Range) Globals.ThisAddIn.Application.Selection;
+            usedRange.AutoFilter(Field: 1, Criteria1: Type.Missing, Operator: XlAutoFilterOperator.xlAnd, Criteria2: Type.Missing, VisibleDropDown: true);
+        }
+
+        private void 清除筛选_Click(object sender, RibbonControlEventArgs e)
+        {
+            if (!是否筛选) return;
+
+            清除();
+            // worksheet.AutoFilterMode = false;
+
+        }
+        private void 清除()
+        {
+            try
+            {
+                Microsoft.Office.Interop.Excel.Workbook workbook = Globals.ThisAddIn.Application.ActiveWorkbook;
+                Microsoft.Office.Interop.Excel.Worksheet worksheet = workbook.ActiveSheet;
+                worksheet.AutoFilterMode = false;
+
+                是否筛选 = false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+
+        private void 自定义排序_Click(object sender, RibbonControlEventArgs e)
+        {
 
         }
     }

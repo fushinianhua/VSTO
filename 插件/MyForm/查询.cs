@@ -99,25 +99,40 @@ namespace 插件.MyCode
                 Range S_Value = SourceSheet.Range[SourceValueCol + "1"].Resize[Source_rows];
                 Range T_Key = ThisSheet.Range[ThisKeyCol + "1"].Resize[This_rows];
                 Range T_Value = ThisSheet.Range[ThisValueCol + "1"].Resize[This_rows]; // 目标值列
-                Dictionary<string, string> keyValues = 获取数据(S_Key, S_Value, Source_rows);
+                Dictionary<string, string> keyValues = 获取数据(S_Key, S_Value, Source_rows);//获取单元格数据
+                List<string> 重复项 = new List<string>();
                 if (keyValues.Count > 0)
                 {
+                  
                     for (int i =2; i <= This_rows; i++)
                     {
-                        Excel.Range rng = T_Key.Rows[i];
-                        string kry = rng.Value2?.ToString();
+                        Excel.Range rng = T_Key.Rows[i];//key列
+                        string kry = rng.Value2?.ToString();//
 
-                        Excel.Range rng2 = T_Value.Rows[i];
+                        Excel.Range rng2 = T_Value.Rows[i];//值列
                         try
                         {
                             if (keyValues.ContainsKey(kry))
                             {
-                                string newValue = keyValues[kry];
+                                string newValue = keyValues[kry];//取到值
                                 string currentValue = rng2.Value2?.ToString();
                                 if (string.IsNullOrEmpty(currentValue))
                                 {
                                     rng2.Value2 = newValue;
                                 }
+                                if (checkBox2.Checked)
+                                {
+                                    if (重复项.Contains(kry))
+                                    {
+
+                                        rng2.Value2 = "重";
+                                    }
+                                    else
+                                    {
+                                        重复项.Add(kry);
+                                    }
+                                }
+
                             }
                             else
                             {

@@ -166,10 +166,19 @@ namespace 插件.MyForm
                 excelapp.EnableEvents = false;
 
                 // 创建汇总工作簿
-                summaryWorkbook = excelapp.Workbooks.Add();
-                summarySheet = (Worksheet)summaryWorkbook.Sheets[1];
-                summarySheet.Name = "超链接汇总";
-                int summaryRow = 1;
+                if (关键名com.SelectedIndex == 0)
+                {
+                    summaryWorkbook = excelapp.Workbooks.Add();
+                    summarySheet = (Worksheet)summaryWorkbook.Sheets[1];
+                    summarySheet.Name = "超链接汇总";
+                }
+                else
+                {
+                    summaryWorkbook = excelapp.ActiveWorkbook;
+                    summarySheet = summaryWorkbook.Sheets.Add();
+                    summarySheet.Name = "超链接汇总";
+                }
+                    int summaryRow = 1;
 
                 // 确保目录存在
                 string basePath = Path.Combine(桌面路径.Text, 关键名com.Text, textBox1.Text, textBox2.Text);
@@ -247,9 +256,13 @@ namespace 插件.MyForm
                 }
 
                 // 保存汇总工作簿
-                string summaryFilePath = Path.Combine(Path.GetDirectoryName(basePath), $"汇总{后缀com.Text}");
-                summaryWorkbook.SaveAs(summaryFilePath);
-                summaryWorkbook.Close(false); // 不保存更改提示
+                if (关键名com.SelectedIndex==0)
+                {
+
+                    string summaryFilePath = Path.Combine(Path.GetDirectoryName(basePath), $"汇总{后缀com.Text}");
+                    summaryWorkbook.SaveAs(summaryFilePath);
+                    summaryWorkbook.Close(false); // 不保存更改提示
+                }
             }
             catch (Exception ex)
             {
@@ -266,11 +279,7 @@ namespace 插件.MyForm
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-                // 确保 Excel 进程完全退出
-                foreach (var process in Process.GetProcessesByName("EXCEL"))
-                {
-                    process.Kill();
-                }
+              
 
                 // 恢复屏幕刷新和事件触发
                 excelapp.ScreenUpdating = true;

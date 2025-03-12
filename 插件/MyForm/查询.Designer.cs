@@ -62,10 +62,10 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -358,6 +358,8 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox2.Location = new System.Drawing.Point(221, 26);
             this.checkBox2.Name = "checkBox2";
@@ -429,6 +431,24 @@
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(114, 46);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(109, 21);
+            this.textBox1.TabIndex = 25;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(13, 44);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(61, 25);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "耗时:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // progressBar1
             // 
             this.progressBar1.ForeColor = System.Drawing.Color.Green;
@@ -447,24 +467,6 @@
             this.label10.Text = "当前完成率:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(13, 44);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(61, 25);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "耗时:";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(114, 46);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(109, 21);
-            this.textBox1.TabIndex = 25;
-            // 
             // 查询
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -477,7 +479,7 @@
             this.Controls.Add(this.groupBox4);
             this.Name = "查询";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "VLookUpTool";
+            this.Text = "数据匹配";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.查询_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

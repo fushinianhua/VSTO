@@ -295,9 +295,9 @@
             this.关键字com.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.关键字com.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.关键字com.FormattingEnabled = true;
-            this.关键字com.Location = new System.Drawing.Point(261, 31);
+            this.关键字com.Location = new System.Drawing.Point(242, 31);
             this.关键字com.Name = "关键字com";
-            this.关键字com.Size = new System.Drawing.Size(116, 23);
+            this.关键字com.Size = new System.Drawing.Size(102, 23);
             this.关键字com.TabIndex = 3;
             // 
             // 关键列com
@@ -307,7 +307,7 @@
             this.关键列com.FormattingEnabled = true;
             this.关键列com.Location = new System.Drawing.Point(117, 31);
             this.关键列com.Name = "关键列com";
-            this.关键列com.Size = new System.Drawing.Size(116, 23);
+            this.关键列com.Size = new System.Drawing.Size(101, 23);
             this.关键列com.TabIndex = 2;
             this.关键列com.SelectedIndexChanged += new System.EventHandler(this.关键列com_SelectedIndexChanged);
             // 
