@@ -66,6 +66,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label10 = new System.Windows.Forms.Label();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -410,6 +411,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.checkBox3);
             this.groupBox4.Controls.Add(this.button2);
             this.groupBox4.Controls.Add(this.textBox5);
             this.groupBox4.Controls.Add(this.label1);
@@ -466,6 +468,17 @@
             this.label10.TabIndex = 17;
             this.label10.Text = "当前完成率:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox3.Location = new System.Drawing.Point(28, 21);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(90, 15);
+            this.checkBox3.TabIndex = 7;
+            this.checkBox3.Text = "完成自动关闭";
+            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // 查询
             // 
@@ -538,5 +551,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }

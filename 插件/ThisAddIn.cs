@@ -31,6 +31,7 @@ namespace 插件
             StaticClass.ExcelApp = excelApp;
             try
             {
+                excelApp.Workbooks.Open("C:\\Users\\Administrator\\Desktop\\工作簿1(2)");
                
                 _聚光灯 = new 聚光灯(this.Application);
             }

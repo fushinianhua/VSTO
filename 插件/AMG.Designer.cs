@@ -36,23 +36,23 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.group2 = this.Factory.CreateRibbonGroup();
-            this.group3 = this.Factory.CreateRibbonGroup();
-            this.group4 = this.Factory.CreateRibbonGroup();
-            this.group5 = this.Factory.CreateRibbonGroup();
             this.button1 = this.Factory.CreateRibbonButton();
+            this.group2 = this.Factory.CreateRibbonGroup();
             this.button2 = this.Factory.CreateRibbonButton();
+            this.group3 = this.Factory.CreateRibbonGroup();
             this.聚光灯 = this.Factory.CreateRibbonSplitButton();
             this.button3 = this.Factory.CreateRibbonButton();
+            this.group4 = this.Factory.CreateRibbonGroup();
             this.button4 = this.Factory.CreateRibbonButton();
+            this.导入数据 = this.Factory.CreateRibbonButton();
+            this.导出数据 = this.Factory.CreateRibbonButton();
+            this.group5 = this.Factory.CreateRibbonGroup();
             this.menu1 = this.Factory.CreateRibbonMenu();
             this.升序 = this.Factory.CreateRibbonButton();
             this.降序 = this.Factory.CreateRibbonButton();
-            this.重新应用 = this.Factory.CreateRibbonButton();
             this.筛选 = this.Factory.CreateRibbonButton();
             this.清除筛选 = this.Factory.CreateRibbonButton();
-            this.button5 = this.Factory.CreateRibbonButton();
-            this.button6 = this.Factory.CreateRibbonButton();
+            this.重新应用 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.group2.SuspendLayout();
@@ -77,42 +77,29 @@
             this.group1.Label = "查询";
             this.group1.Name = "group1";
             // 
-            // group2
-            // 
-            this.group2.Items.Add(this.button2);
-            this.group2.Label = "对比";
-            this.group2.Name = "group2";
-            // 
-            // group3
-            // 
-            this.group3.Items.Add(this.聚光灯);
-            this.group3.Label = "聚光灯";
-            this.group3.Name = "group3";
-            // 
-            // group4
-            // 
-            this.group4.Items.Add(this.button4);
-            this.group4.Items.Add(this.button5);
-            this.group4.Items.Add(this.button6);
-            this.group4.Label = "表格拆分";
-            this.group4.Name = "group4";
-            // 
-            // group5
-            // 
-            this.group5.Items.Add(this.menu1);
-            this.group5.Name = "group5";
-            // 
             // button1
             // 
             this.button1.Label = "数据匹配";
             this.button1.Name = "button1";
             this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
+            // group2
+            // 
+            this.group2.Items.Add(this.button2);
+            this.group2.Label = "对比";
+            this.group2.Name = "group2";
+            // 
             // button2
             // 
             this.button2.Label = "数据对比";
             this.button2.Name = "button2";
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
+            // 
+            // group3
+            // 
+            this.group3.Items.Add(this.聚光灯);
+            this.group3.Label = "聚光灯";
+            this.group3.Name = "group3";
             // 
             // 聚光灯
             // 
@@ -130,11 +117,40 @@
             this.button3.ShowImage = true;
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
+            // group4
+            // 
+            this.group4.Items.Add(this.button4);
+            this.group4.Items.Add(this.导入数据);
+            this.group4.Items.Add(this.导出数据);
+            this.group4.Label = "工作簿操作";
+            this.group4.Name = "group4";
+            // 
             // button4
             // 
             this.button4.Label = "拆分工作表";
             this.button4.Name = "button4";
             this.button4.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button4_Click);
+            // 
+            // 导入数据
+            // 
+            this.导入数据.Label = "导入";
+            this.导入数据.Name = "导入数据";
+            this.导入数据.OfficeImageId = "ActiveXButton";
+            this.导入数据.ShowImage = true;
+            this.导入数据.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.导入数据_Click);
+            // 
+            // 导出数据
+            // 
+            this.导出数据.Label = "导出";
+            this.导出数据.Name = "导出数据";
+            this.导出数据.OfficeImageId = "ActiveXButton";
+            this.导出数据.ShowImage = true;
+            this.导出数据.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.导出数据_Click);
+            // 
+            // group5
+            // 
+            this.group5.Items.Add(this.menu1);
+            this.group5.Name = "group5";
             // 
             // menu1
             // 
@@ -168,15 +184,6 @@
             this.降序.ShowImage = true;
             this.降序.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button6_Click);
             // 
-            // 重新应用
-            // 
-            this.重新应用.ImageName = "FilterReapply";
-            this.重新应用.Label = "重新应用";
-            this.重新应用.Name = "重新应用";
-            this.重新应用.OfficeImageId = "FilterReapply";
-            this.重新应用.ShowImage = true;
-            this.重新应用.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.重新应用_Click);
-            // 
             // 筛选
             // 
             this.筛选.ImageName = "Filter";
@@ -195,19 +202,14 @@
             this.清除筛选.ShowImage = true;
             this.清除筛选.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.清除筛选_Click);
             // 
-            // button5
+            // 重新应用
             // 
-            this.button5.Label = "导入";
-            this.button5.Name = "button5";
-            this.button5.OfficeImageId = "ActiveXButton";
-            this.button5.ShowImage = true;
-            // 
-            // button6
-            // 
-            this.button6.Label = "导出";
-            this.button6.Name = "button6";
-            this.button6.OfficeImageId = "ActiveXButton";
-            this.button6.ShowImage = true;
+            this.重新应用.ImageName = "FilterReapply";
+            this.重新应用.Label = "重新应用";
+            this.重新应用.Name = "重新应用";
+            this.重新应用.OfficeImageId = "FilterReapply";
+            this.重新应用.ShowImage = true;
+            this.重新应用.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.重新应用_Click);
             // 
             // AMG
             // 
@@ -250,8 +252,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton 重新应用;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton 筛选;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton 清除筛选;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button5;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton 导入数据;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton 导出数据;
     }
 
     partial class ThisRibbonCollection

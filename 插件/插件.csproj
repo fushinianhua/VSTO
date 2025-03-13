@@ -218,6 +218,12 @@
     <Compile Include="AMG.Designer.cs">
       <DependentUpon>AMG.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\导出数据.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\导出数据.Designer.cs">
+      <DependentUpon>导出数据.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\拆分工作表.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +256,9 @@
     </Compile>
     <EmbeddedResource Include="AMG.resx">
       <DependentUpon>AMG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\导出数据.resx">
+      <DependentUpon>导出数据.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\拆分工作表.resx">
       <DependentUpon>拆分工作表.cs</DependentUpon>

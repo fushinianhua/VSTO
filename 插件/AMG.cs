@@ -167,7 +167,12 @@ namespace 插件
            
         }
 
-        private void 自定义排序_Click(object sender, RibbonControlEventArgs e)
+        private void 导入数据_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
+
+        private void 导出数据_Click(object sender, RibbonControlEventArgs e)
         {
 
         }

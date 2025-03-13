@@ -101,6 +101,7 @@ namespace 插件.MyCode
                 Range T_Value = ThisSheet.Range[ThisValueCol + "1"].Resize[This_rows]; // 目标值列
                 Dictionary<string, string> keyValues = 获取数据(S_Key, S_Value, Source_rows);//获取单元格数据
                 List<string> 重复项 = new List<string>();
+                int 重复数量 = 0;
                 if (keyValues.Count > 0)
                 {
                   
@@ -125,7 +126,7 @@ namespace 插件.MyCode
                                     if (重复项.Contains(kry))
                                     {
 
-                                        rng2.Value2 = "重";
+                                       // rng2.Value2 = "重";
                                     }
                                     else
                                     {
@@ -155,11 +156,15 @@ namespace 插件.MyCode
                         }
                     }
                 }
+                MessageBox.Show($"共有重复数量：{重复数量}");
                 TimeSpan timeSpan = DateTime.Now.Subtract(t0);
                 double totalSeconds = timeSpan.TotalSeconds;
                 textBox1.Text = totalSeconds + "秒";
-
-                this.Close();
+                if(checkBox3.Checked)
+                {
+                    this.Close();
+                }
+               
             }
             catch (Exception ex)
             {
