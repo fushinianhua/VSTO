@@ -157,7 +157,7 @@ namespace 插件.MyForm
         {
             Workbook summaryWorkbook = null;
             Worksheet summarySheet = null;
-
+           
             try
             {
                 excelapp.Visible = false;
@@ -166,7 +166,7 @@ namespace 插件.MyForm
                 excelapp.EnableEvents = false;
 
                 // 创建汇总工作簿
-                if (关键名com.SelectedIndex == 0)
+                if (关键字com.SelectedIndex == 0)
                 {
                     summaryWorkbook = excelapp.Workbooks.Add();
                     summarySheet = (Worksheet)summaryWorkbook.Sheets[1];
@@ -245,9 +245,9 @@ namespace 插件.MyForm
                     }
                     finally
                     {
-                        // 释放当前工作簿和工作表对象
-                        if (newSheet != null) Marshal.FinalReleaseComObject(newSheet);
-                        if (newWorkbook != null) Marshal.FinalReleaseComObject(newWorkbook);
+                        //// 释放当前工作簿和工作表对象
+                        //if (newSheet != null) Marshal.FinalReleaseComObject(newSheet);
+                        //if (newWorkbook != null) Marshal.FinalReleaseComObject(newWorkbook);
 
                         // 强制垃圾回收
                         GC.Collect();
@@ -256,7 +256,7 @@ namespace 插件.MyForm
                 }
 
                 // 保存汇总工作簿
-                if (关键名com.SelectedIndex==0)
+                if (关键字com.SelectedIndex==0)
                 {
 
                     string summaryFilePath = Path.Combine(Path.GetDirectoryName(basePath), $"汇总{后缀com.Text}");
@@ -279,7 +279,7 @@ namespace 插件.MyForm
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-              
+
 
                 // 恢复屏幕刷新和事件触发
                 excelapp.ScreenUpdating = true;

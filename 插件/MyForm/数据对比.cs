@@ -627,9 +627,6 @@ namespace 插件.MyForm
             AMG.对比form = null;
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 }

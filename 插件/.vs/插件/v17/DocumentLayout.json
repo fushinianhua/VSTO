@@ -3,39 +3,51 @@
   "WorkspaceRootPath": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\thisaddin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:thisaddin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\mycode\\code1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:mycode\\code1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -43,15 +55,11 @@
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\mycode\\code1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:mycode\\code1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\mycode\\staticclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\mycode\\staticclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:mycode\\staticclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -70,11 +78,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
+              "Title": "ThisAddIn.cs",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\ThisAddIn.cs",
+              "RelativeDocumentMoniker": "ThisAddIn.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\ThisAddIn.cs",
+              "RelativeToolTip": "ThisAddIn.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwCIAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T17:59:32.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "\u67E5\u8BE2.cs",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
               "RelativeDocumentMoniker": "MyForm\\\u67E5\u8BE2.cs",
@@ -82,12 +103,11 @@
               "RelativeToolTip": "MyForm\\\u67E5\u8BE2.cs",
               "ViewState": "AgIAAKcBAAAAAAAAAAAAALkBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T15:04:52.623Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T15:04:52.623Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "\u62C6\u5206\u5DE5\u4F5C\u8868.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "RelativeDocumentMoniker": "MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
@@ -99,32 +119,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "RelativeDocumentMoniker": "MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "RelativeToolTip": "MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
-              "ViewState": "AgIAAEwBAAAAAAAAAAAmwFIBAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAO8AAAAAAAAAAAAAAAABAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-13T15:59:14.491Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "\u805A\u5149\u706F\u8BBE\u7F6E.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
               "RelativeDocumentMoniker": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
               "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T16:02:23.975Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-03-13T16:02:23.975Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "\u805A\u5149\u706F\u8BBE\u7F6E.cs",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
               "RelativeDocumentMoniker": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
@@ -132,12 +151,11 @@
               "RelativeToolTip": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
               "ViewState": "AgIAAHoAAAAAAAAAAAAQwIUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T16:02:25.281Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T16:02:25.281Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
               "RelativeDocumentMoniker": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
@@ -149,95 +167,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "\u6570\u636E\u5BF9\u6BD4.cs",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
               "RelativeDocumentMoniker": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
               "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
               "RelativeToolTip": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
-              "ViewState": "AgIAAF0CAAAAAAAAAAAAAHICAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAC0BAAAAAAAAAAAgwEABAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-13T15:05:54.133Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AMG.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs",
-              "RelativeDocumentMoniker": "AMG.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs",
-              "RelativeToolTip": "AMG.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowCkAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T10:06:53.101Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
-              "RelativeDocumentMoniker": "MyForm\\\u67E5\u8BE2.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T15:04:50.511Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AMG.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs",
-              "RelativeDocumentMoniker": "AMG.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "AMG.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T10:00:03.609Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AMG.Designer.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.Designer.cs",
-              "RelativeDocumentMoniker": "AMG.Designer.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.Designer.cs",
-              "RelativeToolTip": "AMG.Designer.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAA0wJAAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T13:38:46.788Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
-              "RelativeDocumentMoniker": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T13:45:53.635Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "StaticClass.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
-              "RelativeDocumentMoniker": "MyCode\\StaticClass.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
-              "RelativeToolTip": "MyCode\\StaticClass.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T15:51:52.664Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
               "Title": "Code1.cs",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyCode\\Code1.cs",
               "RelativeDocumentMoniker": "MyCode\\Code1.cs",
@@ -245,12 +188,93 @@
               "RelativeToolTip": "MyCode\\Code1.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T15:52:12.784Z",
+              "WhenOpened": "2025-03-13T15:52:12.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "\u6570\u636E\u5BF9\u6BD4.Designer.cs",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
+              "RelativeToolTip": "MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAA0wFMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T16:21:33.375Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AMG.cs",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs",
+              "RelativeDocumentMoniker": "AMG.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs",
+              "RelativeToolTip": "AMG.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAowCkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T10:06:53.101Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u67E5\u8BE2.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T15:04:50.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AMG.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs",
+              "RelativeDocumentMoniker": "AMG.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "AMG.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T10:00:03.609Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AMG.Designer.cs",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.Designer.cs",
+              "RelativeDocumentMoniker": "AMG.Designer.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.Designer.cs",
+              "RelativeToolTip": "AMG.Designer.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAA0wJAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T13:38:46.788Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T13:45:53.635Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 13,
+              "Title": "StaticClass.cs",
+              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
+              "RelativeDocumentMoniker": "MyCode\\StaticClass.cs",
+              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
+              "RelativeToolTip": "MyCode\\StaticClass.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T15:51:52.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "ThisAddIn.Designer.cs",
               "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\ThisAddIn.Designer.cs",
               "RelativeDocumentMoniker": "ThisAddIn.Designer.cs",
