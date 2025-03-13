@@ -116,6 +116,7 @@
             this.GroupBox2.TabIndex = 7;
             this.GroupBox2.TabStop = false;
             this.GroupBox2.Text = "形状";
+            this.GroupBox2.Enter += new System.EventHandler(this.GroupBox2_Enter);
             // 
             // RadioButton3
             // 

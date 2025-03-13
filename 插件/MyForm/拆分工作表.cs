@@ -335,7 +335,13 @@ namespace 插件.MyForm
 
         private void 拆分工作表_FormClosed(object sender, FormClosedEventArgs e)
         {
+           
             AMG.拆分form = null;
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

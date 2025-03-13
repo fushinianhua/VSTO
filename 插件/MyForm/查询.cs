@@ -125,7 +125,7 @@ namespace 插件.MyCode
                                 {
                                     if (重复项.Contains(kry))
                                     {
-
+                                        重复数量++;
                                        // rng2.Value2 = "重";
                                     }
                                     else
@@ -442,6 +442,7 @@ namespace 插件.MyCode
 
         private void 查询_FormClosed(object sender, FormClosedEventArgs e)
         {
+       
             AMG.查询form = null;
         }
     }
