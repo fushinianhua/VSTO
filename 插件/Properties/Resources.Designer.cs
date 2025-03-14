@@ -71,6 +71,80 @@ namespace 插件.Properties {
         }
         
         /// <summary>
+        ///   查找类似 using Excel = Microsoft.Office.Interop.Excel;
+        ///using System;
+        ///using System.Collections.Generic;
+        ///using System.ComponentModel;
+        ///using System.Data;
+        ///using System.Drawing;
+        ///using System.Linq;
+        ///using System.Runtime.InteropServices;
+        ///using System.Text;
+        ///using System.Threading.Tasks;
+        ///using System.Windows.Forms;
+        ///using System.Threading;
+        ///using Microsoft.Office.Interop.Excel;
+        ///using Button = System.Windows.Forms.Button;
+        ///using System.Diagnostics;
+        ///using Rectangle = System.Drawing.Rectangle;
+        ///using System.Collectio [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 数据对比 {
+            get {
+                return ResourceManager.GetString("数据对比", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 namespace 插件.MyForm
+        ///{
+        ///    partial class 数据对比
+        ///    {
+        ///        /// &lt;summary&gt;
+        ///        /// Required designer variable.
+        ///        /// &lt;/summary&gt;
+        ///        private System.ComponentModel.IContainer components = null;
+        ///
+        ///        /// &lt;summary&gt;
+        ///        /// Clean up any resources being used.
+        ///        /// &lt;/summary&gt;
+        ///        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        ///        protected override void Dispose(bool disposing)
+        ///        {
+        ///            if (disposing  [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 数据对比_Designer {
+            get {
+                return ResourceManager.GetString("数据对比_Designer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;root&gt;
+        ///  &lt;!-- 
+        ///    Microsoft ResX Schema 
+        ///    
+        ///    Version 2.0
+        ///    
+        ///    The primary goals of this format is to allow a simple XML format 
+        ///    that is mostly human readable. The generation and parsing of the 
+        ///    various data types are done through the TypeConverter classes 
+        ///    associated with the data types.
+        ///    
+        ///    Example:
+        ///    
+        ///    ... ado.net/XML headers &amp; schema ...
+        ///    &lt;resheader name=&quot;resmimetype&quot;&gt;text/microsoft-resx&lt;/resheader&gt;
+        ///    &lt;resheader n [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 数据对比1 {
+            get {
+                return ResourceManager.GetString("数据对比1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap 更换 {

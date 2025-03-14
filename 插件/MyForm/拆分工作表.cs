@@ -9,8 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace 插件.MyForm
 {
@@ -151,140 +153,184 @@ namespace 插件.MyForm
             {
             }
         }
- 
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void 拆分()
         {
-            Workbook summaryWorkbook = null;
+           Application newExcelApp = null;
+         
+            Workbook currentWorkbook = excelapp.ActiveWorkbook;
             Worksheet summarySheet = null;
-           
+            Workbook summaryWorkbook = null;
+            int summaryRow = 1;
             try
             {
-                excelapp.Visible = false;
-                // 禁用屏幕刷新和事件触发
-                excelapp.ScreenUpdating = false;
-                excelapp.EnableEvents = false;
+                // 初始化新Excel实例
+                newExcelApp = new Application();
+                newExcelApp.Visible = false;
+                newExcelApp.ScreenUpdating = false;
+                newExcelApp.DisplayAlerts = false;
 
-                // 创建汇总工作簿
-                if (关键字com.SelectedIndex == 0)
+                // 读取原始数据
+                Range usedRange = worksheet.UsedRange;
+                object[,] allData = (object[,])usedRange.Value2;
+                int totalRows = usedRange.Rows.Count;
+                int totalCols = usedRange.Columns.Count;
+
+                // 释放Range对象
+                Marshal.ReleaseComObject(usedRange);
+                usedRange = null;
+
+                // 处理模式判断
+                bool isMultiMode = 关键字com.SelectedIndex == 0;
+                string targetKeyword = isMultiMode ? null : 关键字com.SelectedItem.ToString();
+
+                // 构建基础路径
+                string baseFolder = Path.Combine(桌面路径.Text, 关键名com.Text, textBox1.Text, textBox2.Text);
+                Directory.CreateDirectory(baseFolder);
+
+                // 初始化汇总表
+                if (isMultiMode)
                 {
-                    summaryWorkbook = excelapp.Workbooks.Add();
+                    summaryWorkbook = newExcelApp.Workbooks.Add();
                     summarySheet = (Worksheet)summaryWorkbook.Sheets[1];
                     summarySheet.Name = "超链接汇总";
                 }
                 else
                 {
-                    summaryWorkbook = excelapp.ActiveWorkbook;
-                    summarySheet = summaryWorkbook.Sheets.Add();
-                    summarySheet.Name = "超链接汇总";
+                    List<string> names = new List<string>();
+                    foreach (Worksheet ws in currentWorkbook.Sheets)
+                    {
+                        names.Add(ws.Name);
+                    }
+                    if (names.Contains( $"{targetKeyword}汇总"))
+                    {
+                        summarySheet = (Worksheet)currentWorkbook.Worksheets[$"{targetKeyword}汇总"];
+                        Range rng = (Range)summarySheet.Cells[1,summarySheet.Rows.Count];
+                        summaryRow = rng.End[XlDirection.xlDown].Row+1;
+                    }
+                    else
+                    {
+                        summarySheet = (Worksheet)currentWorkbook.Sheets.Add(
+                         After: currentWorkbook.Sheets[currentWorkbook.Sheets.Count]);
+                        summarySheet.Name = $"{targetKeyword}汇总";
+                    }
                 }
-                    int summaryRow = 1;
-
-                // 确保目录存在
-                string basePath = Path.Combine(桌面路径.Text, 关键名com.Text, textBox1.Text, textBox2.Text);
-                Directory.CreateDirectory(basePath);
-
-                // 获取关键字集合
-                HashSet<string> names = 关键字com.SelectedIndex> 0
-                    ? new HashSet<string> { 关键字com.SelectedItem.ToString()}
-                    : vlaue;
-
-                // 遍历每个关键字
-                foreach (string keyword in names)
+              
+                // 数据收集
+                var dataDict = new Dictionary<string, List<object[,]>>();
+                for (int row = 2; row <= totalRows; row++)
                 {
+                    var cellValue = allData[row, 关键列com.SelectedIndex+1];
+                    if (cellValue == null) continue;
+
+                    string key = cellValue.ToString();
+                    if (!isMultiMode && key != targetKeyword) continue;
+
+                    if (!dataDict.ContainsKey(key))
+                        dataDict[key] = new List<object[,]>();
+
+                    object[,] rowData = new object[1, totalCols];
+                    Array.Copy(allData, (row - 1) * totalCols, rowData, 0, totalCols);
+                    dataDict[key].Add(rowData);
+                }
+                // 文件生成逻辑          
+                foreach (var kv in dataDict)
+                {
+                    string keyword = kv.Key;
+                    string safeKeyword = CleanFileName(keyword);
+                    string filePath = Path.Combine(baseFolder, $"{safeKeyword}{后缀com.Text}");
+
                     Workbook newWorkbook = null;
-                    Worksheet newSheet = null;
+                    Worksheet newWorksheet = null;
+                    Range dataRange = null;
+
                     try
                     {
-                        // 创建一个新的工作簿
-                        newWorkbook = excelapp.Workbooks.Add();
-                        newSheet = (Worksheet)newWorkbook.Sheets[1];
-                        newSheet.Name = keyword;
+                        // 创建新工作簿
+                        newWorkbook = newExcelApp.Workbooks.Add();
+                        newWorksheet = (Worksheet)newWorkbook.Sheets[1];
+                        newWorksheet.Name = safeKeyword;
 
-                        // 复制表头
-                        Range headerRange = worksheet.Rows[表头行数];
-                        headerRange.Copy(newSheet.Rows[表头行数]);
+                        // 准备数据
+                        int dataCount = kv.Value.Count;
+                        object[,] outputData = new object[dataCount + 1, totalCols];
+                        Array.Copy(allData, outputData, totalCols); // 复制表头
 
-                        // 遍历数据行并复制匹配的行
-                        int newRow = 表头行数 + 1;
-                        int rows = worksheet.UsedRange.Rows.Count;
-                        for (int i = 2; i <= rows; i++)
+                        for (int i = 0; i < dataCount; i++)
                         {
-                            Range cell = worksheet.Cells[i, SelectCol];
-                            try
-                            {
-                                if (cell.Value2 != null && cell.Value2.ToString() == keyword)
-                                {
-                                    Range rowRange = worksheet.Rows[i];
-                                    CopyRowWithOptions(rowRange, newSheet.Rows[newRow]);
-                                    newRow++;
-                                }
-                            }
-                            finally
-                            {
-                                if (cell != null) Marshal.ReleaseComObject(cell);
-                            }
+                            Array.Copy(kv.Value[i], 0, outputData, (i + 1) * totalCols, totalCols);
                         }
-                        // 保存单独的工作簿
-                        string filePath = Path.Combine(basePath, $"{keyword}{后缀com.Text}");
-                        newWorkbook.SaveAs(filePath);
-                        newWorkbook.Close(false); // 不保存更改提示
 
-                        // 在汇总工作表中添加超链接
-                        summarySheet.Hyperlinks.Add(
-                            Anchor: summarySheet.Cells[summaryRow, 1],
-                            Address: filePath,
-                            TextToDisplay: keyword
-                        );
-                        summaryRow++;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"处理关键字 {keyword} 时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Console.WriteLine($"Error processing keyword {keyword}: {ex.Message}");
+                        // 批量写入
+                        dataRange = newWorksheet.Range[
+                            newWorksheet.Cells[1, 1],
+                            newWorksheet.Cells[dataCount + 1, totalCols]];
+                        dataRange.Value2 = outputData;
+
+                        // 保存文件
+                        newWorkbook.SaveAs(filePath);
                     }
                     finally
                     {
-                        //// 释放当前工作簿和工作表对象
-                        //if (newSheet != null) Marshal.FinalReleaseComObject(newSheet);
-                        //if (newWorkbook != null) Marshal.FinalReleaseComObject(newWorkbook);
-
-                        // 强制垃圾回收
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
+                        // 释放资源
+                        if (dataRange != null) Marshal.ReleaseComObject(dataRange);
+                        if (newWorksheet != null) Marshal.ReleaseComObject(newWorksheet);
+                        if (newWorkbook != null)
+                        {
+                            newWorkbook.Close(false);
+                            Marshal.ReleaseComObject(newWorkbook);
+                        }
                     }
+
+                    // 添加超链接
+                    summarySheet.Hyperlinks.Add(
+                        summarySheet.Cells[summaryRow, 1],
+                        filePath,
+                        TextToDisplay: $"{keyword}"
+                    );
+                    summaryRow++;
                 }
 
-                // 保存汇总工作簿
-                if (关键字com.SelectedIndex==0)
+                // 保存汇总
+                if (isMultiMode)
                 {
-
-                    string summaryFilePath = Path.Combine(Path.GetDirectoryName(basePath), $"汇总{后缀com.Text}");
-                    summaryWorkbook.SaveAs(summaryFilePath);
-                    summaryWorkbook.Close(false); // 不保存更改提示
-                }
+                    string summaryPath = Path.Combine(
+                        Path.GetDirectoryName(baseFolder),
+                        $"数据汇总{后缀com.Text}");
+                    summaryWorkbook.SaveAs(summaryPath);
+                }         
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine($"Error: {ex.Message}");
+                MessageBox.Show($"操作失败：{ex.Message}");
             }
             finally
             {
-                // 确保释放所有 COM 对象
-                if (summarySheet != null) Marshal.FinalReleaseComObject(summarySheet);
-                if (summaryWorkbook != null) Marshal.FinalReleaseComObject(summaryWorkbook);
+                // 释放所有COM对象
+                if (summarySheet != null) Marshal.ReleaseComObject(summarySheet);
+                if (summaryWorkbook != null)
+                {
+                    summaryWorkbook.Close(false);
+                    Marshal.ReleaseComObject(summaryWorkbook);
+                }
+                if (newExcelApp != null)
+                {
+                    newExcelApp.Quit();
+                    Marshal.ReleaseComObject(newExcelApp);
+                }
 
-                // 强制垃圾回收
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-
-
-
-                // 恢复屏幕刷新和事件触发
-                excelapp.ScreenUpdating = true;
-                excelapp.EnableEvents = true;
             }
+        }
+
+        // 清理非法文件名字符
+        private string CleanFileName(string fileName)
+        {
+            return Regex.Replace(fileName, @"[\\/:*?""<>|]", "_");
         }
         private void CopyRowWithOptions(Range sourceRow, Range targetRow)
         {
