@@ -17,10 +17,6 @@ namespace 插件
     public partial class AMG
     {
         private bool 开光状态;
-        public static Form 查询form = null;
-        public static Form 对比form = null;
-        public static Form 拆分form = null;
-        public static Form 聚光灯form = null;
         private void AMG_Load(object sender, RibbonUIEventArgs e)
         {
             开光状态 = Settings.Default.聚光灯开关状态;
@@ -30,14 +26,22 @@ namespace 插件
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
+            Form form = Globals.ThisAddIn.查询form ;
             try
             {
 
-                if (查询form == null)
+                if (form == null)
                 {
-                    查询form = new 查询();
+                    form = new 查询();
+                    Globals.ThisAddIn.查询form=form ;
+                    form.Show();
                 }
-                查询form.Show();
+                else
+                {
+                    窗口显示API.ShowWindow(form.Handle,1);
+                    窗口显示API.SetForegroundWindow(form.Handle);
+                }
+             
             }
             catch (Exception)
             {
@@ -46,13 +50,22 @@ namespace 插件
 
         private void button2_Click(object sender, RibbonControlEventArgs e)
         {
+            Form form = Globals.ThisAddIn.对比form;
             try
             {
-                if (对比form == null)
+
+                if (form == null)
                 {
-                    对比form = new 数据对比();
+                    form = new 数据对比();
+                    Globals.ThisAddIn.对比form = form;
+                    form.Show();
                 }
-                对比form.Show();
+                else
+                {
+                    窗口显示API.ShowWindow(form.Handle, 1);
+                    窗口显示API.SetForegroundWindow(form.Handle);
+                }
+
             }
             catch (Exception)
             {
@@ -61,13 +74,21 @@ namespace 插件
 
         private void button3_Click(object sender, RibbonControlEventArgs e)
         {
+            Form form = Globals.ThisAddIn.聚光灯form;
             try
             {
-                if (聚光灯form == null)
+
+                if (form == null)
                 {
-                    聚光灯form = new 聚光灯设置();
+                    form = new 聚光灯设置();
+                    Globals.ThisAddIn.聚光灯form = form;
+                    form.Show();
                 }
-                聚光灯form.Show();
+                else
+                {
+                    窗口显示API.ShowWindow(form.Handle, 1);
+                    窗口显示API.SetForegroundWindow(form.Handle);
+                }
 
             }
             catch (Exception)
@@ -97,19 +118,29 @@ namespace 插件
 
         private void button4_Click(object sender, RibbonControlEventArgs e)
         {
+          
+            Form form = Globals.ThisAddIn.拆分form;
             try
             {
-                if (拆分form == null)
+
+                if (form == null)
                 {
-                    拆分form = new 拆分工作表();
+                    form = new 拆分工作表();
+                    Globals.ThisAddIn.拆分form = form;
+                    form.Show();
                 }
-                拆分form.Show();
+                else
+                {
+                    窗口显示API.ShowWindow(form.Handle, 1);
+                    窗口显示API.SetForegroundWindow(form.Handle);
+                }
+
             }
             catch (Exception)
             {
             }
 
-        }
+            }
 
         private void button5_Click(object sender, RibbonControlEventArgs e)//升序
         {

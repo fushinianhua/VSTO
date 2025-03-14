@@ -23,7 +23,11 @@ namespace 插件
         private Excel.Application excelApp;
         private Range _lastHighlightedRange;
         private readonly Color _highlightColor = Color.LightBlue;
-        private 聚光灯 _聚光灯;     
+        private 聚光灯 _聚光灯;
+        public  Form 查询form = null;
+        public  Form 对比form = null;
+        public  Form 拆分form = null;
+        public  Form 聚光灯form = null;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             // 初始化Excel应用引用
@@ -31,8 +35,6 @@ namespace 插件
             StaticClass.ExcelApp = excelApp;
             try
             {
-                //excelApp.Workbooks.Open("C:\\Users\\Administrator\\Desktop\\工作簿1(2)");
-               
                 _聚光灯 = new 聚光灯(this.Application);
             }
             catch (Exception ex)

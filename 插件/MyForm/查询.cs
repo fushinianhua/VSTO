@@ -443,7 +443,7 @@ namespace 插件.MyCode
         private void 查询_FormClosed(object sender, FormClosedEventArgs e)
         {
        
-            AMG.查询form = null;
+          Globals.ThisAddIn.查询form=null;
         }
     }
 }

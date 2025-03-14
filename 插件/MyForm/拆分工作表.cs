@@ -196,7 +196,7 @@ namespace 插件.MyForm
                 {
                     summaryWorkbook = newExcelApp.Workbooks.Add();
                     summarySheet = (Worksheet)summaryWorkbook.Sheets[1];
-                    summarySheet.Name = "超链接汇总";
+                    summarySheet.Name = "汇总";
                 }
                 else
                 {
@@ -205,9 +205,9 @@ namespace 插件.MyForm
                     {
                         names.Add(ws.Name);
                     }
-                    if (names.Contains( $"{targetKeyword}汇总"))
+                    if (names.Contains(targetKeyword))
                     {
-                        summarySheet = (Worksheet)currentWorkbook.Worksheets[$"{targetKeyword}汇总"];
+                        summarySheet = (Worksheet)currentWorkbook.Worksheets[targetKeyword];
                         Range rng = (Range)summarySheet.Cells[1,summarySheet.Rows.Count];
                         summaryRow = rng.End[XlDirection.xlDown].Row+1;
                     }
@@ -215,7 +215,7 @@ namespace 插件.MyForm
                     {
                         summarySheet = (Worksheet)currentWorkbook.Sheets.Add(
                          After: currentWorkbook.Sheets[currentWorkbook.Sheets.Count]);
-                        summarySheet.Name = $"{targetKeyword}汇总";
+                        summarySheet.Name = targetKeyword;
                     }
                 }
               
@@ -381,8 +381,8 @@ namespace 插件.MyForm
 
         private void 拆分工作表_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
-            AMG.拆分form = null;
+
+            Globals.ThisAddIn.拆分form = null;
         }
 
         private void tabPage1_Click(object sender, EventArgs e)

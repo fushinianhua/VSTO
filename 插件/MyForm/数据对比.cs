@@ -624,7 +624,7 @@ namespace 插件.MyForm
         private void 数据对比_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-            AMG.对比form = null;
+            Globals.ThisAddIn.查询form = null;
         }
 
      

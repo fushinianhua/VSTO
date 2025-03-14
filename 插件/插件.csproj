@@ -254,6 +254,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MyCode\窗口显示API.cs" />
     <EmbeddedResource Include="AMG.resx">
       <DependentUpon>AMG.cs</DependentUpon>
     </EmbeddedResource>
