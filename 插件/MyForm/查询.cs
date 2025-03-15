@@ -49,11 +49,11 @@ namespace 插件.MyCode
             {
                 comboBox1.SelectedIndex = 0;
                 comboBox3.SelectedIndex = 0;
-            }          
+            }
             textBox5.Text = "0";
             textBox6.Text = "无";
             textBox7.Text = "重";
-            progressBar1.Value=100;
+            progressBar1.Value = 100;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -92,8 +92,8 @@ namespace 插件.MyCode
                 Worksheet SourceSheet = (Worksheet)WKs[item].Worksheets[item2];//源文件
                 Worksheet ThisSheet = (Worksheet)WKs[item3].Worksheets[item4];//目标文件
 
-                long Source_rows = SourceSheet.Range["B1"].End[XlDirection.xlDown].Row;//源文件的最后一行
-                long This_rows = ThisSheet.Range["B1"].End[XlDirection.xlDown].Row;//目标文件的最后一行
+                long Source_rows = SourceSheet.Range[$"{SourceKeyCol}{SourceSheet.Rows.Count}"].End[XlDirection.xlUp].Row;//源文件的最后一行
+                long This_rows = ThisSheet.Range[$"{ThisKeyCol}{ThisSheet.Rows.Count}"].End[XlDirection.xlUp].Row;//目标文件的最后一行
 
                 Range S_Key = SourceSheet.Range[SourceKeyCol + "1"].Resize[Source_rows];
                 Range S_Value = SourceSheet.Range[SourceValueCol + "1"].Resize[Source_rows];
@@ -104,13 +104,11 @@ namespace 插件.MyCode
                 int 重复数量 = 0;
                 if (keyValues.Count > 0)
                 {
-                  
-                    for (int i =2; i <= This_rows; i++)
+                    for (int i = 2; i <= This_rows; i++)
                     {
-                        Excel.Range rng = T_Key.Rows[i];//key列
+                        Range rng = T_Key.Rows[i];//key列
                         string kry = rng.Value2?.ToString();//
-
-                        Excel.Range rng2 = T_Value.Rows[i];//值列
+                        Range rng2 = T_Value.Rows[i];//值列
                         try
                         {
                             if (keyValues.ContainsKey(kry))
@@ -126,7 +124,7 @@ namespace 插件.MyCode
                                     if (重复项.Contains(kry))
                                     {
                                         重复数量++;
-                                       // rng2.Value2 = "重";
+                                        // rng2.Value2 = "重";
                                     }
                                     else
                                     {
@@ -160,11 +158,11 @@ namespace 插件.MyCode
                 TimeSpan timeSpan = DateTime.Now.Subtract(t0);
                 double totalSeconds = timeSpan.TotalSeconds;
                 textBox1.Text = totalSeconds + "秒";
-                if(checkBox3.Checked)
+                if (checkBox3.Checked)
                 {
                     this.Close();
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -307,7 +305,7 @@ namespace 插件.MyCode
                         {
                             Col1.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
                             Col2.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
-                        }                       
+                        }
                     }
                 }
             }
@@ -360,7 +358,7 @@ namespace 插件.MyCode
                         }
 
                     }
-                    Col4.Items.Add($"{ColNum+1}.空白尾列");
+                    Col4.Items.Add($"{ColNum + 1}.空白尾列");
                 }
             }
             catch (Exception ex)
@@ -386,14 +384,14 @@ namespace 插件.MyCode
                 Range range = (Range)WS.Range[ThisValueCol + ":" + ThisValueCol];
                 int count = (int)StaticClass.ExcelApp.WorksheetFunction.CountA(range);
                 Marshal.ReleaseComObject(range);
-               
-                    DialogResult result = MessageBox.Show("填充列已有数据,确认覆盖写入结果,\r,点击继续，中断操作点击取消。", "是否继续", MessageBoxButtons.OKCancel);
-                    if (result == DialogResult.OK )
-                    {
-                        Run();
-                    }
-                    else { return; }
-                
+
+                DialogResult result = MessageBox.Show("填充列已有数据,确认覆盖写入结果,\r,点击继续，中断操作点击取消。", "是否继续", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+                    Run();
+                }
+                else { return; }
+
             }
             catch
             {
@@ -442,8 +440,8 @@ namespace 插件.MyCode
 
         private void 查询_FormClosed(object sender, FormClosedEventArgs e)
         {
-       
-          Globals.ThisAddIn.查询form=null;
+
+            Globals.ThisAddIn.查询form = null;
         }
     }
 }

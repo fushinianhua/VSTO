@@ -627,6 +627,9 @@ namespace 插件.MyForm
             Globals.ThisAddIn.查询form = null;
         }
 
-     
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

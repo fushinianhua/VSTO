@@ -209,6 +209,8 @@
             this.Controls.Add(this.GroupBox2);
             this.Controls.Add(this.GroupBox1);
             this.Name = "聚光灯设置";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "聚光灯设置";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.聚光灯设置_FormClosed);

@@ -26,22 +26,21 @@ namespace 插件
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
-            Form form = Globals.ThisAddIn.查询form ;
+            Form form = Globals.ThisAddIn.查询form;
             try
             {
 
                 if (form == null)
                 {
                     form = new 查询();
-                    Globals.ThisAddIn.查询form=form ;
+                    Globals.ThisAddIn.查询form = form;
                     form.Show();
                 }
                 else
                 {
-                    窗口显示API.ShowWindow(form.Handle,1);
-                    窗口显示API.SetForegroundWindow(form.Handle);
+                    窗口显示API.ShowWindow(form.Handle, 1);
                 }
-             
+                窗口显示API.SetForegroundWindow(form.Handle);
             }
             catch (Exception)
             {
@@ -63,9 +62,8 @@ namespace 插件
                 else
                 {
                     窗口显示API.ShowWindow(form.Handle, 1);
-                    窗口显示API.SetForegroundWindow(form.Handle);
                 }
-
+                窗口显示API.SetForegroundWindow(form.Handle);
             }
             catch (Exception)
             {
@@ -87,9 +85,8 @@ namespace 插件
                 else
                 {
                     窗口显示API.ShowWindow(form.Handle, 1);
-                    窗口显示API.SetForegroundWindow(form.Handle);
                 }
-
+                窗口显示API.SetForegroundWindow(form.Handle);
             }
             catch (Exception)
             {
@@ -118,7 +115,7 @@ namespace 插件
 
         private void button4_Click(object sender, RibbonControlEventArgs e)
         {
-          
+
             Form form = Globals.ThisAddIn.拆分form;
             try
             {
@@ -132,15 +129,14 @@ namespace 插件
                 else
                 {
                     窗口显示API.ShowWindow(form.Handle, 1);
-                    窗口显示API.SetForegroundWindow(form.Handle);
                 }
-
+                窗口显示API.SetForegroundWindow(form.Handle);
             }
             catch (Exception)
             {
             }
 
-            }
+        }
 
         private void button5_Click(object sender, RibbonControlEventArgs e)//升序
         {
@@ -156,20 +152,28 @@ namespace 插件
 
         private void 重新应用_Click(object sender, RibbonControlEventArgs e)
         {
-           // ExecuteCommandSafely("FilterReapply");
+            // ExecuteCommandSafely("FilterReapply");
         }
-        private bool 是否筛选=false;
+        private bool 是否筛选 = false;
         private void 筛选_Click(object sender, RibbonControlEventArgs e)
         {
-            if (是否筛选)
+            try
             {
-                清除();
-                return;
+                if (是否筛选)
+                {
+                    清除();
+                    return;
+                }
+                是否筛选 = true;
+                // 获取当前工作表的UsedRange
+                Range usedRange = (Range)Globals.ThisAddIn.Application.Selection;
+                usedRange.AutoFilter(Field: 1, Criteria1: Type.Missing, Operator: XlAutoFilterOperator.xlAnd, Criteria2: Type.Missing, VisibleDropDown: true);
             }
-            是否筛选 = true;
-            // 获取当前工作表的UsedRange
-            Range usedRange =(Range) Globals.ThisAddIn.Application.Selection;
-            usedRange.AutoFilter(Field: 1, Criteria1: Type.Missing, Operator: XlAutoFilterOperator.xlAnd, Criteria2: Type.Missing, VisibleDropDown: true);
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void 清除筛选_Click(object sender, RibbonControlEventArgs e)
@@ -195,17 +199,53 @@ namespace 插件
 
                 throw;
             }
-           
+
         }
 
         private void 导入数据_Click(object sender, RibbonControlEventArgs e)
         {
+            Form form = Globals.ThisAddIn.导入form;
+            try
+            {
 
+                if (form == null)
+                {
+                    form = new 导入数据();
+                    Globals.ThisAddIn.导入form = form;
+                    form.Show();
+                }
+                else
+                {
+                    窗口显示API.ShowWindow(form.Handle, 1);
+                }
+                窗口显示API.SetForegroundWindow(form.Handle);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void 导出数据_Click(object sender, RibbonControlEventArgs e)
         {
+            Form form = Globals.ThisAddIn.导出form;
+            try
+            {
 
+                if (form == null)
+                {
+                    form = new 导出数据();
+                    Globals.ThisAddIn.导出form = form;
+                    form.Show();
+                }
+                else
+                {
+                    窗口显示API.ShowWindow(form.Handle, 1);
+                }
+                窗口显示API.SetForegroundWindow(form.Handle);
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

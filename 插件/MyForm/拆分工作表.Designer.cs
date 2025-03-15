@@ -385,6 +385,8 @@
             this.ClientSize = new System.Drawing.Size(529, 451);
             this.Controls.Add(this.tabControl1);
             this.Name = "拆分工作表";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "拆分工作表";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.拆分工作表_FormClosed);

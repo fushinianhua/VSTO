@@ -28,6 +28,8 @@ namespace 插件
         public  Form 对比form = null;
         public  Form 拆分form = null;
         public  Form 聚光灯form = null;
+        public Form 导出form = null;
+        public Form 导入form = null;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             // 初始化Excel应用引用

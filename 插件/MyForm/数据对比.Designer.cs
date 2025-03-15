@@ -83,7 +83,7 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据区域";
-
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // colorComboBox
             // 
@@ -297,6 +297,8 @@
             this.MaximumSize = new System.Drawing.Size(634, 583);
             this.MinimumSize = new System.Drawing.Size(634, 583);
             this.Name = "数据对比";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据对比";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.数据对比_FormClosed);

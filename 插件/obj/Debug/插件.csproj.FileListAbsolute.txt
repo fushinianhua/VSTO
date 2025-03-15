@@ -72,3 +72,4 @@ D:\软件\Repository\VSTO\插件\obj\Debug\插件.csproj.Up2Date
 D:\软件\Repository\VSTO\插件\obj\Debug\插件.dll
 D:\软件\Repository\VSTO\插件\obj\Debug\插件.pdb
 D:\Github_project\VSTO\插件\obj\Debug\插件.MyForm.导出数据.resources
+D:\Github_project\VSTO\插件\obj\Debug\插件.MyForm.导入数据.resources
