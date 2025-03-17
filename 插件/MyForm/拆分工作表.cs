@@ -32,8 +32,6 @@ namespace 插件.MyForm
         {
             try
             {
-
-
                 worksheet = (Worksheet)excelapp.ActiveSheet;
                 后缀com.Items.AddRange(new object[] { ".xlsx", ".xlsm", ".txt", ".xls" });
                 后缀com.SelectedIndex = 0;

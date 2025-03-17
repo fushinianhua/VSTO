@@ -17,6 +17,7 @@ namespace 插件.MyForm
       
         public static string _聚光灯选择状态;
         public static bool _聚光开关状态;
+        public static string 数据导出地址;
         // 定义一个事件，当聚光灯颜色改变时触发
         public event EventHandler<ColorChangedEventArgs> SpotlightColorChanged;
         public event EventHandler<状态ChangedEventArgs> Spotlight状态Changed;
@@ -78,6 +79,7 @@ namespace 插件.MyForm
             聚光灯颜色 = Settings.Default.聚光灯颜色;
             聚光灯状态 = Settings.Default.聚光灯选择状态;
             聚光开关状态 = Settings.Default.聚光灯开关状态;
+            数据导出地址 = Settings.Default.数据导出地址;
 
         }
 

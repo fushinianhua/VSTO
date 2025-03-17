@@ -24,10 +24,10 @@ namespace 插件
         private Range _lastHighlightedRange;
         private readonly Color _highlightColor = Color.LightBlue;
         private 聚光灯 _聚光灯;
-        public  Form 查询form = null;
-        public  Form 对比form = null;
-        public  Form 拆分form = null;
-        public  Form 聚光灯form = null;
+        public Form 查询form = null;
+        public Form 对比form = null;
+        public Form 拆分form = null;
+        public Form 聚光灯form = null;
         public Form 导出form = null;
         public Form 导入form = null;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
@@ -43,18 +43,18 @@ namespace 插件
             {
                 MessageBox.Show($"初始化失败: {ex.Message}");
             }
-            
+
         }
         // 初始化控制台  
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
-        {       
+        {
             // 释放资源
             _聚光灯?.UnsubscribeEvents();
             if (_lastHighlightedRange != null)
             {
                 Marshal.ReleaseComObject(_lastHighlightedRange);
-            } 
-        }    
+            }
+        }
         #region VSTO 生成的代码
 
         /// <summary>
