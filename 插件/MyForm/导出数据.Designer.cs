@@ -38,6 +38,7 @@
             this.WBnameText = new System.Windows.Forms.TextBox();
             this.WSnameText = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,12 +50,12 @@
             this.CheckList.Margin = new System.Windows.Forms.Padding(0);
             this.CheckList.MultiColumn = true;
             this.CheckList.Name = "CheckList";
-            this.CheckList.Size = new System.Drawing.Size(543, 84);
+            this.CheckList.Size = new System.Drawing.Size(443, 84);
             this.CheckList.TabIndex = 0;
             // 
             // 文件导出
             // 
-            this.文件导出.Location = new System.Drawing.Point(473, 341);
+            this.文件导出.Location = new System.Drawing.Point(391, 315);
             this.文件导出.Name = "文件导出";
             this.文件导出.Size = new System.Drawing.Size(63, 31);
             this.文件导出.TabIndex = 1;
@@ -67,7 +68,7 @@
             this.groupBox1.Controls.Add(this.CheckList);
             this.groupBox1.Location = new System.Drawing.Point(3, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(558, 113);
+            this.groupBox1.Size = new System.Drawing.Size(459, 113);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选择需要导出的列";
@@ -94,7 +95,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 258);
+            this.label2.Location = new System.Drawing.Point(12, 246);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 30);
             this.label2.TabIndex = 5;
@@ -104,7 +105,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(242, 258);
+            this.label3.Location = new System.Drawing.Point(242, 246);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 30);
             this.label3.TabIndex = 6;
@@ -114,7 +115,7 @@
             // WBnameText
             // 
             this.WBnameText.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.WBnameText.Location = new System.Drawing.Point(89, 258);
+            this.WBnameText.Location = new System.Drawing.Point(89, 246);
             this.WBnameText.Multiline = true;
             this.WBnameText.Name = "WBnameText";
             this.WBnameText.Size = new System.Drawing.Size(81, 30);
@@ -123,7 +124,7 @@
             // WSnameText
             // 
             this.WSnameText.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.WSnameText.Location = new System.Drawing.Point(331, 258);
+            this.WSnameText.Location = new System.Drawing.Point(331, 246);
             this.WSnameText.Multiline = true;
             this.WSnameText.Name = "WSnameText";
             this.WSnameText.Size = new System.Drawing.Size(81, 30);
@@ -139,11 +140,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(3, 131);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "全部选中";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // 导出数据
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 384);
+            this.ClientSize = new System.Drawing.Size(469, 350);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.WSnameText);
             this.Controls.Add(this.WBnameText);
@@ -176,5 +191,6 @@
         private System.Windows.Forms.TextBox WBnameText;
         private System.Windows.Forms.TextBox WSnameText;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

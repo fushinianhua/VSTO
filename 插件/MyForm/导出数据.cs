@@ -169,6 +169,35 @@ namespace 插件.MyForm
             {
             }
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkBox1.Checked)
+                {
+                    for (int i = 1; i <= CheckList.Items.Count; i++)
+                    {
+                        CheckList.SetItemChecked(i - 1, true);
+                        checkBox1.Text = "全部取消";
+                    }
+
+                }
+                else
+                {
+                    for (int i = 1; i <= CheckList.Items.Count; i++)
+                    {
+                        CheckList.SetItemChecked(i - 1, false);
+                        checkBox1.Text = "全部选中";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 
 }
