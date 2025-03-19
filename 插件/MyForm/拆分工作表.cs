@@ -56,7 +56,7 @@ namespace 插件.MyForm
         private void button1_Click(object sender, EventArgs e)
         {
             拆分();
-            
+
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -157,8 +157,8 @@ namespace 插件.MyForm
         /// </summary>
         private void 拆分()
         {
-           Application newExcelApp = null;
-         
+            Application newExcelApp = null;
+
             Workbook currentWorkbook = excelapp.ActiveWorkbook;
             Worksheet summarySheet = null;
             Workbook summaryWorkbook = null;
@@ -206,8 +206,8 @@ namespace 插件.MyForm
                     if (names.Contains(targetKeyword))
                     {
                         summarySheet = (Worksheet)currentWorkbook.Worksheets[targetKeyword];
-                        Range rng = (Range)summarySheet.Cells[1,summarySheet.Rows.Count];
-                        summaryRow = rng.End[XlDirection.xlDown].Row+1;
+                        Range rng = (Range)summarySheet.Cells[summarySheet.Rows.Count, 1];
+                        summaryRow = rng.End[XlDirection.xlUp].Row + 1;
                     }
                     else
                     {
@@ -216,12 +216,12 @@ namespace 插件.MyForm
                         summarySheet.Name = targetKeyword;
                     }
                 }
-              
+
                 // 数据收集
                 var dataDict = new Dictionary<string, List<object[,]>>();
                 for (int row = 2; row <= totalRows; row++)
                 {
-                    var cellValue = allData[row, 关键列com.SelectedIndex+1];
+                    var cellValue = allData[row, 关键列com.SelectedIndex + 1];
                     if (cellValue == null) continue;
 
                     string key = cellValue.ToString();
@@ -231,7 +231,10 @@ namespace 插件.MyForm
                         dataDict[key] = new List<object[,]>();
 
                     object[,] rowData = new object[1, totalCols];
-                    Array.Copy(allData, (row - 1) * totalCols, rowData, 0, totalCols);
+                    for (int i = 0; i <= totalCols - 1; i++)
+                    {
+                        rowData[0, i] = allData[row, i + 1];
+                    }
                     dataDict[key].Add(rowData);
                 }
                 // 文件生成逻辑          
@@ -240,11 +243,9 @@ namespace 插件.MyForm
                     string keyword = kv.Key;
                     string safeKeyword = CleanFileName(keyword);
                     string filePath = Path.Combine(baseFolder, $"{safeKeyword}{后缀com.Text}");
-
                     Workbook newWorkbook = null;
                     Worksheet newWorksheet = null;
                     Range dataRange = null;
-
                     try
                     {
                         // 创建新工作簿
@@ -261,13 +262,9 @@ namespace 插件.MyForm
                         {
                             Array.Copy(kv.Value[i], 0, outputData, (i + 1) * totalCols, totalCols);
                         }
-
                         // 批量写入
-                        dataRange = newWorksheet.Range[
-                            newWorksheet.Cells[1, 1],
-                            newWorksheet.Cells[dataCount + 1, totalCols]];
+                        dataRange = newWorksheet.Range[newWorksheet.Cells[1, 1], newWorksheet.Cells[dataCount + 1, totalCols]];
                         dataRange.Value2 = outputData;
-
                         // 保存文件
                         newWorkbook.SaveAs(filePath);
                     }
@@ -282,16 +279,10 @@ namespace 插件.MyForm
                             Marshal.ReleaseComObject(newWorkbook);
                         }
                     }
-
                     // 添加超链接
-                    summarySheet.Hyperlinks.Add(
-                        summarySheet.Cells[summaryRow, 1],
-                        filePath,
-                        TextToDisplay: $"{keyword}"
-                    );
+                    summarySheet.Hyperlinks.Add(summarySheet.Cells[summaryRow, 1], filePath, TextToDisplay: $"{keyword}");
                     summaryRow++;
                 }
-
                 // 保存汇总
                 if (isMultiMode)
                 {
@@ -299,7 +290,8 @@ namespace 插件.MyForm
                         Path.GetDirectoryName(baseFolder),
                         $"数据汇总{后缀com.Text}");
                     summaryWorkbook.SaveAs(summaryPath);
-                }         
+                }
+                MessageBox.Show("汇总完成");
             }
             catch (Exception ex)
             {

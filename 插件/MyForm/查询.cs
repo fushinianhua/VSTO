@@ -111,6 +111,7 @@ namespace 插件.MyCode
                         Range rng2 = T_Value.Rows[i];//值列
                         try
                         {
+                            if (string.IsNullOrEmpty(kry)) continue;
                             if (keyValues.ContainsKey(kry))
                             {
                                 string newValue = keyValues[kry];//取到值
@@ -154,6 +155,7 @@ namespace 插件.MyCode
                         }
                     }
                 }
+                
                 MessageBox.Show($"共有重复数量：{重复数量}");
                 TimeSpan timeSpan = DateTime.Now.Subtract(t0);
                 double totalSeconds = timeSpan.TotalSeconds;

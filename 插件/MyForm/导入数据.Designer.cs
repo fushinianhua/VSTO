@@ -45,7 +45,7 @@
             this.groupBox1.Controls.Add(this.CheckList);
             this.groupBox1.Location = new System.Drawing.Point(8, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(446, 113);
+            this.groupBox1.Size = new System.Drawing.Size(531, 121);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选择需要导入的列";
@@ -54,16 +54,16 @@
             // 
             this.CheckList.CheckOnClick = true;
             this.CheckList.FormattingEnabled = true;
-            this.CheckList.Location = new System.Drawing.Point(8, 17);
+            this.CheckList.Location = new System.Drawing.Point(8, 13);
             this.CheckList.Margin = new System.Windows.Forms.Padding(0);
             this.CheckList.MultiColumn = true;
             this.CheckList.Name = "CheckList";
-            this.CheckList.Size = new System.Drawing.Size(431, 84);
+            this.CheckList.Size = new System.Drawing.Size(509, 100);
             this.CheckList.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(245, 218);
+            this.button1.Location = new System.Drawing.Point(273, 225);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(46, 39);
             this.button1.TabIndex = 4;
@@ -73,7 +73,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(401, 218);
+            this.button2.Location = new System.Drawing.Point(479, 225);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(46, 39);
             this.button2.TabIndex = 5;
@@ -86,16 +86,16 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(358, 153);
+            this.comboBox1.Location = new System.Drawing.Point(410, 160);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(89, 27);
+            this.comboBox1.Size = new System.Drawing.Size(115, 27);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(284, 153);
+            this.label1.Location = new System.Drawing.Point(325, 161);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 27);
             this.label1.TabIndex = 7;
@@ -105,7 +105,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(5, 153);
+            this.label2.Location = new System.Drawing.Point(5, 160);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 25);
             this.label2.TabIndex = 8;
@@ -115,10 +115,10 @@
             // PathText
             // 
             this.PathText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PathText.Location = new System.Drawing.Point(45, 153);
+            this.PathText.Location = new System.Drawing.Point(45, 160);
             this.PathText.Multiline = true;
             this.PathText.Name = "PathText";
-            this.PathText.Size = new System.Drawing.Size(233, 25);
+            this.PathText.Size = new System.Drawing.Size(274, 25);
             this.PathText.TabIndex = 9;
             // 
             // checkBox1
@@ -126,7 +126,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(13, 126);
+            this.checkBox1.Location = new System.Drawing.Point(13, 133);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
             this.checkBox1.TabIndex = 10;
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 268);
+            this.ClientSize = new System.Drawing.Size(551, 337);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.PathText);
             this.Controls.Add(this.label2);

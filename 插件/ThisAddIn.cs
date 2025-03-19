@@ -15,7 +15,6 @@ using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using 插件.MyCode;
 
-
 namespace 插件
 {
     public partial class ThisAddIn
@@ -30,6 +29,7 @@ namespace 插件
         public Form 聚光灯form = null;
         public Form 导出form = null;
         public Form 导入form = null;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             // 初始化Excel应用引用
@@ -43,9 +43,8 @@ namespace 插件
             {
                 MessageBox.Show($"初始化失败: {ex.Message}");
             }
-
         }
-        // 初始化控制台  
+
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
             // 释放资源
@@ -53,8 +52,19 @@ namespace 插件
             if (_lastHighlightedRange != null)
             {
                 Marshal.ReleaseComObject(_lastHighlightedRange);
+                _lastHighlightedRange = null;
             }
+
+            if (excelApp != null)
+            {
+                Marshal.ReleaseComObject(excelApp);
+                excelApp = null;
+            }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
+
         #region VSTO 生成的代码
 
         /// <summary>

@@ -86,6 +86,7 @@ namespace 插件.MyForm
                 int selectedColumnCount = selectedColumnIndices.Count;
                 // 创建新的二维数组来存储选中列的数据
                 object[,] newData = new object[rowCount, selectedColumnCount];
+
                 // 复制选中列的数据到新数组
                 for (int row = 0; row < rowCount; row++)
                 {
@@ -96,6 +97,7 @@ namespace 插件.MyForm
                         newData[row, colIndex] = 单元格数据[row + 1, actualColumn];
                     }
                 }
+
                 // 以下是将新数据导出到新 Excel 工作表的示例
                 Workbook newWorkbook = null;
                 Worksheet newWorksheet = null;
@@ -113,13 +115,35 @@ namespace 插件.MyForm
                     {
                         newWorksheet.Name = WSnameText.Text.Trim();
                     }
+
                     // 确定新工作表要写入数据的范围
                     newRange = newWorksheet.Range[
                         newWorksheet.Cells[1, 1],
                         newWorksheet.Cells[rowCount, selectedColumnCount]
                     ];
+
+                    // 先设置单元格格式为文本
+                    newRange.NumberFormat = "@";
+
                     // 将新数据写入新工作表
                     newRange.Value2 = newData;
+
+                    // 设置日期单元格格式
+                    for (int row = 1; row <= rowCount; row++)
+                    {
+                        for (int col = 1; col <= selectedColumnCount; col++)
+                        {
+                            Range cell = newWorksheet.Cells[row, col];
+                            object cellValue = cell.Value2;
+
+                            if (cellValue is DateTime)
+                            {
+                                // 设置日期格式
+                                cell.NumberFormat = "yyyy-mm-dd hh:mm:ss";
+                            }
+                        }
+                    }
+
                     // 保存新工作簿
                     string str = Path.Combine(保存地址, wbname + ".xlsx");
                     newWorkbook.SaveAs(str);
@@ -155,6 +179,15 @@ namespace 插件.MyForm
                 MessageBox.Show("未选择任何列的数据导出");
             }
         }
+
+        // 模拟获取原单元格格式的方法，需要根据实际情况实现
+        private string 获取原单元格格式(int row, int col)
+        {
+            // 这里需要根据实际情况编写获取原单元格格式的代码
+            // 例如，如果原数据是 Excel 单元格，可能是 单元格数据.Cells[row, col].NumberFormat;
+            return "";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try

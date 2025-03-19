@@ -46,16 +46,16 @@
             // 
             this.CheckList.CheckOnClick = true;
             this.CheckList.FormattingEnabled = true;
-            this.CheckList.Location = new System.Drawing.Point(8, 17);
+            this.CheckList.Location = new System.Drawing.Point(12, 14);
             this.CheckList.Margin = new System.Windows.Forms.Padding(0);
             this.CheckList.MultiColumn = true;
             this.CheckList.Name = "CheckList";
-            this.CheckList.Size = new System.Drawing.Size(443, 84);
+            this.CheckList.Size = new System.Drawing.Size(501, 116);
             this.CheckList.TabIndex = 0;
             // 
             // 文件导出
             // 
-            this.文件导出.Location = new System.Drawing.Point(391, 315);
+            this.文件导出.Location = new System.Drawing.Point(453, 288);
             this.文件导出.Name = "文件导出";
             this.文件导出.Size = new System.Drawing.Size(63, 31);
             this.文件导出.TabIndex = 1;
@@ -68,7 +68,7 @@
             this.groupBox1.Controls.Add(this.CheckList);
             this.groupBox1.Location = new System.Drawing.Point(3, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(459, 113);
+            this.groupBox1.Size = new System.Drawing.Size(522, 135);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选择需要导出的列";
@@ -132,7 +132,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(416, 201);
+            this.button1.Location = new System.Drawing.Point(478, 203);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(38, 30);
             this.button1.TabIndex = 9;
@@ -145,7 +145,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(3, 131);
+            this.checkBox1.Location = new System.Drawing.Point(3, 162);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
             this.checkBox1.TabIndex = 11;
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 350);
+            this.ClientSize = new System.Drawing.Size(532, 335);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.WSnameText);
