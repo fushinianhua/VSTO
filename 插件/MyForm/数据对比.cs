@@ -624,7 +624,7 @@ namespace 插件.MyForm
         private void 数据对比_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-            Globals.ThisAddIn.查询form = null;
+            Globals.ThisAddIn.对比form = null;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

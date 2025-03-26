@@ -12,7 +12,26 @@ namespace 插件.MyForm
 {
     internal class StaticClass
     {
+        /// <summary>
+        /// 自定义类用于保存单元格格式
+        /// </summary>
+        public class RangeFormat
+        {
         
+            public string NumberFormat { get; set; }
+
+            public string FontName { get; set; }
+            public double FontSize { get; set; }
+            public object FontColor { get; set; }
+            public object InteriorColor { get; set; }
+        }
+        public class DataTypeInfo
+        {
+            public string DataType { get; set; }
+            public List<string> Keywords { get; set; }
+        }
+
+
         public static Application ExcelApp;
       
         public static string _聚光灯选择状态;

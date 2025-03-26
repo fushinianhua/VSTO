@@ -1,0 +1,14 @@
+[
+  {
+    "dataType": "Date",
+    "keywords": [ "日期", "运单日", "运单日期", "下单日期" ]
+  },
+  {
+    "dataType": "Text",
+    "keywords": [ "运单号", "运单号码" ]
+  },
+ {
+    "dataType": "Text2",
+    "keywords": [ "运单号2", "运单号码2" ]
+  }
+]
