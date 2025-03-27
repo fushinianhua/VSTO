@@ -6,9 +6,6 @@
   {
     "dataType": "Text",
     "keywords": [ "运单号", "运单号码" ]
-  },
- {
-    "dataType": "Text2",
-    "keywords": [ "运单号2", "运单号码2" ]
   }
+
 ]

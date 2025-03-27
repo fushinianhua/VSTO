@@ -34,14 +34,15 @@ namespace 插件.MyForm
         private Worksheet 选择工作表;
         private object[,] 数据;
         private readonly List<string> 工作表名字 = new List<string>();
-        private readonly List<string> 列表头 = new List<string>();
-        private  List<DataTypeInfo> 列表数据=new List<DataTypeInfo>();
+        private readonly List<string> 导入列表头 = new List<string>();
+        private List<DataTypeInfo> 列表数据 = new List<DataTypeInfo>();
         // 新增：用于保存 A2 - H2 单元格格式的列表
         private Dictionary<int, string> RangeFormat = new Dictionary<int, string>();
         private void 导入数据_FormClosed(object sender, FormClosedEventArgs e)
         {
             ReleaseExcelObjects();
             Globals.ThisAddIn.导入form = null;
+
         }
 
         private void 导入数据_Load(object sender, EventArgs e)
@@ -96,7 +97,7 @@ namespace 插件.MyForm
                 选择工作表 = 选择工作薄.Worksheets[1];
                 LoadDataAndHeaders();
 
-                if (列表头.Count > 0)
+                if (导入列表头.Count > 0)
                 {
                     PopulateCheckList();
                 }
@@ -123,14 +124,14 @@ namespace 插件.MyForm
                 string item = comboBox1.SelectedItem.ToString();
                 if (工作表名字.Contains(item))
                 {
-                    列表头.Clear();
+                    导入列表头.Clear();
                     数据 = null;
                     CheckList.Items.Clear();
 
                     选择工作表 = 选择工作薄.Worksheets[item];
                     LoadDataAndHeaders();
 
-                    if (列表头.Count > 0)
+                    if (导入列表头.Count > 0)
                     {
                         PopulateCheckList();
                     }
@@ -144,7 +145,41 @@ namespace 插件.MyForm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // 这里可以添加按钮2的点击逻辑
+            try
+            {
+                // 拿到选择的导入列表头
+                List<string> selectedItems = new List<string>();
+                for (int i = 0; i < CheckList.Items.Count; i++)
+                {
+                    if (CheckList.GetItemChecked(i))
+                    {
+                        selectedItems.Add(CheckList.Items[i].ToString());
+                    }
+                }
+
+                foreach (string selectedItem in selectedItems)
+                {
+                    bool isExist = false;
+                    foreach (DataTypeInfo sourceItem in 列表数据)
+                    {
+                        if (sourceItem.Keywords.Contains(selectedItem))
+                        {
+                            isExist = true;
+                            break;
+                        }
+                    }
+
+                    if (!isExist)
+                    {
+                        MessageBox.Show("列表头不存在对应数据,请修改");
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -175,21 +210,21 @@ namespace 插件.MyForm
             }
         }
         /// <summary>
-        /// 获取sheet列表头
+        /// 获取sheet导入列表头
         /// </summary>
         private void LoadDataAndHeaders()
         {
             Range rng = 选择工作表.UsedRange;
             数据 = rng.Value2;
-            列表头.Clear();
+            导入列表头.Clear();
             if (数据 != null && 数据.GetLength(0) > 0 && 数据.GetLength(1) > 0)
             {
                 for (int i = 1; i <= 数据.GetLength(1); i++)
                 {
-                    Range r = rng[2,i];
+                    Range r = rng[2, i];
                     string format = r.NumberFormat;
                     RangeFormat.Add(i, format);
-                    列表头.Add(数据[1, i].ToString());
+                    导入列表头.Add(数据[1, i].ToString());
                 }
             }
         }
@@ -199,13 +234,15 @@ namespace 插件.MyForm
         private void PopulateCheckList()
         {
             CheckList.Items.Clear();
-            for (int i = 0; i < 列表头.Count; i++)
+            for (int i = 0; i < 导入列表头.Count; i++)
             {
-                CheckList.Items.Add(列表头[i]);
+                CheckList.Items.Add(导入列表头[i]);
                 CheckList.SetItemChecked(i, true);
             }
         }
-
+        /// <summary>
+        /// 释放资源
+        /// </summary>
         private void ReleaseExcelObjects()
         {
             if (选择工作表 != null)
@@ -226,7 +263,9 @@ namespace 插件.MyForm
                 excelapp = null;
             }
         }
-    
+        /// <summary>
+        /// 读取导入列表头对应数据
+        /// </summary>
         private void LoadConfig()
         {
             try
@@ -246,7 +285,7 @@ namespace 插件.MyForm
                         using (JsonTextReader jsonReader = new JsonTextReader(new StringReader(json)))
                         {
                             JsonSerializer serializer = new JsonSerializer();
-                             列表数据 = serializer.Deserialize<List<DataTypeInfo>>(jsonReader);                          
+                            列表数据 = serializer.Deserialize<List<DataTypeInfo>>(jsonReader);
                         }
                     }
                 }
@@ -257,6 +296,6 @@ namespace 插件.MyForm
             }
         }
     }
-    // 定义数据模型类
-   
+
+
 }

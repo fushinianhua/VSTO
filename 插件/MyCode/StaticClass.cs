@@ -25,6 +25,9 @@ namespace 插件.MyForm
             public object FontColor { get; set; }
             public object InteriorColor { get; set; }
         }
+        /// <summary>
+        /// 定义数据模型类
+        /// </summary>
         public class DataTypeInfo
         {
             public string DataType { get; set; }
@@ -136,7 +139,7 @@ namespace 插件.MyForm
                 // 创建事件参数对象
                 开关状态ChangedEventArgs args = new 开关状态ChangedEventArgs(oldColor, newColor);
                 // 触发事件
-                handler(Instance, args);
+                handler.Invoke(Instance, args);
             }
         }
         // 单例模式，确保只有一个 SpotlightColorManager 实例
