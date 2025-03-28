@@ -1,4 +1,4 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿
 using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -142,62 +143,143 @@ namespace 插件.MyForm
                 MessageBox.Show($"切换工作表时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                // 拿到选择的导入列表头
-                List<string> selectedItems = new List<string>();
-                for (int i = 0; i < CheckList.Items.Count; i++)
+                // 获取选中的源列头
+                var selectedHeaders = CheckList.CheckedItems.Cast<string>().ToList();
+                if (selectedHeaders.Count == 0)
                 {
-                    if (CheckList.GetItemChecked(i))
-                    {
-                        selectedItems.Add(CheckList.Items[i].ToString());
-                    }
+                    MessageBox.Show("请至少选择一列进行导入");
+                    return;
                 }
 
-                foreach (string selectedItem in selectedItems)
+                // 获取目标工作表
+                var targetApp = Globals.ThisAddIn.Application;
+                var targetSheet = (Worksheet)targetApp.ActiveSheet;
+                var targetHeaders = GetTargetHeaders(targetSheet); // 获取目标表头
+
+                // 建立列映射关系（源列索引 -> 目标列索引）
+                var columnMapping = new Dictionary<int, int>();
+                foreach (var srcHeader in selectedHeaders)
                 {
-                    bool isExist = false;
-                    foreach (DataTypeInfo sourceItem in 列表数据)
+                    // 查找近义词配置
+                    DataTypeInfo dataType = 列表数据.FirstOrDefault(d => d.Keywords.Contains(srcHeader));
+                    if (dataType == null)
                     {
-                        if (sourceItem.Keywords.Contains(selectedItem))
-                        {
-                            isExist = true;
-                            break;
-                        }
+                        MessageBox.Show($"未找到【{srcHeader}】的列配置");
+                        continue;
                     }
 
-                    if (!isExist)
+                    // 在目标表中查找匹配列
+                    var targetCol = FindTargetColumn(targetHeaders, dataType.Keywords);
+                    if (targetCol == -1)
                     {
-                        MessageBox.Show("列表头不存在对应数据,请修改");
-                        break;
+                        MessageBox.Show($"未找到【{srcHeader}】对应的目标列");
+                        continue;
                     }
+
+                    // 记录映射关系
+                    int srcColIndex = 导入列表头.IndexOf(srcHeader) + 1; // Excel列从1开始
+                    columnMapping.Add(srcColIndex, targetCol);
                 }
+
+                // 执行数据填充
+                FillDataToTarget(columnMapping, targetSheet);
+
+                MessageBox.Show($"成功导入 {columnMapping.Count} 列数据");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"导入失败：{ex.Message}");
+            }
+            finally
+            {
+                ReleaseExcelObjects();
             }
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// 在目标表中查找匹配列
+        /// </summary>
+        private int FindTargetColumn(Dictionary<int, string> targetHeaders, List<string> keywords)
         {
-            try
+            foreach (var keyword in keywords)
             {
-                bool isChecked = checkBox1.Checked;
-                for (int i = 0; i < CheckList.Items.Count; i++)
+                var match = targetHeaders.FirstOrDefault(h =>
+                    h.Value.Equals(keyword, StringComparison.OrdinalIgnoreCase));
+                if (!match.Equals(default(KeyValuePair<int, string>)))
                 {
-                    CheckList.SetItemChecked(i, isChecked);
+                    return match.Key;
                 }
-                checkBox1.Text = isChecked ? "全部取消" : "全部选中";
             }
-            catch (Exception ex)
+            return -1; // 未找到
+        }
+
+        /// <summary>
+        /// 填充数据到目标列
+        /// </summary>
+        private void FillDataToTarget(Dictionary<int, int> columnMapping, Worksheet targetSheet)
+        {
+            const int startRow = 2; // 数据从第二行开始
+            int maxRow = 数据.GetLength(0);
+
+            foreach (var mapping in columnMapping)
             {
-                MessageBox.Show($"全选/全不选时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int srcCol = mapping.Key;
+                int targetCol = mapping.Value;
+
+                // 准备数据数组（优化写入性能）
+                object[,] dataArray = new object[maxRow - 1, 1]; // 行数从2开始
+                for (int row = 2; row <= maxRow; row++)
+                {
+                    dataArray[row - 2, 0] = 数据[row, srcCol] ?? DBNull.Value;
+                }
+
+                // 批量写入数据
+                Range targetRange = (Range)targetSheet.Range[
+                    targetSheet.Cells[startRow, targetCol],
+                    targetSheet.Cells[startRow + maxRow - 2, targetCol]
+                ];
+                targetRange.Value2 = dataArray;
+
+                // 应用源列格式（可选）
+                string format = RangeFormat.ContainsKey(srcCol) ? RangeFormat[srcCol] : "@";
+                targetRange.NumberFormat = format;
             }
         }
+
+
+        /// <summary>
+        /// 获取目标表头信息（列索引 -> 列名）
+        /// </summary>
+        private Dictionary<int, string> GetTargetHeaders(Worksheet targetSheet)
+        {
+            var headers = new Dictionary<int, string>();
+            Range usedRange = targetSheet.UsedRange;
+            var headerRow = usedRange.Rows[1]; // 假设表头在第一行
+
+            foreach (Range cell in headerRow.Cells)
+            {
+                if (cell.Value2 != null)
+                {
+                    headers[cell.Column] = cell.Value2.ToString().Trim();
+                }
+            }
+            return headers;
+        }
+
+        private bool ValidateHeaders(List<string> headers)
+        {
+            foreach (var header in headers)
+            {
+                bool exists = 列表数据.Any(d => d.Keywords.Contains(header));
+                if (!exists) return false;
+            }
+            return true;
+        }
+
+     
         /// <summary>
         /// 获取所有工作表名字
         /// </summary>
@@ -295,6 +377,41 @@ namespace 插件.MyForm
                 MessageBox.Show($"读取配置文件时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isChecked = checkBox1.Checked;
+                for (int i = 0; i < CheckList.Items.Count; i++)
+                {
+                    CheckList.SetItemChecked(i, isChecked);
+                }
+                checkBox1.Text = isChecked ? "全部取消" : "全部选中";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"全选/全不选时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                 string AssemblyPath= Assembly.GetExecutingAssembly().Location;
+                // 定义要打开的文件路径
+                string filePath = "D:\\Github_project\\VSTO\\插件\\Resources\\ColName.json";
+                // 启动记事本并打开指定的 JSON 文件
+                Process.Start("notepad.exe", filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+      
     }
 
 

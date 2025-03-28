@@ -130,21 +130,6 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
-      <HintPath>packages\BouncyCastle.Cryptography.2.3.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
-    </Reference>
-    <Reference Include="Enums.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
-      <HintPath>packages\Enums.NET.4.0.1\lib\net45\Enums.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="ExtendedNumerics.BigDecimal, Version=2025.1001.2.129, Culture=neutral, PublicKeyToken=65f1315a45ad8949, processorArchitecture=MSIL">
-      <HintPath>packages\ExtendedNumerics.BigDecimal.2025.1001.2.129\lib\net472\ExtendedNumerics.BigDecimal.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
-      <HintPath>packages\MathNet.Numerics.Signed.5.0.0\lib\net461\MathNet.Numerics.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.3.0.0\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
@@ -374,19 +359,29 @@
     <None Include="插件_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shuaxin.jpg" />
+    <EmbeddedResource Include="Resources\shuaxin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\聚光灯开.png" />
+    <EmbeddedResource Include="Resources\聚光灯开.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\选择.jpg" />
+    <EmbeddedResource Include="Resources\选择.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\更换.jpg" />
+    <EmbeddedResource Include="Resources\更换.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\聚光灯关.png" />
+    <EmbeddedResource Include="Resources\聚光灯关.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

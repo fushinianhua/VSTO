@@ -124,9 +124,6 @@ namespace 插件.MyForm
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
         private Excel.Application excelapp;
-        private Range 相同Rng = null;
-        private Range 不同Rng = null;
-
         private void 相同项_Click(object sender, EventArgs e)
         {
             try
@@ -602,7 +599,7 @@ namespace 插件.MyForm
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void ReleaseComObjects(List<Excel.Range> ranges)
         {
