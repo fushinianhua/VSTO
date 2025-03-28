@@ -7,14 +7,19 @@
     "dataType": "Text",
     "keywords": [ "运单号", "运单号码" ]
   },
+  
+
   {
     "dataType": "Text",
-    "keywords": [ "运单号", "运单号码" ]
-  },
-{
-    "dataType": "Text",
-    "keywords": [ "运单号", "运单号码" ]
-  }
+    "keywords": [ "计费重量", "计费重量" ]
 
+  },
+
+
+  {
+    "dataType": "Text",
+    "keywords": [ "省份", "省份" ]
+
+  }
 
 ]

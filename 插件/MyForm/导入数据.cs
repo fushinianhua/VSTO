@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using 插件.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static 插件.MyForm.StaticClass;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
@@ -54,6 +55,11 @@ namespace 插件.MyForm
                 {
                     PathText.Text = 数据导入地址 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 }
+                // 为按钮添加提示信息
+                toolTip1.SetToolTip(button1, "点击选择需要导入的文件");
+                toolTip1.SetToolTip(button3, "点击修改近义匹配列表"); 
+                toolTip1.SetToolTip(button2, "点击开始导入数据"); 
+                toolTip1.SetToolTip(comboBox1, "可以选择sheet,默认为第一个sheet"); 
                 LoadConfig();
             }
             catch (Exception ex)
@@ -221,7 +227,8 @@ namespace 插件.MyForm
         /// </summary>
         private void FillDataToTarget(Dictionary<int, int> columnMapping, Worksheet targetSheet)
         {
-            const int startRow = 2; // 数据从第二行开始
+           int startRow=targetSheet.UsedRange.Rows.Count;
+             
             int maxRow = 数据.GetLength(0);
 
             foreach (var mapping in columnMapping)
@@ -257,7 +264,7 @@ namespace 插件.MyForm
         {
             var headers = new Dictionary<int, string>();
             Range usedRange = targetSheet.UsedRange;
-            var headerRow = usedRange.Rows[1]; // 假设表头在第一行
+            Range headerRow = usedRange.Rows[1]; // 假设表头在第一行
 
             foreach (Range cell in headerRow.Cells)
             {
@@ -296,7 +303,10 @@ namespace 插件.MyForm
         /// </summary>
         private void LoadDataAndHeaders()
         {
-            Range rng = 选择工作表.UsedRange;
+             int row = 选择工作表.Cells[选择工作表.Rows.Count,1].End[XlDirection.xlUp].Row;
+            int col = 选择工作表.Cells[1, 选择工作表.Columns.Count].End[XlDirection.xlToLeft].Column;
+
+            Range rng = 选择工作表.Range[选择工作表.Cells[1,1], 选择工作表.Cells[row,col]];
             数据 = rng.Value2;
             导入列表头.Clear();
             if (数据 != null && 数据.GetLength(0) > 0 && 数据.GetLength(1) > 0)
@@ -350,31 +360,35 @@ namespace 插件.MyForm
         /// </summary>
         private void LoadConfig()
         {
+            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
             try
             {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                string resourceName = "插件.Resources.ColName.json";
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                using (FileStream stream = new FileStream(jsonFilePath, FileMode.Open, FileAccess.Read))
                 {
-                    if (stream == null)
-                    {
-                        MessageBox.Show("未找到配置文件资源。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         string json = reader.ReadToEnd();
                         using (JsonTextReader jsonReader = new JsonTextReader(new StringReader(json)))
                         {
                             JsonSerializer serializer = new JsonSerializer();
-                            列表数据 = serializer.Deserialize<List<DataTypeInfo>>(jsonReader);
+                            List<DataTypeInfo> listData = serializer.Deserialize<List<DataTypeInfo>>(jsonReader);
+                            // 这里假设列表数据是类中的成员变量，将反序列化后的数据赋值给它
+                            列表数据 = listData;
                         }
                     }
                 }
             }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("配置文件未找到。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (JsonException ex)
+            {
+                MessageBox.Show($"解析JSON时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"读取配置文件时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"发生其他错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -394,16 +408,16 @@ namespace 插件.MyForm
                 MessageBox.Show($"全选/全不选时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        bool IsChanged=false;
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                 string AssemblyPath= Assembly.GetExecutingAssembly().Location;
-                // 定义要打开的文件路径
-                string filePath = "D:\\Github_project\\VSTO\\插件\\Resources\\ColName.json";
-                // 启动记事本并打开指定的 JSON 文件
-                Process.Start("notepad.exe", filePath);
+                string jsonFilePath =Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
+               
+              Process.Start("notepad.exe", jsonFilePath);
+                IsChanged=true;
+                button4.Enabled=IsChanged;
             }
             catch (Exception ex)
             {
@@ -411,7 +425,22 @@ namespace 插件.MyForm
             }
         }
 
-      
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsChanged) return;
+                LoadConfig();
+                MessageBox.Show("数据更新成功");
+                IsChanged = false;
+                button4.Enabled=IsChanged;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 
 

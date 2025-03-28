@@ -93,11 +93,6 @@ D:\Github_project\VSTO\插件\bin\Debug\System.Security.Cryptography.Xml.xml
 D:\Github_project\VSTO\插件\bin\Debug\System.Text.Encoding.CodePages.xml
 D:\Github_project\VSTO\插件\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Github_project\VSTO\插件\bin\Debug\System.ValueTuple.xml
-D:\软件\Repository\VSTO\插件\bin\Debug\BouncyCastle.Cryptography.dll
-D:\软件\Repository\VSTO\插件\bin\Debug\Enums.NET.dll
-D:\软件\Repository\VSTO\插件\bin\Debug\ExtendedNumerics.BigDecimal.dll
-D:\软件\Repository\VSTO\插件\bin\Debug\ICSharpCode.SharpZipLib.dll
-D:\软件\Repository\VSTO\插件\bin\Debug\MathNet.Numerics.dll
 D:\软件\Repository\VSTO\插件\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 D:\软件\Repository\VSTO\插件\bin\Debug\System.Buffers.dll
 D:\软件\Repository\VSTO\插件\bin\Debug\System.Memory.dll
@@ -108,13 +103,6 @@ D:\软件\Repository\VSTO\插件\bin\Debug\System.Security.Cryptography.Xml.dll
 D:\软件\Repository\VSTO\插件\bin\Debug\System.Text.Encoding.CodePages.dll
 D:\软件\Repository\VSTO\插件\bin\Debug\System.Threading.Tasks.Extensions.dll
 D:\软件\Repository\VSTO\插件\bin\Debug\System.ValueTuple.dll
-D:\软件\Repository\VSTO\插件\bin\Debug\BouncyCastle.Cryptography.xml
-D:\软件\Repository\VSTO\插件\bin\Debug\Enums.NET.pdb
-D:\软件\Repository\VSTO\插件\bin\Debug\Enums.NET.xml
-D:\软件\Repository\VSTO\插件\bin\Debug\ExtendedNumerics.BigDecimal.xml
-D:\软件\Repository\VSTO\插件\bin\Debug\ICSharpCode.SharpZipLib.pdb
-D:\软件\Repository\VSTO\插件\bin\Debug\ICSharpCode.SharpZipLib.xml
-D:\软件\Repository\VSTO\插件\bin\Debug\MathNet.Numerics.xml
 D:\软件\Repository\VSTO\插件\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 D:\软件\Repository\VSTO\插件\bin\Debug\System.Buffers.xml
 D:\软件\Repository\VSTO\插件\bin\Debug\System.Memory.xml
@@ -137,3 +125,8 @@ D:\Github_project\VSTO\插件\bin\Debug\Resources\选择.jpg
 D:\Github_project\VSTO\插件\bin\Debug\Resources\更换.jpg
 D:\Github_project\VSTO\插件\bin\Debug\Resources\聚光灯开.png
 D:\Github_project\VSTO\插件\bin\Debug\Resources\聚光灯关.png
+D:\软件\Repository\VSTO\插件\bin\Debug\Resources\shuaxin.jpg
+D:\软件\Repository\VSTO\插件\bin\Debug\Resources\选择.jpg
+D:\软件\Repository\VSTO\插件\bin\Debug\Resources\更换.jpg
+D:\软件\Repository\VSTO\插件\bin\Debug\Resources\聚光灯开.png
+D:\软件\Repository\VSTO\插件\bin\Debug\Resources\聚光灯关.png
