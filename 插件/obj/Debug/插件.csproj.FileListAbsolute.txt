@@ -117,7 +117,6 @@ D:\软件\Repository\VSTO\插件\obj\Debug\插件.MyForm.导入数据.resources
 D:\Github_project\VSTO\插件\bin\Debug\Newtonsoft.Json.dll
 D:\Github_project\VSTO\插件\bin\Debug\Newtonsoft.Json.xml
 D:\Github_project\VSTO\插件\bin\Debug\Resources\ColName.json
-D:\软件\Repository\VSTO\插件\bin\Debug\Resources\ColName.json
 D:\软件\Repository\VSTO\插件\bin\Debug\Newtonsoft.Json.dll
 D:\软件\Repository\VSTO\插件\bin\Debug\Newtonsoft.Json.xml
 D:\Github_project\VSTO\插件\bin\Debug\Resources\shuaxin.jpg
@@ -130,3 +129,4 @@ D:\软件\Repository\VSTO\插件\bin\Debug\Resources\选择.jpg
 D:\软件\Repository\VSTO\插件\bin\Debug\Resources\更换.jpg
 D:\软件\Repository\VSTO\插件\bin\Debug\Resources\聚光灯开.png
 D:\软件\Repository\VSTO\插件\bin\Debug\Resources\聚光灯关.png
+D:\软件\Repository\VSTO\插件\bin\Debug\Resources\ColName.json

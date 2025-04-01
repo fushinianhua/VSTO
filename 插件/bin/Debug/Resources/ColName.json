@@ -1,24 +1,134 @@
 [
   {
     "dataType": "Date",
-    "keywords": [ "日期", "运单日", "运单日期", "下单日期" ]
+    "keywords": [ "日期", "运单日", "运单日期", "下单日期","单号申请时间" ]
   },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "订单创建时间", "单号申请时间" ]
+  },
+
   {
     "dataType": "Text",
     "keywords": [ "运单号", "运单号码" ]
   },
-  
 
   {
     "dataType": "Text",
-    "keywords": [ "计费重量", "计费重量" ]
+    "keywords": [ "业务员", "揽收业务员" ]
+  },
 
+  {
+    "dataType": "Text",
+    "keywords": [ "微信昵称" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "品牌", "快递公司" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "客户名称", "客户店铺" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "单号帐户", "运单发放" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "寄件人" ]
   },
 
 
   {
     "dataType": "Text",
-    "keywords": [ "省份", "省份" ]
+    "keywords": [ "寄件人公司" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "寄件人电话" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "省份", "寄件省" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "寄件市" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "寄件区" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "寄件人地址", "寄件人详细地址" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "收件人" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "收件人公司" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "收件人电话" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "收件省" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "收件市" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "收件区" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "收件地址", "目的地", "收件人地址" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "计费重量", "实际重量", "结算重量" ]
+
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "运费" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "物流状态", "单号状态" ]
+  },
+
+  {
+    "dataType": "Text",
+    "keywords": [ "备注" ]
 
   }
 

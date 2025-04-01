@@ -68,127 +68,125 @@ namespace 插件.MyForm
             Globals.ThisAddIn.导出form = null;
         }
 
-        private void 文件导出_Click(object sender, EventArgs e)
+        // 在窗体设计器中添加一个CheckBox控件，命名为 chkExportFilteredData
+        // 设置其Text属性为"仅导出筛选后的数据"
+
+
+private void 文件导出_Click(object sender, EventArgs e)
+    {
+        // 1. 检查是否选中列
+        if (CheckList.CheckedItems.Count == 0)
         {
-            if (CheckList.CheckedItems.Count > 0)
+            MessageBox.Show("请至少选择一列数据导出");
+            return;
+        }
+
+        // 2. 获取选中列索引（Excel从1开始）
+        List<int> selectedColumns = CheckList.Items.Cast<string>()
+            .Select((item, index) => new { item, index })
+            .Where(x => CheckList.GetItemChecked(x.index))
+            .Select(x => x.index + 1)
+            .ToList();
+
+       Workbook sourceWorkbook = null;
+        Worksheet sourceSheet = null;
+        Workbook newWorkbook = null;
+       Worksheet newWorksheet = null;
+       Range visibleRange = null;
+
+        try
+        {
+            // 3. 获取当前Excel对象
+            sourceWorkbook = StaticClass.ExcelApp.ActiveWorkbook;
+            sourceSheet = sourceWorkbook.ActiveSheet;
+
+            // 4. 检查筛选模式
+            bool exportFiltered = checkBox2.Checked;
+             bool falg= sourceSheet.AutoFilter == null || !sourceSheet.AutoFilter.FilterMode;
+              
+           
+
+            // 5. 创建新工作簿
+            newWorkbook = StaticClass.ExcelApp.Workbooks.Add();
+            newWorksheet = newWorkbook.Sheets[1];
+
+            // 6. 复制表头（保留格式）
+            for (int i = 0; i < selectedColumns.Count; i++)
             {
-                // 获取选中列的索引
-                List<int> selectedColumnIndices = new List<int>();
-                for (int i = 0; i < CheckList.Items.Count; i++)
+               Range headerCell = sourceSheet.Cells[1, selectedColumns[i]];
+                headerCell.Copy(newWorksheet.Cells[1, i + 1]);
+            }
+
+            // 7. 高性能数据导出
+            if (exportFiltered &&!falg)
+            {
+                // 7.1 使用SpecialCells获取可见区域（关键优化点）
+                visibleRange = sourceSheet.UsedRange.SpecialCells(
+                  XlCellType.xlCellTypeVisible);
+
+                // 7.2 仅复制选中列
+                foreach (int colIndex in selectedColumns)
                 {
-                    if (CheckList.GetItemChecked(i))
-                    {
-                        // 注意 Excel 索引从 1 开始，而 CheckList 索引从 0 开始
-                        selectedColumnIndices.Add(i + 1);
-                    }
-                }
-                int rowCount = 单元格数据.GetLength(0);
-                int selectedColumnCount = selectedColumnIndices.Count;
-                // 创建新的二维数组来存储选中列的数据
-                object[,] newData = new object[rowCount, selectedColumnCount];
-
-                // 复制选中列的数据到新数组
-                for (int row = 0; row < rowCount; row++)
-                {
-                    for (int colIndex = 0; colIndex < selectedColumnCount; colIndex++)
-                    {
-                        int actualColumn = selectedColumnIndices[colIndex];
-                        // 从原数据中取出对应行和选中列的数据放入新数组
-                        newData[row, colIndex] = 单元格数据[row + 1, actualColumn];
-                    }
-                }
-
-                // 以下是将新数据导出到新 Excel 工作表的示例
-                Workbook newWorkbook = null;
-                Worksheet newWorksheet = null;
-                Range newRange = null;
-                try
-                {
-                    newWorkbook = StaticClass.ExcelApp.Workbooks.Add();
-                    string wbname = WBnameText.Text.Trim();
-                    if (WBnameText.Text.Trim() == "")
-                    {
-                        wbname = $"{DateTime.Now.Year}-{DateTime.Now.Month}";
-                    }
-                    newWorksheet = newWorkbook.ActiveSheet;
-                    if (WSnameText.Text.Trim() != "")
-                    {
-                        newWorksheet.Name = WSnameText.Text.Trim();
-                    }
-
-                    // 确定新工作表要写入数据的范围
-                    newRange = newWorksheet.Range[
-                        newWorksheet.Cells[1, 1],
-                        newWorksheet.Cells[rowCount, selectedColumnCount]
-                    ];
-
-                    // 先设置单元格格式为文本
-                    newRange.NumberFormat = "@";
-
-                    // 将新数据写入新工作表
-                    newRange.Value2 = newData;
-
-                    // 设置日期单元格格式
-                    for (int row = 1; row <= rowCount; row++)
-                    {
-                        for (int col = 1; col <= selectedColumnCount; col++)
-                        {
-                            Range cell = newWorksheet.Cells[row, col];
-                            object cellValue = cell.Value2;
-
-                            if (cellValue is DateTime)
-                            {
-                                // 设置日期格式
-                                cell.NumberFormat = "yyyy-mm-dd hh:mm:ss";
-                            }
-                        }
-                    }
-
-                    // 保存新工作簿
-                    string str = Path.Combine(保存地址, wbname + ".xlsx");
-                    newWorkbook.SaveAs(str);
-                    newWorkbook.Close();
-                    MessageBox.Show("数据导出成功！");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"数据导出失败：{ex.Message}");
-                }
-                finally
-                {
-                    // 释放资源
-                    if (newRange != null)
-                    {
-                        Marshal.ReleaseComObject(newRange);
-                        newRange = null;
-                    }
-                    if (newWorksheet != null)
-                    {
-                        Marshal.ReleaseComObject(newWorksheet);
-                        newWorksheet = null;
-                    }
-                    if (newWorkbook != null)
-                    {
-                        Marshal.ReleaseComObject(newWorkbook);
-                        newWorkbook = null;
-                    }
+                   Range sourceCol = visibleRange.Columns[colIndex];
+                    int targetCol = selectedColumns.IndexOf(colIndex) + 1;
+                    sourceCol.Copy(newWorksheet.Columns[targetCol]);
                 }
             }
             else
             {
-                MessageBox.Show("未选择任何列的数据导出");
+                // 7.3 非筛选模式直接复制整列
+                foreach (int colIndex in selectedColumns)
+                {
+                   Range sourceCol = sourceSheet.Columns[colIndex];
+                    int targetCol = selectedColumns.IndexOf(colIndex) + 1;
+                    sourceCol.Copy(newWorksheet.Columns[targetCol]);
+                }
             }
-        }
 
-        // 模拟获取原单元格格式的方法，需要根据实际情况实现
-        private string 获取原单元格格式(int row, int col)
+            // 8. 设置文件名
+            string workbookName = string.IsNullOrWhiteSpace(WBnameText.Text)
+                ? $"导出数据_{DateTime.Now:yyyyMMddHHmmss}"
+                : WBnameText.Text.Trim();
+
+            if (!string.IsNullOrWhiteSpace(WSnameText.Text))
+            {
+                newWorksheet.Name = WSnameText.Text.Trim();
+            }
+
+            // 9. 保存文件
+            string savePath = System.IO.Path.Combine(保存地址, $"{workbookName}.xlsx");
+            newWorkbook.SaveAs(savePath);
+
+            MessageBox.Show($"导出成功！\n文件已保存到：{savePath}");
+        }
+        catch (COMException comEx) when (comEx.Message.Contains("0x800A03EC"))
         {
-            // 这里需要根据实际情况编写获取原单元格格式的代码
-            // 例如，如果原数据是 Excel 单元格，可能是 单元格数据.Cells[row, col].NumberFormat;
-            return "";
+            MessageBox.Show("没有可见数据可导出，请检查筛选条件");
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"导出失败：{ex.Message}\n建议关闭其他Excel进程后重试");
+        }
+        finally
+        {
+            // 10. 释放所有COM对象（严格按顺序）
+            if (visibleRange != null) Marshal.ReleaseComObject(visibleRange);
+            if (newWorksheet != null) Marshal.ReleaseComObject(newWorksheet);
+            if (newWorkbook != null)
+            {
+                newWorkbook.Close(false);
+                Marshal.ReleaseComObject(newWorkbook);
+            }
+            if (sourceSheet != null) Marshal.ReleaseComObject(sourceSheet);
+            if (sourceWorkbook != null) Marshal.ReleaseComObject(sourceWorkbook);
 
-        private void button1_Click(object sender, EventArgs e)
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+    }
+
+
+    private void button1_Click(object sender, EventArgs e)
         {
             try
             {

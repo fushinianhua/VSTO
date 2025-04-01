@@ -82,6 +82,10 @@ namespace 插件.MyForm
                     {
                         sourceFilePath = openFileDialog.FileName;
                         PathText.Text = sourceFilePath;
+                        if(CheckList.Items.Count>0)
+                        {
+                            CheckList.Items.Clear();
+                        }
                         LoadHeadersFromSource();
                     }
                 }
@@ -227,7 +231,7 @@ namespace 插件.MyForm
         /// </summary>
         private void FillDataToTarget(Dictionary<int, int> columnMapping, Worksheet targetSheet)
         {
-           int startRow=targetSheet.UsedRange.Rows.Count;
+           int startRow=targetSheet.UsedRange.Rows.Count+1;
              
             int maxRow = 数据.GetLength(0);
 
@@ -248,11 +252,12 @@ namespace 插件.MyForm
                     targetSheet.Cells[startRow, targetCol],
                     targetSheet.Cells[startRow + maxRow - 2, targetCol]
                 ];
-                targetRange.Value2 = dataArray;
-
-                // 应用源列格式（可选）
+                // 先设置格式，再写入数据
                 string format = RangeFormat.ContainsKey(srcCol) ? RangeFormat[srcCol] : "@";
-                targetRange.NumberFormat = format;
+                targetRange.NumberFormat = format;  // 先设置格式
+                targetRange.Value2 = dataArray;     // 再写入数据
+                // 强制刷新 Excel 应用程序
+                targetSheet.Application.CalculateFull();
             }
         }
 
