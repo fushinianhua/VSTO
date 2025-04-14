@@ -47,6 +47,7 @@ namespace 插件.MyForm
                     if (StaticClass.数据导出地址 == "")
                     {
                         保存地址 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                        PathText.Text = 保存地址;
                     }
                 }
             }
@@ -72,121 +73,161 @@ namespace 插件.MyForm
         // 设置其Text属性为"仅导出筛选后的数据"
 
 
-private void 文件导出_Click(object sender, EventArgs e)
-    {
-        // 1. 检查是否选中列
-        if (CheckList.CheckedItems.Count == 0)
+        private void 文件导出_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("请至少选择一列数据导出");
-            return;
-        }
-
-        // 2. 获取选中列索引（Excel从1开始）
-        List<int> selectedColumns = CheckList.Items.Cast<string>()
-            .Select((item, index) => new { item, index })
-            .Where(x => CheckList.GetItemChecked(x.index))
-            .Select(x => x.index + 1)
-            .ToList();
-
-       Workbook sourceWorkbook = null;
-        Worksheet sourceSheet = null;
-        Workbook newWorkbook = null;
-       Worksheet newWorksheet = null;
-       Range visibleRange = null;
-
-        try
-        {
-            // 3. 获取当前Excel对象
-            sourceWorkbook = StaticClass.ExcelApp.ActiveWorkbook;
-            sourceSheet = sourceWorkbook.ActiveSheet;
-
-            // 4. 检查筛选模式
-            bool exportFiltered = checkBox2.Checked;
-             bool falg= sourceSheet.AutoFilter == null || !sourceSheet.AutoFilter.FilterMode;
-              
+            
            
-
-            // 5. 创建新工作簿
-            newWorkbook = StaticClass.ExcelApp.Workbooks.Add();
-            newWorksheet = newWorkbook.Sheets[1];
-
-            // 6. 复制表头（保留格式）
-            for (int i = 0; i < selectedColumns.Count; i++)
+            // 1. 检查是否选中列
+            if (CheckList.CheckedItems.Count == 0)
             {
-               Range headerCell = sourceSheet.Cells[1, selectedColumns[i]];
-                headerCell.Copy(newWorksheet.Cells[1, i + 1]);
+                MessageBox.Show("请至少选择一列数据导出");
+                return;
             }
+            //禁用所有Excel更新和计算
+            StaticClass.ExcelApp.ScreenUpdating = false;
+            StaticClass.ExcelApp.Calculation = XlCalculation.xlCalculationManual;
+            StaticClass.ExcelApp.DisplayAlerts = false;
+            StaticClass.ExcelApp.EnableEvents = false;
 
-            // 7. 高性能数据导出
-            if (exportFiltered &&!falg)
+            // 2. 获取选中列索引（Excel从1开始）
+            List<int> selectedColumns = CheckList.Items.Cast<string>()
+                .Select((item, index) => new { item, index })
+                .Where(x => CheckList.GetItemChecked(x.index))
+                .Select(x => x.index + 1)
+                .ToList();
+
+            Workbook sourceWorkbook = null;
+            Worksheet sourceSheet = null;
+            Workbook newWorkbook = null;
+            Worksheet newWorksheet = null;
+            Range visibleRange = null;
+
+            try
             {
-                // 7.1 使用SpecialCells获取可见区域（关键优化点）
-                visibleRange = sourceSheet.UsedRange.SpecialCells(
-                  XlCellType.xlCellTypeVisible);
+                // 3. 获取当前Excel对象
+                sourceWorkbook = StaticClass.ExcelApp.ActiveWorkbook;
+                sourceSheet = sourceWorkbook.ActiveSheet;
+                int rows= sourceSheet.UsedRange.Rows.Count;
+                // 4. 检查筛选模式
+                bool exportFiltered = checkBox2.Checked;
+                bool falg = sourceSheet.AutoFilter == null || !sourceSheet.AutoFilter.FilterMode;
 
-                // 7.2 仅复制选中列
+
+
+                // 5. 创建新工作簿
+                newWorkbook = StaticClass.ExcelApp.Workbooks.Add();
+                newWorksheet = newWorkbook.Sheets[1];
+
+                // 6. 复制表头（保留格式）
+                //for (int i = 0; i < selectedColumns.Count; i++)
+                //{
+                //    Range headerCell = sourceSheet.Cells[1, selectedColumns[i]];
+                //    headerCell.Copy(newWorksheet.Cells[1, i + 1]);
+                //};
+
+
+                //// 7. 高性能数据导出
+                //if (exportFiltered && !falg)
+
+                //{
+                //    // 获取整个数据区域（包括标题）
+                //    Range entireRange = sourceSheet.UsedRange;
+
+                //    // 获取可见单元格（从第二行开始，跳过标题）
+                //  visibleRange = entireRange.Offset[1, 0].Resize[entireRange.Rows.Count - 1, entireRange.Columns.Count]
+                //                        .SpecialCells(XlCellType.xlCellTypeVisible);
+                //    // 获取可见行号并排序
+                //    List<int> visibleRows = visibleRange.Areas.Cast<Range>()
+                //        .SelectMany(area => area.Rows.Cast<Range>().Select(r => r.Row))
+                //        .Where(row => row > 1) // 排除标题行
+                //        .OrderBy(row => row)
+                //        .ToList();
+
+                //    // 按列处理
                 foreach (int colIndex in selectedColumns)
                 {
-                   Range sourceCol = visibleRange.Columns[colIndex];
                     int targetCol = selectedColumns.IndexOf(colIndex) + 1;
-                    sourceCol.Copy(newWorksheet.Columns[targetCol]);
+                    Range rng= sourceSheet.Range[sourceSheet.Cells[1, targetCol], sourceSheet.Cells[rows, targetCol]];
+                    Range rng2= newWorksheet.Range[newWorksheet.Cells[1, targetCol], newWorksheet.Cells[rows, targetCol]];
+                  //复制表头
+                    //sourceSheet.Cells[1, colIndex].Copy(newWorksheet.Cells[1, targetCol]);
+                    rng.Copy(rng2);
+                    // 准备数据数组
+                    //object[,] data = new object[visibleRows.Count, 1];
+                    //for (int i = 0; i < visibleRows.Count; i++)
+                    //{
+                    //    data[i, 0] = sourceSheet.Cells[visibleRows[i], colIndex].Value2;
+                    //}
+
+                    //// 批量写入
+                    //newWorksheet.Cells[2, targetCol].Resize[visibleRows.Count, 1].Value2 = data;
+                    // 7.2 仅复制选中列
+
                 }
-            }
-            else
-            {
-                // 7.3 非筛选模式直接复制整列
-                foreach (int colIndex in selectedColumns)
+                //}
+                //else
+                //{
+                //    // 7.3 非筛选模式直接复制整列
+                //    foreach (int colIndex in selectedColumns)
+                //    {
+                //        Range sourceCol = sourceSheet.Columns[colIndex];
+                //        int targetCol = selectedColumns.IndexOf(colIndex) + 1;
+                //        sourceCol.Copy(newWorksheet.Columns[targetCol]);
+                //    }
+                //}
+
+                // 8. 设置文件名
+                string workbookName = string.IsNullOrWhiteSpace(WBnameText.Text)
+                    ? $"导出数据_{DateTime.Now:yyyyMMddHHmmss}"
+                    : WBnameText.Text.Trim();
+
+                if (!string.IsNullOrWhiteSpace(WSnameText.Text))
                 {
-                   Range sourceCol = sourceSheet.Columns[colIndex];
-                    int targetCol = selectedColumns.IndexOf(colIndex) + 1;
-                    sourceCol.Copy(newWorksheet.Columns[targetCol]);
+                    newWorksheet.Name = WSnameText.Text.Trim();
                 }
+
+                // 9. 保存文件
+                string savePath = Path.Combine(保存地址, $"{workbookName}.xlsx");
+                newWorkbook.SaveAs(savePath);
+
+                MessageBox.Show($"导出成功！\n文件已保存到：{savePath}");
             }
-
-            // 8. 设置文件名
-            string workbookName = string.IsNullOrWhiteSpace(WBnameText.Text)
-                ? $"导出数据_{DateTime.Now:yyyyMMddHHmmss}"
-                : WBnameText.Text.Trim();
-
-            if (!string.IsNullOrWhiteSpace(WSnameText.Text))
+            catch (COMException comEx) when (comEx.Message.Contains("0x800A03EC"))
             {
-                newWorksheet.Name = WSnameText.Text.Trim();
+                MessageBox.Show("没有可见数据可导出，请检查筛选条件");
             }
-
-            // 9. 保存文件
-            string savePath = System.IO.Path.Combine(保存地址, $"{workbookName}.xlsx");
-            newWorkbook.SaveAs(savePath);
-
-            MessageBox.Show($"导出成功！\n文件已保存到：{savePath}");
-        }
-        catch (COMException comEx) when (comEx.Message.Contains("0x800A03EC"))
-        {
-            MessageBox.Show("没有可见数据可导出，请检查筛选条件");
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"导出失败：{ex.Message}\n建议关闭其他Excel进程后重试");
-        }
-        finally
-        {
-            // 10. 释放所有COM对象（严格按顺序）
-            if (visibleRange != null) Marshal.ReleaseComObject(visibleRange);
-            if (newWorksheet != null) Marshal.ReleaseComObject(newWorksheet);
-            if (newWorkbook != null)
+            catch (Exception ex)
             {
-                newWorkbook.Close(false);
-                Marshal.ReleaseComObject(newWorkbook);
+                MessageBox.Show($"导出失败：{ex.Message}\n建议关闭其他Excel进程后重试");
             }
-            if (sourceSheet != null) Marshal.ReleaseComObject(sourceSheet);
-            if (sourceWorkbook != null) Marshal.ReleaseComObject(sourceWorkbook);
+            finally
+            {
+               // 恢复Excel设置
+                    StaticClass.ExcelApp.ScreenUpdating = true;
+                    StaticClass.ExcelApp.Calculation = XlCalculation.xlCalculationAutomatic;
+                    StaticClass.ExcelApp.DisplayAlerts = true;
+                    StaticClass.ExcelApp.EnableEvents = true;
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+                    // ...释放资源...
+              
+                // 10. 释放所有COM对象（严格按顺序）
+                if (visibleRange != null) Marshal.ReleaseComObject(visibleRange);
+                if (newWorksheet != null) Marshal.ReleaseComObject(newWorksheet);
+                if (newWorkbook != null)
+                {
+                    newWorkbook.Close(false);
+                    Marshal.ReleaseComObject(newWorkbook);
+                }
+                if (sourceSheet != null) Marshal.ReleaseComObject(sourceSheet);
+                if (sourceWorkbook != null) Marshal.ReleaseComObject(sourceWorkbook);
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
         }
-    }
 
 
-    private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             try
             {

@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using 插件.Properties;
+using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static 插件.MyForm.StaticClass;
 using Application = Microsoft.Office.Interop.Excel.Application;
@@ -31,7 +32,6 @@ namespace 插件.MyForm
         /// </summary>
         private string sourceFilePath;
         private string 数据导入地址 = Settings.Default.数据导入地址;
-        private Application excelapp;
         private Workbook 选择工作薄;
         private Worksheet 选择工作表;
         private object[,] 数据;
@@ -46,7 +46,7 @@ namespace 插件.MyForm
             Globals.ThisAddIn.导入form = null;
 
         }
-
+        private Worksheet targetSheet;
         private void 导入数据_Load(object sender, EventArgs e)
         {
             try
@@ -55,11 +55,12 @@ namespace 插件.MyForm
                 {
                     PathText.Text = 数据导入地址 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 }
+                targetSheet = Globals.ThisAddIn.Application.ActiveSheet;
                 // 为按钮添加提示信息
                 toolTip1.SetToolTip(button1, "点击选择需要导入的文件");
-                toolTip1.SetToolTip(button3, "点击修改近义匹配列表"); 
-                toolTip1.SetToolTip(button2, "点击开始导入数据"); 
-                toolTip1.SetToolTip(comboBox1, "可以选择sheet,默认为第一个sheet"); 
+                toolTip1.SetToolTip(button3, "点击修改近义匹配列表");
+                toolTip1.SetToolTip(button2, "点击开始导入数据");
+                toolTip1.SetToolTip(comboBox1, "可以选择sheet,默认为第一个sheet");
                 LoadConfig();
             }
             catch (Exception ex)
@@ -72,6 +73,7 @@ namespace 插件.MyForm
         {
             try
             {
+               
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = 数据导入地址;
@@ -82,7 +84,7 @@ namespace 插件.MyForm
                     {
                         sourceFilePath = openFileDialog.FileName;
                         PathText.Text = sourceFilePath;
-                        if(CheckList.Items.Count>0)
+                        if (CheckList.Items.Count > 0)
                         {
                             CheckList.Items.Clear();
                         }
@@ -101,9 +103,8 @@ namespace 插件.MyForm
         {
             try
             {
-                excelapp = new Application { Visible = false };
-                选择工作薄 = excelapp.Workbooks.Open(sourceFilePath);
 
+                选择工作薄 = Globals.ThisAddIn.Application.Workbooks.Open(sourceFilePath);
                 GetWorksheetNames();
                 选择工作表 = 选择工作薄.Worksheets[1];
                 LoadDataAndHeaders();
@@ -135,6 +136,7 @@ namespace 插件.MyForm
                 string item = comboBox1.SelectedItem.ToString();
                 if (工作表名字.Contains(item))
                 {
+                    RangeFormat.Clear();
                     导入列表头.Clear();
                     数据 = null;
                     CheckList.Items.Clear();
@@ -166,8 +168,7 @@ namespace 插件.MyForm
                 }
 
                 // 获取目标工作表
-                var targetApp = Globals.ThisAddIn.Application;
-                var targetSheet = (Worksheet)targetApp.ActiveSheet;
+
                 var targetHeaders = GetTargetHeaders(targetSheet); // 获取目标表头
 
                 // 建立列映射关系（源列索引 -> 目标列索引）
@@ -231,8 +232,8 @@ namespace 插件.MyForm
         /// </summary>
         private void FillDataToTarget(Dictionary<int, int> columnMapping, Worksheet targetSheet)
         {
-           int startRow=targetSheet.UsedRange.Rows.Count+1;
-             
+            int startRow = targetSheet.UsedRange.Rows.Count + 1;
+
             int maxRow = 数据.GetLength(0);
 
             foreach (var mapping in columnMapping)
@@ -291,7 +292,7 @@ namespace 插件.MyForm
             return true;
         }
 
-     
+
         /// <summary>
         /// 获取所有工作表名字
         /// </summary>
@@ -308,10 +309,10 @@ namespace 插件.MyForm
         /// </summary>
         private void LoadDataAndHeaders()
         {
-             int row = 选择工作表.Cells[选择工作表.Rows.Count,1].End[XlDirection.xlUp].Row;
+            int row = 选择工作表.Cells[选择工作表.Rows.Count, 1].End[XlDirection.xlUp].Row;
             int col = 选择工作表.Cells[1, 选择工作表.Columns.Count].End[XlDirection.xlToLeft].Column;
 
-            Range rng = 选择工作表.Range[选择工作表.Cells[1,1], 选择工作表.Cells[row,col]];
+            Range rng = 选择工作表.Range[选择工作表.Cells[1, 1], 选择工作表.Cells[row, col]];
             数据 = rng.Value2;
             导入列表头.Clear();
             if (数据 != null && 数据.GetLength(0) > 0 && 数据.GetLength(1) > 0)
@@ -352,12 +353,6 @@ namespace 插件.MyForm
                 选择工作薄.Close(false);
                 Marshal.ReleaseComObject(选择工作薄);
                 选择工作薄 = null;
-            }
-            if (excelapp != null)
-            {
-                excelapp.Quit();
-                Marshal.ReleaseComObject(excelapp);
-                excelapp = null;
             }
         }
         /// <summary>
@@ -413,16 +408,16 @@ namespace 插件.MyForm
                 MessageBox.Show($"全选/全不选时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        bool IsChanged=false;
+        bool IsChanged = false;
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                string jsonFilePath =Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
-               
-              Process.Start("notepad.exe", jsonFilePath);
-                IsChanged=true;
-                button4.Enabled=IsChanged;
+                string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
+
+                Process.Start("notepad.exe", jsonFilePath);
+                IsChanged = true;
+                button4.Enabled = IsChanged;
             }
             catch (Exception ex)
             {
@@ -438,7 +433,7 @@ namespace 插件.MyForm
                 LoadConfig();
                 MessageBox.Show("数据更新成功");
                 IsChanged = false;
-                button4.Enabled=IsChanged;
+                button4.Enabled = IsChanged;
             }
             catch (Exception)
             {

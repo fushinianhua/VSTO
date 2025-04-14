@@ -140,7 +140,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 25);
             this.label5.TabIndex = 11;
-            this.label5.Text = "值列:";
+            this.label5.Text = "选择列:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -287,7 +287,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 25);
             this.label6.TabIndex = 21;
-            this.label6.Text = "写入列:";
+            this.label6.Text = "选择列:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
