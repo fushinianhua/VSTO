@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Office.Interop.Excel;
+﻿using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using System;
@@ -31,22 +30,22 @@ namespace 插件.MyForm
         /// 源文本数据地址
         /// </summary>
         private string sourceFilePath;
+
         private string 数据导入地址 = Settings.Default.数据导入地址;
         private Workbook 选择工作薄;
         private Worksheet 选择工作表;
-        private object[,] 数据;
         private readonly List<string> 工作表名字 = new List<string>();
         private readonly List<string> 导入列表头 = new List<string>();
         private List<DataTypeInfo> 列表数据 = new List<DataTypeInfo>();
-        // 新增：用于保存 A2 - H2 单元格格式的列表
-        private Dictionary<int, string> RangeFormat = new Dictionary<int, string>();
+
         private void 导入数据_FormClosed(object sender, FormClosedEventArgs e)
         {
             ReleaseExcelObjects();
             Globals.ThisAddIn.导入form = null;
-
         }
+
         private Worksheet targetSheet;
+
         private void 导入数据_Load(object sender, EventArgs e)
         {
             try
@@ -73,7 +72,6 @@ namespace 插件.MyForm
         {
             try
             {
-               
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = 数据导入地址;
@@ -98,12 +96,64 @@ namespace 插件.MyForm
             }
         }
 
-        // 加载表头
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isChecked = checkBox1.Checked;
+                for (int i = 0; i < CheckList.Items.Count; i++)
+                {
+                    CheckList.SetItemChecked(i, isChecked);
+                }
+                checkBox1.Text = isChecked ? "全部取消" : "全部选中";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"全选/全不选时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool IsChanged = false;
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
+
+                Process.Start("notepad.exe", jsonFilePath);
+                IsChanged = true;
+                button4.Enabled = IsChanged;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsChanged) return;
+                LoadConfig();
+                MessageBox.Show("数据更新成功");
+                IsChanged = false;
+                button4.Enabled = IsChanged;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 获取源文件的表头信息
+        /// </summary>
         private void LoadHeadersFromSource()
         {
             try
             {
-
                 选择工作薄 = Globals.ThisAddIn.Application.Workbooks.Open(sourceFilePath);
                 GetWorksheetNames();
                 选择工作表 = 选择工作薄.Worksheets[1];
@@ -129,6 +179,11 @@ namespace 插件.MyForm
             }
         }
 
+        /// <summary>
+        /// 切换工作表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -136,9 +191,7 @@ namespace 插件.MyForm
                 string item = comboBox1.SelectedItem.ToString();
                 if (工作表名字.Contains(item))
                 {
-                    RangeFormat.Clear();
                     导入列表头.Clear();
-                    数据 = null;
                     CheckList.Items.Clear();
 
                     选择工作表 = 选择工作薄.Worksheets[item];
@@ -155,6 +208,12 @@ namespace 插件.MyForm
                 MessageBox.Show($"切换工作表时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// 获取目标工作表列头
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -198,6 +257,10 @@ namespace 插件.MyForm
 
                 // 执行数据填充
                 FillDataToTarget(columnMapping, targetSheet);
+                if (checkBox2.Checked)
+                {
+                    this.Close();
+                }
 
                 MessageBox.Show($"成功导入 {columnMapping.Count} 列数据");
             }
@@ -205,11 +268,8 @@ namespace 插件.MyForm
             {
                 MessageBox.Show($"导入失败：{ex.Message}");
             }
-            finally
-            {
-                ReleaseExcelObjects();
-            }
         }
+
         /// <summary>
         /// 在目标表中查找匹配列
         /// </summary>
@@ -232,36 +292,23 @@ namespace 插件.MyForm
         /// </summary>
         private void FillDataToTarget(Dictionary<int, int> columnMapping, Worksheet targetSheet)
         {
-            int startRow = targetSheet.UsedRange.Rows.Count + 1;
+            Range startRange = targetSheet.Cells[targetSheet.Rows.Count, 1].End[XlDirection.xlUp];
+            int startRow = startRange.Row + 1;
 
-            int maxRow = 数据.GetLength(0);
-
+            Range EndRange = 选择工作表.Cells[选择工作表.Rows.Count, 1].End[XlDirection.xlUp];
+            int endRow = EndRange.Row;
             foreach (var mapping in columnMapping)
             {
                 int srcCol = mapping.Key;
                 int targetCol = mapping.Value;
-
-                // 准备数据数组（优化写入性能）
-                object[,] dataArray = new object[maxRow - 1, 1]; // 行数从2开始
-                for (int row = 2; row <= maxRow; row++)
-                {
-                    dataArray[row - 2, 0] = 数据[row, srcCol] ?? DBNull.Value;
-                }
-
-                // 批量写入数据
-                Range targetRange = (Range)targetSheet.Range[
-                    targetSheet.Cells[startRow, targetCol],
-                    targetSheet.Cells[startRow + maxRow - 2, targetCol]
-                ];
-                // 先设置格式，再写入数据
-                string format = RangeFormat.ContainsKey(srcCol) ? RangeFormat[srcCol] : "@";
-                targetRange.NumberFormat = format;  // 先设置格式
-                targetRange.Value2 = dataArray;     // 再写入数据
-                // 强制刷新 Excel 应用程序
+                Range sourceRange = 选择工作表.Range[选择工作表.Cells[2, srcCol], 选择工作表.Cells[endRow, srcCol]];
+                Range targetRange = targetSheet.Cells[startRow, targetCol].Resize[endRow, 1];
+                sourceRange.Copy(targetRange);
+                Marshal.ReleaseComObject(sourceRange);
+                Marshal.ReleaseComObject(targetRange);
                 targetSheet.Application.CalculateFull();
             }
         }
-
 
         /// <summary>
         /// 获取目标表头信息（列索引 -> 列名）
@@ -282,6 +329,11 @@ namespace 插件.MyForm
             return headers;
         }
 
+        /// <summary>
+        /// 验证表头
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <returns></returns>
         private bool ValidateHeaders(List<string> headers)
         {
             foreach (var header in headers)
@@ -291,7 +343,6 @@ namespace 插件.MyForm
             }
             return true;
         }
-
 
         /// <summary>
         /// 获取所有工作表名字
@@ -304,6 +355,7 @@ namespace 插件.MyForm
                 工作表名字.Add(ws.Name);
             }
         }
+
         /// <summary>
         /// 获取sheet导入列表头
         /// </summary>
@@ -311,21 +363,19 @@ namespace 插件.MyForm
         {
             int row = 选择工作表.Cells[选择工作表.Rows.Count, 1].End[XlDirection.xlUp].Row;
             int col = 选择工作表.Cells[1, 选择工作表.Columns.Count].End[XlDirection.xlToLeft].Column;
+            Range rng = 选择工作表.Range[选择工作表.Cells[1, 1], 选择工作表.Cells[1, col]];
+            object[,] vlaue = rng.Value2;
 
-            Range rng = 选择工作表.Range[选择工作表.Cells[1, 1], 选择工作表.Cells[row, col]];
-            数据 = rng.Value2;
             导入列表头.Clear();
-            if (数据 != null && 数据.GetLength(0) > 0 && 数据.GetLength(1) > 0)
+            if (vlaue != null && vlaue.GetLength(0) > 0 && vlaue.GetLength(1) > 0)
             {
-                for (int i = 1; i <= 数据.GetLength(1); i++)
+                for (int i = 1; i <= vlaue.GetLength(1); i++)
                 {
-                    Range r = rng[2, i];
-                    string format = r.NumberFormat;
-                    RangeFormat.Add(i, format);
-                    导入列表头.Add(数据[1, i].ToString());
+                    导入列表头.Add(vlaue[1, i].ToString());
                 }
             }
         }
+
         /// <summary>
         /// 添加CheckList的item
         /// </summary>
@@ -338,6 +388,7 @@ namespace 插件.MyForm
                 CheckList.SetItemChecked(i, true);
             }
         }
+
         /// <summary>
         /// 释放资源
         /// </summary>
@@ -355,6 +406,7 @@ namespace 插件.MyForm
                 选择工作薄 = null;
             }
         }
+
         /// <summary>
         /// 读取导入列表头对应数据
         /// </summary>
@@ -391,57 +443,5 @@ namespace 插件.MyForm
                 MessageBox.Show($"发生其他错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                bool isChecked = checkBox1.Checked;
-                for (int i = 0; i < CheckList.Items.Count; i++)
-                {
-                    CheckList.SetItemChecked(i, isChecked);
-                }
-                checkBox1.Text = isChecked ? "全部取消" : "全部选中";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"全选/全不选时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        bool IsChanged = false;
-        private void button3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
-
-                Process.Start("notepad.exe", jsonFilePath);
-                IsChanged = true;
-                button4.Enabled = IsChanged;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!IsChanged) return;
-                LoadConfig();
-                MessageBox.Show("数据更新成功");
-                IsChanged = false;
-                button4.Enabled = IsChanged;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
     }
-
-
 }

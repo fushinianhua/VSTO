@@ -1,62 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\",
+  "WorkspaceRootPath": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\github_project\\vsto\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\resources\\colname.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:resources\\colname.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\\u8F6F\u4EF6\\repository\\vsto\\\u63D2\u4EF6\\myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\mycode\\staticclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:mycode\\staticclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u5165\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\Github_project\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u5165\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u5BFC\u5165\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u5165\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|d:\\github_project\\vsto\\\u63D2\u4EF6\\myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u67E5\u8BE2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\Github_project\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u5165\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u5BFC\u5165\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\Github_project\\VSTO\\\u63D2\u4EF6\\myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\Github_project\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\Github_project\\VSTO\\\u63D2\u4EF6\\amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:amg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u805A\u5149\u706F\u8BBE\u7F6E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\Github_project\\VSTO\\\u63D2\u4EF6\\myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u5BFC\u51FA\u6570\u636E.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\thisaddin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:thisaddin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\amg.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:amg.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|D:\\Github_project\\VSTO\\\u63D2\u4EF6\\myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2495F1B6-34E4-44AB-885C-D3DAD411D156}|\u63D2\u4EF6.csproj|solutionrelative:myform\\\u6570\u636E\u5BF9\u6BD4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,19 +46,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "StaticClass.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
-              "RelativeDocumentMoniker": "MyCode\\StaticClass.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyCode\\StaticClass.cs",
-              "RelativeToolTip": "MyCode\\StaticClass.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAgwBwAAAATAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "\u67E5\u8BE2.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u67E5\u8BE2.cs",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
+              "RelativeToolTip": "MyForm\\\u67E5\u8BE2.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAtwG4AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T13:08:52.765Z",
+              "WhenOpened": "2025-04-15T01:30:13.106Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -96,24 +76,36 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u67E5\u8BE2.cs",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T10:07:17.508Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ColName.json",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\Resources\\ColName.json",
-              "RelativeDocumentMoniker": "Resources\\ColName.json",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\Resources\\ColName.json",
-              "RelativeToolTip": "Resources\\ColName.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-01T13:16:29.202Z",
+              "Title": "\u5BFC\u5165\u6570\u636E.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs",
+              "RelativeDocumentMoniker": "MyForm\\\u5BFC\u5165\u6570\u636E.cs",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs",
+              "RelativeToolTip": "MyForm\\\u5BFC\u5165\u6570\u636E.cs",
+              "ViewState": "AgIAAOUAAAAAAAAAAAArwO0AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T02:34:02.449Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "\u5BFC\u5165\u6570\u636E.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs",
               "RelativeDocumentMoniker": "MyForm\\\u5BFC\u5165\u6570\u636E.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs [\u8BBE\u8BA1]",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "MyForm\\\u5BFC\u5165\u6570\u636E.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-15T05:43:50.341Z",
@@ -121,11 +113,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "RelativeDocumentMoniker": "MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "RelativeToolTip": "MyForm\\\u62C6\u5206\u5DE5\u4F5C\u8868.cs",
               "ViewState": "AgIAAFQBAAAAAAAAAAAqwHUBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -134,49 +126,34 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "\u5BFC\u51FA\u6570\u636E.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
               "RelativeDocumentMoniker": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
               "RelativeToolTip": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAkwJoAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAkwJkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T05:45:34.457Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T05:45:34.457Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
               "RelativeDocumentMoniker": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "MyForm\\\u5BFC\u51FA\u6570\u636E.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T10:23:23.936Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "\u5BFC\u5165\u6570\u636E.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs",
-              "RelativeDocumentMoniker": "MyForm\\\u5BFC\u5165\u6570\u636E.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u5BFC\u5165\u6570\u636E.cs",
-              "RelativeToolTip": "MyForm\\\u5BFC\u5165\u6570\u636E.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAnwEgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T02:34:02.449Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:23:23.936Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
               "RelativeDocumentMoniker": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
+              "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "MyForm\\\u6570\u636E\u5BF9\u6BD4.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-13T15:05:51.71Z",
@@ -184,75 +161,14 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs",
-              "RelativeDocumentMoniker": "MyForm\\\u67E5\u8BE2.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "MyForm\\\u67E5\u8BE2.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T15:04:50.511Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
               "Title": "AMG.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.cs",
+              "DocumentMoniker": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\AMG.cs",
               "RelativeDocumentMoniker": "AMG.cs",
               "ToolTip": "D:\\Github_project\\VSTO\\\u63D2\u4EF6\\AMG.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "..\\..\\..\\..\\Github_project\\VSTO\\\u63D2\u4EF6\\AMG.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "AMG.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-27T10:00:03.609Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "\u805A\u5149\u706F\u8BBE\u7F6E.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
-              "RelativeDocumentMoniker": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
-              "RelativeToolTip": "MyForm\\\u805A\u5149\u706F\u8BBE\u7F6E.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAAA8wIUAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T16:02:25.281Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "\u6570\u636E\u5BF9\u6BD4.Designer.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
-              "RelativeDocumentMoniker": "MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
-              "RelativeToolTip": "MyForm\\\u6570\u636E\u5BF9\u6BD4.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T16:21:33.375Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AMG.Designer.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.Designer.cs",
-              "RelativeDocumentMoniker": "AMG.Designer.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\AMG.Designer.cs",
-              "RelativeToolTip": "AMG.Designer.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAA0wJAAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T13:38:46.788Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ThisAddIn.Designer.cs",
-              "DocumentMoniker": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\ThisAddIn.Designer.cs",
-              "RelativeDocumentMoniker": "ThisAddIn.Designer.cs",
-              "ToolTip": "D:\\\u8F6F\u4EF6\\Repository\\VSTO\\\u63D2\u4EF6\\ThisAddIn.Designer.cs",
-              "RelativeToolTip": "ThisAddIn.Designer.cs",
-              "ViewState": "AgIAANoAAAAAAAAAAAAgwOgAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T04:24:53.445Z"
             }
           ]
         }
