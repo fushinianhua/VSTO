@@ -25,7 +25,7 @@ namespace 插件.MyCode
 {
     public partial class 查询 : Form
     {
-        private Workbooks WKs = null;
+        private readonly Workbooks WKs = null;
 
         private string item = null;
         private string item2 = null;
@@ -33,6 +33,8 @@ namespace 插件.MyCode
         private string item4 = null;
 
         public bool IsChanged = false;
+
+        private List<DataTypeInfo> 列表数据 = new List<DataTypeInfo>();
 
         public 查询()
         {
@@ -63,25 +65,18 @@ namespace 插件.MyCode
             textBox5.Text = "0";
             textBox6.Text = "无";
             textBox7.Text = "重";
-            progressBar1.Value = 100;
-            LoadConfig();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            progressBar1.PerformStep();
         }
 
         private void Run()
         {
             try
             {
-                DateTime t0 = DateTime.Now; // 记录开始时间
-
-                string item = comboBox1.SelectedItem?.ToString();
-                string item2 = comboBox2.SelectedItem?.ToString();
-                string item3 = comboBox3.SelectedItem?.ToString();
-                string item4 = comboBox4.SelectedItem?.ToString();
+                string item = comboBox1.SelectedItem?.ToString();//导入文件的工作薄
+                string item2 = comboBox2.SelectedItem?.ToString();//导入文件的工作表名
+                string item3 = comboBox3.SelectedItem?.ToString();//写入文件的工作薄
+                string item4 = comboBox4.SelectedItem?.ToString();//写入文件的工作表名
+                int 导入列索引 = Col1.SelectedIndex + 1;
+                int 写入列索引 = Col3.SelectedIndex + 1;
 
                 if (item == null || item2 == null || item3 == null || item4 == null)
                 {
@@ -94,92 +89,76 @@ namespace 插件.MyCode
                     MessageBox.Show("textBox5 中的输入无效，请输入有效的数字。");
                     return;
                 }
-                Worksheet 读取的文件 = (Worksheet)WKs[item].Worksheets[item2];//源文件
-                Worksheet 写入的文件 = (Worksheet)WKs[item3].Worksheets[item4];//目标文件
-                Range EndRange = 写入的文件.Cells[1, 写入的文件.Columns.Count];
-                int EndColunm = EndRange.End[XlDirection.xlToLeft].Column;
-                Dictionary<string, int> 写入的数据表头 = Enumerable.Range(0, CheckList2.Items.Count)
-                                                        .Where(i => CheckList2.GetItemChecked(i))
-                                                        .ToDictionary(i => CheckList2.Items[i].ToString(), i => i + 1);
+                Worksheet 导入文件 = (Worksheet)WKs[item].Worksheets[item2];//导入的文件
+                Worksheet 目标文件 = (Worksheet)WKs[item3].Worksheets[item4];//目标文件
 
-                Dictionary<string, int> 读取的数据表头 = Enumerable.Range(0, CheckList1.Items.Count)
-                                                     .ToDictionary(i => CheckList1.Items[i].ToString(), i => i + 1);
-                DataTypeInfo dataType = 列表数据.FirstOrDefault(k => 写入的数据表头.Keys.Any(key => k.Keywords.Contains(key)));
+                Range EndRange = 目标文件.Cells[目标文件.Rows.Count, 写入列索引]; //写入文件的最后一行
+                int EndRow = EndRange.End[XlDirection.xlUp].Row;//写入文件的最后一行的行数
+                Range rng = 目标文件.Range[目标文件.Cells[1, 写入列索引], 目标文件.Cells[EndRow, 写入列索引]];//写入文件的第一行到最后一行的范围
+                object[,] values = rng.Value2;//写入文件的第一行到最后一行的值
+                List<string> 目标列表 = 转换列表(values); //把数据转换成列表
+                Marshal.ReleaseComObject(EndRange); Marshal.ReleaseComObject(rng);
 
-                //if (dataType.Keywords.Count == dataType2.Keywords.Count)
-                //{
-                //    foreach (var key in dataType.Keywords)
-                //    {
-                //        if (dataType2.Keywords.Contains(key))
-                //        {
-                //            int a = 写入数据表头;
-                //            int a=dataType.Keywords.IndexOf(key) + 1;
-                //            columnMapping.Add(写入数据表头., dataType2.Keywords.IndexOf(key) + 1);
-                //        }
-                //        else
-                //        {
-                //            columnMapping.Add(dataType.Keywords.IndexOf(key) + 1, EndColunm + 1);
-                //            EndColunm++;
-                //        }
-                //    }
-                //}
-                //for (int i = 0; i < columnMapping.Count; i++)
-                //{
-                //}
-                //if (keyValues.Count > 0)
-                //{
-                //    for (int i = 2; i <= This_rows; i++)
-                //    {
-                //        Range rng = T_Key.Rows[i];//key列
-                //        string kry = rng.Value2?.ToString();//
-                //        Range rng2 = T_Value.Rows[i];//值列
-                //        try
-                //        {
-                //            if (string.IsNullOrEmpty(kry)) continue;
-                //            if (keyValues.ContainsKey(kry))
-                //            {
-                //                string newValue = keyValues[kry];//取到值
-                //                string currentValue = rng2.Value2?.ToString();
-                //                if (string.IsNullOrEmpty(currentValue))
-                //                {
-                //                    rng2.Value2 = newValue;
-                //                }
-                //                if (checkBox2.Checked)
-                //                {
-                //                    if (重复项.Contains(kry))
-                //                    {
-                //                        重复数量++;
-                //                        // rng2.Value2 = "重";
-                //                    }
-                //                    else
-                //                    {
-                //                        重复项.Add(kry);
-                //                    }
-                //                }
-                //            }
-                //            else
-                //            {
-                //                if (checkBox1.Checked)
-                //                {
-                //                    string newText = textBox6.Text;
-                //                    string currentValue = rng2.Value2?.ToString();
-                //                    if (currentValue != newText)
-                //                    {
-                //                        rng2.Value2 = newText;
-                //                    }
-                //                }
-                //            }
-                //        }
-                //        finally
-                //        {
-                //            // 释放 COM 对象
-                //            Marshal.ReleaseComObject(rng);
-                //            Marshal.ReleaseComObject(rng2);
-                //        }
+                EndRange = 导入文件.Cells[导入文件.Rows.Count, 导入列索引];//导入文件的最后一行
+                EndRow = EndRange.End[XlDirection.xlUp].Row;//导入文件的最后一行的行数
+                rng = 导入文件.Range[导入文件.Cells[1, 导入列索引], 导入文件.Cells[EndRow, 导入列索引]];//写入文件的第一行到最后一行的范围
+                values = rng.Value2;//写入文件的第一行到最后一行的值
+                List<string> 写入列表 = 转换列表(values); //把数据转换成列表
+                Marshal.ReleaseComObject(EndRange); Marshal.ReleaseComObject(rng);
+
+                Range EndColumnRange = 导入文件.Cells[1, 导入文件.Columns.Count];
+                int EndColumn = EndColumnRange.End[XlDirection.xlToLeft].Column;//导入文件的最后一列的列数
+                Range rngs = 导入文件.Range[导入文件.Cells[1, 1], 导入文件.Cells[EndRow, EndColumn]];
+                object[,] 总数据 = rngs.Value2;
+                Marshal.ReleaseComObject(EndColumnRange); Marshal.ReleaseComObject(rngs);
+
+                List<string[]> 数据列表 = new List<string[]>();
+                List<int> 映射列 = 映射列Dic.Keys.ToList();
+
+                for (int i = 0; i < 写入列表.Count; i++)
+                {
+                    string[] data = new string[映射列Dic.Count];
+                    for (int j = 0; i < 映射列Dic.Count; j++)
+                    {
+                        int a = 映射列[j];
+                        data[j] = 总数据[i, a].ToString();
+                    }
+                    数据列表.Add(data);
+                }
             }
             catch
             { }
-            //}
+            finally
+            {
+            }
+        }
+
+        private List<string> 转换列表(object[,] objects)
+        {
+            try
+            {
+                List<string> strings = new List<string>();
+                if (objects != null)
+                {
+                    for (int i = 1; i <= objects.GetLength(0); i++)
+                    {
+                        for (int j = 1; j <= objects.GetLength(1); j++)
+                        {
+                            string value = objects[i, j]?.ToString();
+                            if (!string.IsNullOrEmpty(value))
+                            {
+                                strings.Add(value);
+                            }
+                        }
+                    }
+                }
+
+                return strings;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         private Dictionary<string, string> 获取数据(Excel.Range KeyCol, Excel.Range ValueCol, long RowCount)
@@ -222,6 +201,33 @@ namespace 插件.MyCode
             }
         }
 
+        private void Col2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string ColText = Col2.Text;
+                if (ColText == Col1.SelectedItem.ToString())
+                {
+                    Col2.SelectedIndexChanged -= Col2_SelectedIndexChanged;
+                    Col2.SelectedIndex = -1;
+                    Col2.SelectedIndexChanged += Col2_SelectedIndexChanged;
+                    MessageBox.Show("列名重复");
+                    return;
+                }
+                if (Col2.Text != "")
+                {
+                    string ColStr = Code1.StrtoW(Col2.Text);
+                    Worksheet WS = (Worksheet)WKs[item].Worksheets[item2];
+                    Range range = WS.Range[ColStr + ":" + ColStr];
+                    int count = (int)StaticClass.ExcelApp.WorksheetFunction.CountA(range);
+                    Tip2.Text = $"{ColStr}列:  {(double)count / 10000:0.000}万";
+                }
+            }
+            catch
+            {
+            }
+        }
+
         private void Col3_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -232,12 +238,39 @@ namespace 插件.MyCode
                     Worksheet WS = (Worksheet)WKs[item3].Worksheets[item4];
                     Range range = WS.Range[ColStr + ":" + ColStr];
                     int count = (int)StaticClass.ExcelApp.WorksheetFunction.CountA(range);
-                    需求空白列text.Text = $"{ColStr}列:  {(double)count / 10000:0.000}万";
+                    Tip3.Text = $"{ColStr}列:  {(double)count / 10000:0.000}万";
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Col4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string ColText = Col4.Text;
+                if (ColText == Col3.SelectedItem.ToString())
+                {
+                    Col4.SelectedIndexChanged -= Col4_SelectedIndexChanged;
+                    Col4.SelectedIndex = -1;
+                    Col4.SelectedIndexChanged += Col4_SelectedIndexChanged;
+                    MessageBox.Show("列名重复");
+                    return;
+                }
+                if (Col4.Text != "")
+                {
+                    string ColStr = Code1.StrtoW(Col4.Text);
+                    Worksheet WS = (Worksheet)WKs[item3].Worksheets[item4];
+                    Range range = WS.Range[ColStr + ":" + ColStr];
+                    int count = (int)StaticClass.ExcelApp.WorksheetFunction.CountA(range);
+                    Tip4.Text = $"{ColStr}列:  {(double)count / 10000:0.000}万";
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -249,7 +282,12 @@ namespace 插件.MyCode
                 if (item != "")
                 {
                     Workbook workbook = WKs[item];
+                    comboBox2.Text = "";
                     comboBox2.Items.Clear();
+                    Col1.Text = "";
+                    Col2.Text = "";
+                    Col1.Items.Clear();
+                    Col2.Items.Clear();
                     foreach (Worksheet ws in workbook.Worksheets)
                     {
                         comboBox2.Items.Add(ws.Name);
@@ -268,36 +306,32 @@ namespace 插件.MyCode
         {
             try
             {
-                if (CheckList1.Items.Count > 0)
-                {
-                    CheckList1.Items.Clear();
-                }
                 item2 = comboBox2.SelectedItem.ToString();
                 if (item != "")
                 {
+                    listBox1.Items.Clear();
+                    上一次写入列 = -1;
+                    空白列 = 1;
+                    Col1.Text = "";
+                    Col2.Text = "";
                     Col1.Items.Clear();
+                    Col2.Items.Clear();
                     Worksheet WS = (Worksheet)WKs[item].Worksheets[item2];
                     long ColNum = WS.Cells[1, WS.Columns.Count].End[XlDirection.xlToLeft].Column;
-                    List<string> strings = new List<string>();
+
                     for (int i = 1; i < ColNum + 1; i++)
                     {
                         Range range = (Range)WS.Cells[1, i];
                         if (range.Value2 != "")
                         {
                             Col1.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
-                            //Col2.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
-                            strings.Add(WS.Cells[1, i].Value2);
+                            Col2.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
                         }
                     }
-                    int index = 0;
-                    foreach (string str in strings)
+                    if (Col1.Items.Count > 0)
                     {
-                        CheckList1.Items.Add(str);
-                        //CheckList1.SetItemChecked(index, true);
-                        index++;
+                        Col1.SelectedIndex = 0;
                     }
-
-                    Tip2.Text = $"共选择了{CheckList1.CheckedItems.Count.ToString()}项数据";
                 }
             }
             catch (Exception ex)
@@ -315,6 +349,11 @@ namespace 插件.MyCode
                 {
                     Workbook workbook = WKs[item3];
                     comboBox4.Items.Clear();
+                    comboBox4.Text = "";
+                    Col3.Text = "";
+                    Col4.Text = "";
+                    Col3.Items.Clear();
+                    Col4.Items.Clear();
                     foreach (Worksheet ws in workbook.Worksheets)
                     {
                         comboBox4.Items.Add(ws.Name);
@@ -332,45 +371,78 @@ namespace 插件.MyCode
         {
             try
             {
-                if (CheckList2.Items.Count > 0)
-                {
-                    CheckList2.Items.Clear();
-                }
                 item4 = comboBox4.SelectedItem.ToString();
                 if (item != "")
                 {
+                    listBox1.Items.Clear();
+                    上一次写入列 = -1;
+                    空白列 = 1;
+                    Col3.Text = "";
+                    Col4.Text = "";
                     Col3.Items.Clear();
+                    Col4.Items.Clear();
                     Worksheet WS = (Worksheet)WKs[item3].Worksheets[item4];
                     long ColNum = WS.Cells[1, WS.Columns.Count].End[XlDirection.xlToLeft].Column;
-                    List<string> strings = new List<string>();
                     for (int i = 1; i < ColNum + 1; i++)
                     {
                         Range range = (Range)WS.Cells[1, i];
                         if (range.Value2 != "" && range.Value2 != null)
                         {
                             Col3.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
-                            strings.Add(WS.Cells[1, i].Value2);
+                            Col4.Items.Add($"{i}.{WS.Cells[1, i].Value2}");
                         }
                     }
-                    int index = 0;
-                    foreach (string str in strings)
+                    if (Col3.Items.Count > 0)
                     {
-                        CheckList2.Items.Add(str);
-                        index++;
+                        Col3.SelectedIndex = 0;
                     }
-                    int.TryParse(需求空白列text.Text, out int count);
-                    for (int i = 0; i < count; i++)
-                    {
-                        CheckList1.Items.Add("空白列");
-                    }
-
-                    Tip4.Text = $"共选择了{CheckList1.CheckedItems.Count}项数据";
                     // Col4.Items.Add($"{ColNum + 1}.空白尾列");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private Dictionary<int, int> 映射列Dic = new Dictionary<int, int>();
+        private int 上一次写入列 = -1;
+
+        private void 添加项目_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string col1text = Col1.SelectedItem.ToString();
+                string col2text = Col2.SelectedItem.ToString();
+                string col3text = Col3.SelectedItem.ToString();
+                string col4text = Col4.SelectedItem.ToString();
+
+                if (col1text == col2text || col3text == col4text)
+                {
+                    MessageBox.Show("请选择与索引列不相同的列");
+                    return;
+                }
+                int 导入列 = Col2.SelectedIndex + 1;
+                int 写入列 = Col4.SelectedIndex + 1;
+                if (映射列Dic.ContainsKey(导入列))
+                {
+                    MessageBox.Show("该列已经被选择过");
+                    return;
+                }
+                if (写入列 == 上一次写入列)
+                {
+                    MessageBox.Show("该列已经被选择过");
+                    return;
+                }
+                映射列Dic.Add(导入列, 写入列);
+                上一次写入列 = Col4.SelectedIndex + 1;
+                listBox1.Items.Add($"{Col2.SelectedItem}-- {Col4.SelectedItem}");
+                Col2.SelectedIndex = -1;
+                Col4.SelectedIndex = -1;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -393,41 +465,67 @@ namespace 插件.MyCode
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            comboBox1.Items.Clear();
-            foreach (Workbook wk in WKs)
+            try
             {
-                try
+                listBox1.Items.Clear();
+                上一次写入列 = -1;
+                空白列 = 1;
+                comboBox1.Items.Clear();
+                comboBox2.Items.Clear();
+                Col1.Items.Clear();
+                Col2.Items.Clear();
+                foreach (Workbook wk in WKs)
                 {
-                    comboBox1.Items.Add(wk.Name);
+                    try
+                    {
+                        comboBox1.Items.Add(wk.Name);
+                    }
+                    finally
+                    {
+                        Marshal.ReleaseComObject(wk);
+                    }
                 }
-                finally
+                if (comboBox1.Items.Count > 0)
                 {
-                    Marshal.ReleaseComObject(wk);
+                    comboBox1.SelectedIndex = 0;
                 }
             }
-            if (comboBox1.Items.Count > 0)
+            catch (Exception)
             {
-                comboBox1.SelectedIndex = 0;
+                throw;
             }
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            comboBox3.Items.Clear();
-            foreach (Workbook wk in WKs)
+            try
             {
-                try
+                listBox1.Items.Clear();
+                上一次写入列 = -1;
+                空白列 = 1;
+                comboBox3.Items.Clear();
+                comboBox4.Items.Clear();
+                Col4.Items.Clear();
+                Col3.Items.Clear();
+                foreach (Workbook wk in WKs)
                 {
-                    comboBox3.Items.Add(wk.Name);
+                    try
+                    {
+                        comboBox3.Items.Add(wk.Name);
+                    }
+                    finally
+                    {
+                        Marshal.ReleaseComObject(wk);
+                    }
                 }
-                finally
+                if (comboBox3.Items.Count > 0)
                 {
-                    Marshal.ReleaseComObject(wk);
+                    comboBox3.SelectedIndex = 0;
                 }
             }
-            if (comboBox3.Items.Count > 0)
+            catch (Exception)
             {
-                comboBox3.SelectedIndex = 0;
+                throw;
             }
         }
 
@@ -436,99 +534,30 @@ namespace 插件.MyCode
             Globals.ThisAddIn.查询form = null;
         }
 
-        private void CheckList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Tip2.Text = $"共选择了{CheckList1.CheckedItems.Count.ToString()}项数据";
-        }
+        private int 空白列 = 1;
 
-        private void 需求空白列text_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            try
+            if (Col4.Items.Count > 0)
             {
-                int.TryParse(需求空白列text.Text, out int count);
-                foreach (string str in CheckList1.Items)
-                {
-                    if (str == "空白列")
-                    {
-                        CheckList1.Items.Remove(str);
-                    }
-                }
-                for (int i = 0; i < count; i++)
-                {
-                    CheckList1.Items.Add("空白列");
-                }
-            }
-            catch (Exception)
-            {
+                Col4.Items.Add("空白列" + 空白列);
+                空白列++;
+                Col4.SelectedIndex = Col4.Items.Count - 1;
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
-
-                Process.Start("notepad.exe", jsonFilePath);
-                IsChanged = true;
-                button4.Enabled = IsChanged;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            listBox1.Items.Clear();
+            上一次写入列 = 1;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!IsChanged) return;
-                LoadConfig();
-                MessageBox.Show("数据更新成功");
-                IsChanged = false;
-                button4.Enabled = IsChanged;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private List<DataTypeInfo> 列表数据 = new List<DataTypeInfo>();
-
-        private void LoadConfig()
-        {
-            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ColName.json");
-            try
-            {
-                using (FileStream stream = new FileStream(jsonFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        string json = reader.ReadToEnd();
-                        using (JsonTextReader jsonReader = new JsonTextReader(new StringReader(json)))
-                        {
-                            JsonSerializer serializer = new JsonSerializer();
-                            List<DataTypeInfo> listData = serializer.Deserialize<List<DataTypeInfo>>(jsonReader);
-                            // 这里假设列表数据是类中的成员变量，将反序列化后的数据赋值给它
-                            列表数据 = listData;
-                        }
-                    }
-                }
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("配置文件未找到。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (JsonException ex)
-            {
-                MessageBox.Show($"解析JSON时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"发生其他错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var allitem = listBox1.Items;
+            allitem.Remove(allitem.Count - 1);
+            listBox1.Items.Clear();
+            listBox1.Items.AddRange(allitem);
         }
     }
 }
