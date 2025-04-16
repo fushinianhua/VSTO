@@ -41,7 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.添加项目 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.Col4 = new System.Windows.Forms.ComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -53,25 +53,19 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.添加项目 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +84,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(8, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(542, 136);
+            this.groupBox1.Size = new System.Drawing.Size(542, 153);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查找范围";
@@ -101,7 +95,7 @@
             this.Col2.FormattingEnabled = true;
             this.Col2.Location = new System.Drawing.Point(361, 61);
             this.Col2.Name = "Col2";
-            this.Col2.Size = new System.Drawing.Size(109, 24);
+            this.Col2.Size = new System.Drawing.Size(142, 24);
             this.Col2.TabIndex = 17;
             this.Col2.SelectedIndexChanged += new System.EventHandler(this.Col2_SelectedIndexChanged);
             // 
@@ -178,7 +172,7 @@
             this.Col1.FormattingEnabled = true;
             this.Col1.Location = new System.Drawing.Point(76, 59);
             this.Col1.Name = "Col1";
-            this.Col1.Size = new System.Drawing.Size(109, 24);
+            this.Col1.Size = new System.Drawing.Size(146, 24);
             this.Col1.TabIndex = 8;
             this.Col1.SelectedIndexChanged += new System.EventHandler(this.Col1_SelectedIndexChanged);
             // 
@@ -216,22 +210,22 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Location = new System.Drawing.Point(8, 149);
+            this.groupBox2.Location = new System.Drawing.Point(8, 166);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(542, 146);
+            this.groupBox2.Size = new System.Drawing.Size(542, 191);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "查找关键字及写入";
             // 
-            // 添加项目
+            // button1
             // 
-            this.添加项目.Location = new System.Drawing.Point(675, 178);
-            this.添加项目.Name = "添加项目";
-            this.添加项目.Size = new System.Drawing.Size(84, 25);
-            this.添加项目.TabIndex = 10;
-            this.添加项目.Text = "添加";
-            this.添加项目.UseVisualStyleBackColor = true;
-            this.添加项目.Click += new System.EventHandler(this.添加项目_Click);
+            this.button1.Location = new System.Drawing.Point(420, 100);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(74, 29);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "添加空白列";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Col4
             // 
@@ -239,7 +233,7 @@
             this.Col4.FormattingEnabled = true;
             this.Col4.Location = new System.Drawing.Point(361, 70);
             this.Col4.Name = "Col4";
-            this.Col4.Size = new System.Drawing.Size(109, 24);
+            this.Col4.Size = new System.Drawing.Size(145, 24);
             this.Col4.TabIndex = 32;
             this.Col4.SelectedIndexChanged += new System.EventHandler(this.Col4_SelectedIndexChanged);
             // 
@@ -277,7 +271,7 @@
             // Tip4
             // 
             this.Tip4.Enabled = false;
-            this.Tip4.Location = new System.Drawing.Point(359, 115);
+            this.Tip4.Location = new System.Drawing.Point(361, 148);
             this.Tip4.Name = "Tip4";
             this.Tip4.Size = new System.Drawing.Size(109, 21);
             this.Tip4.TabIndex = 24;
@@ -285,7 +279,7 @@
             // Tip3
             // 
             this.Tip3.Enabled = false;
-            this.Tip3.Location = new System.Drawing.Point(76, 115);
+            this.Tip3.Location = new System.Drawing.Point(75, 148);
             this.Tip3.Name = "Tip3";
             this.Tip3.Size = new System.Drawing.Size(109, 21);
             this.Tip3.TabIndex = 23;
@@ -304,9 +298,9 @@
             // 
             this.Col3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Col3.FormattingEnabled = true;
-            this.Col3.Location = new System.Drawing.Point(77, 70);
+            this.Col3.Location = new System.Drawing.Point(75, 70);
             this.Col3.Name = "Col3";
-            this.Col3.Size = new System.Drawing.Size(109, 24);
+            this.Col3.Size = new System.Drawing.Size(145, 24);
             this.Col3.TabIndex = 19;
             this.Col3.SelectedIndexChanged += new System.EventHandler(this.Col3_SelectedIndexChanged);
             // 
@@ -340,55 +334,15 @@
             this.label13.Text = "选择列:";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox3
+            // 添加项目
             // 
-            this.groupBox3.Controls.Add(this.textBox7);
-            this.groupBox3.Controls.Add(this.textBox6);
-            this.groupBox3.Controls.Add(this.checkBox2);
-            this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Location = new System.Drawing.Point(8, 299);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(542, 66);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(456, 27);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(49, 21);
-            this.textBox7.TabIndex = 7;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(148, 26);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(49, 21);
-            this.textBox6.TabIndex = 7;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox2.Location = new System.Drawing.Point(306, 27);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(162, 20);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "重复结果串联值：";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox1.Location = new System.Drawing.Point(12, 26);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(145, 20);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "替换无结果值：";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.添加项目.Location = new System.Drawing.Point(556, 229);
+            this.添加项目.Name = "添加项目";
+            this.添加项目.Size = new System.Drawing.Size(58, 40);
+            this.添加项目.TabIndex = 10;
+            this.添加项目.Text = "添加";
+            this.添加项目.UseVisualStyleBackColor = true;
+            this.添加项目.Click += new System.EventHandler(this.添加项目_Click);
             // 
             // label1
             // 
@@ -434,6 +388,8 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
+            this.checkBox3.Checked = true;
+            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox3.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox3.Location = new System.Drawing.Point(28, 21);
             this.checkBox3.Name = "checkBox3";
@@ -448,24 +404,14 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(556, 12);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(188, 160);
+            this.listBox1.Size = new System.Drawing.Size(188, 196);
             this.listBox1.TabIndex = 9;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(471, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 25);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "添加空白列";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(675, 220);
+            this.button3.Location = new System.Drawing.Point(620, 229);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 25);
+            this.button3.Size = new System.Drawing.Size(69, 40);
             this.button3.TabIndex = 11;
             this.button3.Text = "全部删除";
             this.button3.UseVisualStyleBackColor = true;
@@ -473,9 +419,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(675, 270);
+            this.button4.Location = new System.Drawing.Point(695, 232);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(84, 25);
+            this.button4.Size = new System.Drawing.Size(69, 37);
             this.button4.TabIndex = 12;
             this.button4.Text = "删除上一个";
             this.button4.UseVisualStyleBackColor = true;
@@ -490,7 +436,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.添加项目);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
@@ -508,8 +453,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
@@ -520,12 +463,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.ComboBox comboBox1;

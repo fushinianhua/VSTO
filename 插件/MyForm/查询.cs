@@ -63,12 +63,12 @@ namespace 插件.MyCode
                 comboBox3.SelectedIndex = 0;
             }
             textBox5.Text = "0";
-            textBox6.Text = "无";
-            textBox7.Text = "重";
         }
 
         private void Run()
         {
+            Worksheet 导入文件=null;
+            Worksheet 目标文件=null;
             try
             {
                 string item = comboBox1.SelectedItem?.ToString();//导入文件的工作薄
@@ -89,8 +89,8 @@ namespace 插件.MyCode
                     MessageBox.Show("textBox5 中的输入无效，请输入有效的数字。");
                     return;
                 }
-                Worksheet 导入文件 = (Worksheet)WKs[item].Worksheets[item2];//导入的文件
-                Worksheet 目标文件 = (Worksheet)WKs[item3].Worksheets[item4];//目标文件
+                导入文件 = (Worksheet)WKs[item].Worksheets[item2];//导入的文件
+                目标文件 = (Worksheet)WKs[item3].Worksheets[item4];//目标文件
 
                 Range EndRange = 目标文件.Cells[目标文件.Rows.Count, 写入列索引]; //写入文件的最后一行
                 int EndRow = EndRange.End[XlDirection.xlUp].Row;//写入文件的最后一行的行数
@@ -118,18 +118,46 @@ namespace 插件.MyCode
                 for (int i = 0; i < 写入列表.Count; i++)
                 {
                     string[] data = new string[映射列Dic.Count];
-                    for (int j = 0; i < 映射列Dic.Count; j++)
+                    for (int j = 0; j < 映射列Dic.Count; j++)
                     {
                         int a = 映射列[j];
-                        data[j] = 总数据[i, a].ToString();
+                        data[j] = 总数据[i + 1, a]?.ToString();
                     }
                     数据列表.Add(data);
                 }
+                int 重复项 = 0;
+                for (int i = 0; i < 写入列表.Count; i++)
+                {
+                    string key = 写入列表[i];
+                    if (目标列表.Contains(key))
+                    {
+                        for (int j = 0; j < 数据列表[i].Length; j++)
+                        {
+                            int 写入列 = 映射列Dic[映射列[j]];
+                            Range r = 目标文件.Cells[i + 1, 写入列];
+                            string 单元格值 = r.Value2?.ToString();
+                            if (单元格值 == null || 单元格值 == "")
+                            {
+                                r.Value2 = 数据列表[i][j];
+                            }
+                            Marshal.ReleaseComObject(r);
+                        }
+                    }
+                }
+                if (checkBox3.Checked)
+                {
+                    Close();
+                }
+                MessageBox.Show($"共有{重复项}个重复项");
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             finally
             {
+                Marshal.ReleaseComObject(目标文件);
+                Marshal.ReleaseComObject(导入文件);
             }
         }
 
@@ -282,6 +310,9 @@ namespace 插件.MyCode
                 if (item != "")
                 {
                     Workbook workbook = WKs[item];
+                    listBox1.Items.Clear();
+                    上一次写入列 = -1;
+                    空白列 = 1;
                     comboBox2.Text = "";
                     comboBox2.Items.Clear();
                     Col1.Text = "";
@@ -348,6 +379,9 @@ namespace 插件.MyCode
                 if (item != "")
                 {
                     Workbook workbook = WKs[item3];
+                    listBox1.Items.Clear();
+                    上一次写入列 = -1;
+                    空白列 = 1;
                     comboBox4.Items.Clear();
                     comboBox4.Text = "";
                     Col3.Text = "";
@@ -442,7 +476,7 @@ namespace 插件.MyCode
             }
             catch (Exception)
             {
-                throw;
+
             }
         }
 
@@ -554,6 +588,7 @@ namespace 插件.MyCode
 
         private void button4_Click(object sender, EventArgs e)
         {
+            映射列Dic.Clear();
             var allitem = listBox1.Items;
             allitem.Remove(allitem.Count - 1);
             listBox1.Items.Clear();
