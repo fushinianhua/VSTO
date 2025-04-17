@@ -90,9 +90,11 @@ namespace 插件.MyCode
                     MessageBox.Show("textBox5 中的输入无效，请输入有效的数字。");
                     return;
                 }
-                导入文件 = (Worksheet)WKs[item].Worksheets[item2];
+                // 获取导入文件和目标文件
+               导入文件 = (Worksheet)WKs[item].Worksheets[item2];
                 目标文件 = (Worksheet)WKs[item3].Worksheets[item4];
 
+                // 获取目标文件的写入列数据
                 Range targetEndRange = 目标文件.Cells[目标文件.Rows.Count, 写入列索引];
                 int targetEndRow = targetEndRange.End[XlDirection.xlUp].Row;
                 Range targetRng = 目标文件.Range[目标文件.Cells[1, 写入列索引], 目标文件.Cells[targetEndRow, 写入列索引]];
@@ -101,6 +103,7 @@ namespace 插件.MyCode
                 Marshal.ReleaseComObject(targetEndRange);
                 Marshal.ReleaseComObject(targetRng);
 
+                // 获取导入文件的导入列数据
                 Range EndRange = 导入文件.Cells[导入文件.Rows.Count, 导入列索引];
                 int EndRow = EndRange.End[XlDirection.xlUp].Row;
                 Range rng = 导入文件.Range[导入文件.Cells[1, 导入列索引], 导入文件.Cells[EndRow, 导入列索引]];
@@ -109,6 +112,7 @@ namespace 插件.MyCode
                 Marshal.ReleaseComObject(EndRange);
                 Marshal.ReleaseComObject(rng);
 
+                // 获取导入文件的总数据
                 Range EndColumnRange = 导入文件.Cells[1, 导入文件.Columns.Count];
                 int EndColumn = EndColumnRange.End[XlDirection.xlToLeft].Column;
                 Range rngs = 导入文件.Range[导入文件.Cells[1, 1], 导入文件.Cells[EndRow, EndColumn]];
@@ -116,6 +120,7 @@ namespace 插件.MyCode
                 Marshal.ReleaseComObject(EndColumnRange);
                 Marshal.ReleaseComObject(rngs);
 
+                // 构建数据列表
                 List<string[]> 数据列表 = new List<string[]>();
                 List<int> 映射列 = 映射列Dic.Keys.ToList();
                 for (int i = 0; i < 写入列表.Count; i++)
@@ -128,6 +133,18 @@ namespace 插件.MyCode
                     }
                     数据列表.Add(data);
                 }
+
+                // 创建行号映射表
+                Dictionary<string, int> 行号映射表 = new Dictionary<string, int>();
+                for (int i = 0; i < 写入列表.Count; i++)
+                {
+                    string key = 写入列表[i];
+                    if (!行号映射表.ContainsKey(key))
+                    {
+                        行号映射表[key] = i;
+                    }
+                }
+
                 List<string> 已经写入值 = new List<string>();
                 List<string> 重复项 = new List<string> { };
 
@@ -137,33 +154,27 @@ namespace 插件.MyCode
                     if (string.IsNullOrEmpty(key)) continue;
                     if (写入列表.Contains(key))
                     {
-                        // 修改点2：使用行号映射表查找真实行号
                         if (已经写入值.Contains(key))
                         {
                             重复项.Add(key);
                         }
                         已经写入值.Add(key);
-                        for (int j = 0; j < 数据列表[i].Length; j++)
+
+                        int 导入文件行号 = 行号映射表[key];
+                        for (int j = 0; j < 数据列表[导入文件行号].Length; j++)
                         {
                             int 写入列 = 映射列Dic[映射列[j]];
-                            // 修改点4：使用正确的目标行号
                             Range r = 目标文件.Cells[i + 1, 写入列];
                             string 单元格值 = r.Value2?.ToString();
                             if (string.IsNullOrEmpty(单元格值))
                             {
-                                int row = 写入列表.IndexOf(key);
-                                r.Value2 = 数据列表[row][j];
+                                r.Value2 = 数据列表[导入文件行号][j];
                             }
-                            Marshal.ReleaseComObject(r); // 修改点5：及时释放对象
+                            Marshal.ReleaseComObject(r);
                         }
                     }
                 }
-
-                if (checkBox3.Checked)
-                {
-                    Close();
-                }
-                MessageBox.Show($"共有{重复项.Count}个重复项");
+                MessageBox.Show($"共有{重复项.Count}个重复");
             }
             catch (Exception ex)
             {
@@ -191,6 +202,10 @@ namespace 插件.MyCode
                             if (!string.IsNullOrEmpty(value))
                             {
                                 strings.Add(value);
+                            }
+                            else
+                            {
+                                strings.Add("");
                             }
                         }
                     }
