@@ -67,14 +67,15 @@ namespace 插件.MyCode
 
         private void Run()
         {
-            Worksheet 导入文件=null;
-            Worksheet 目标文件=null;
+            Worksheet 导入文件 = null;
+            Worksheet 目标文件 = null;
             try
             {
-                string item = comboBox1.SelectedItem?.ToString();//导入文件的工作薄
-                string item2 = comboBox2.SelectedItem?.ToString();//导入文件的工作表名
-                string item3 = comboBox3.SelectedItem?.ToString();//写入文件的工作薄
-                string item4 = comboBox4.SelectedItem?.ToString();//写入文件的工作表名
+                // 原始代码保持不变
+                string item = comboBox1.SelectedItem?.ToString();
+                string item2 = comboBox2.SelectedItem?.ToString();
+                string item3 = comboBox3.SelectedItem?.ToString();
+                string item4 = comboBox4.SelectedItem?.ToString();
                 int 导入列索引 = Col1.SelectedIndex + 1;
                 int 写入列索引 = Col3.SelectedIndex + 1;
 
@@ -89,32 +90,44 @@ namespace 插件.MyCode
                     MessageBox.Show("textBox5 中的输入无效，请输入有效的数字。");
                     return;
                 }
-                导入文件 = (Worksheet)WKs[item].Worksheets[item2];//导入的文件
-                目标文件 = (Worksheet)WKs[item3].Worksheets[item4];//目标文件
+                导入文件 = (Worksheet)WKs[item].Worksheets[item2];
+                目标文件 = (Worksheet)WKs[item3].Worksheets[item4];
 
-                Range EndRange = 目标文件.Cells[目标文件.Rows.Count, 写入列索引]; //写入文件的最后一行
-                int EndRow = EndRange.End[XlDirection.xlUp].Row;//写入文件的最后一行的行数
-                Range rng = 目标文件.Range[目标文件.Cells[1, 写入列索引], 目标文件.Cells[EndRow, 写入列索引]];//写入文件的第一行到最后一行的范围
-                object[,] values = rng.Value2;//写入文件的第一行到最后一行的值
-                List<string> 目标列表 = 转换列表(values); //把数据转换成列表
-                Marshal.ReleaseComObject(EndRange); Marshal.ReleaseComObject(rng);
+                // 修改点1：构建目标文件行号映射表
+                Dictionary<string, int> 目标行映射 = new Dictionary<string, int>();
+                Range targetEndRange = 目标文件.Cells[目标文件.Rows.Count, 写入列索引];
+                int targetEndRow = targetEndRange.End[XlDirection.xlUp].Row;
+                Range targetRng = 目标文件.Range[目标文件.Cells[1, 写入列索引], 目标文件.Cells[targetEndRow, 写入列索引]];
+                object[,] targetValues = targetRng.Value2;
+                for (int row = 1; row <= targetValues.GetLength(0); row++) // 行号从1开始
+                {
+                    string key = targetValues[row, 1]?.ToString();
+                    if (!string.IsNullOrEmpty(key) && !目标行映射.ContainsKey(key))
+                    {
+                        目标行映射.Add(key, row); // 记录实际行号
+                    }
+                }
+                Marshal.ReleaseComObject(targetEndRange);
+                Marshal.ReleaseComObject(targetRng);
 
-                EndRange = 导入文件.Cells[导入文件.Rows.Count, 导入列索引];//导入文件的最后一行
-                EndRow = EndRange.End[XlDirection.xlUp].Row;//导入文件的最后一行的行数
-                rng = 导入文件.Range[导入文件.Cells[1, 导入列索引], 导入文件.Cells[EndRow, 导入列索引]];//写入文件的第一行到最后一行的范围
-                values = rng.Value2;//写入文件的第一行到最后一行的值
-                List<string> 写入列表 = 转换列表(values); //把数据转换成列表
-                Marshal.ReleaseComObject(EndRange); Marshal.ReleaseComObject(rng);
+                // 原始数据读取逻辑保持不变
+                Range EndRange = 导入文件.Cells[导入文件.Rows.Count, 导入列索引];
+                int EndRow = EndRange.End[XlDirection.xlUp].Row;
+                Range rng = 导入文件.Range[导入文件.Cells[1, 导入列索引], 导入文件.Cells[EndRow, 导入列索引]];
+                object[,] values = rng.Value2;
+                List<string> 写入列表 = 转换列表(values);
+                Marshal.ReleaseComObject(EndRange);
+                Marshal.ReleaseComObject(rng);
 
                 Range EndColumnRange = 导入文件.Cells[1, 导入文件.Columns.Count];
-                int EndColumn = EndColumnRange.End[XlDirection.xlToLeft].Column;//导入文件的最后一列的列数
+                int EndColumn = EndColumnRange.End[XlDirection.xlToLeft].Column;
                 Range rngs = 导入文件.Range[导入文件.Cells[1, 1], 导入文件.Cells[EndRow, EndColumn]];
                 object[,] 总数据 = rngs.Value2;
-                Marshal.ReleaseComObject(EndColumnRange); Marshal.ReleaseComObject(rngs);
+                Marshal.ReleaseComObject(EndColumnRange);
+                Marshal.ReleaseComObject(rngs);
 
                 List<string[]> 数据列表 = new List<string[]>();
                 List<int> 映射列 = 映射列Dic.Keys.ToList();
-
                 for (int i = 0; i < 写入列表.Count; i++)
                 {
                     string[] data = new string[映射列Dic.Count];
@@ -125,30 +138,40 @@ namespace 插件.MyCode
                     }
                     数据列表.Add(data);
                 }
-                int 重复项 = 0;
+                List<string> 已经写入值 = new List<string>();
+                List<string> 重复项 = new List<string> { };
+
                 for (int i = 0; i < 写入列表.Count; i++)
                 {
                     string key = 写入列表[i];
-                    if (目标列表.Contains(key))
+                    // 修改点2：使用行号映射表查找真实行号
+                    if (已经写入值.Contains(key))
+                    {
+                        重复项.Add(key);
+                        continue;
+                    }
+                    if (目标行映射.TryGetValue(key, out int targetRow))
                     {
                         for (int j = 0; j < 数据列表[i].Length; j++)
                         {
                             int 写入列 = 映射列Dic[映射列[j]];
-                            Range r = 目标文件.Cells[i + 1, 写入列];
+                            // 修改点4：使用正确的目标行号
+                            Range r = 目标文件.Cells[targetRow, 写入列];
                             string 单元格值 = r.Value2?.ToString();
-                            if (单元格值 == null || 单元格值 == "")
+                            if (string.IsNullOrEmpty(单元格值))
                             {
                                 r.Value2 = 数据列表[i][j];
                             }
-                            Marshal.ReleaseComObject(r);
+                            Marshal.ReleaseComObject(r); // 修改点5：及时释放对象
                         }
                     }
                 }
+
                 if (checkBox3.Checked)
                 {
                     Close();
                 }
-                MessageBox.Show($"共有{重复项}个重复项");
+                MessageBox.Show($"共有{重复项.Count}个重复项");
             }
             catch (Exception ex)
             {
@@ -476,7 +499,6 @@ namespace 插件.MyCode
             }
             catch (Exception)
             {
-
             }
         }
 
@@ -582,17 +604,21 @@ namespace 插件.MyCode
 
         private void button3_Click(object sender, EventArgs e)
         {
+            映射列Dic.Clear();
             listBox1.Items.Clear();
-            上一次写入列 = 1;
+            上一次写入列 = 0;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            映射列Dic.Clear();
+            int count = 映射列Dic.Count - 1;
+            var key = 映射列Dic.Keys.ToList();
+            映射列Dic.Remove(key[key.Count - 1]);
             var allitem = listBox1.Items;
             allitem.Remove(allitem.Count - 1);
             listBox1.Items.Clear();
             listBox1.Items.AddRange(allitem);
+            上一次写入列 = 0;
         }
     }
 }

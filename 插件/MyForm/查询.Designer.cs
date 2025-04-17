@@ -60,7 +60,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.AllDeleBut = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -407,15 +407,15 @@
             this.listBox1.Size = new System.Drawing.Size(188, 196);
             this.listBox1.TabIndex = 9;
             // 
-            // button3
+            // AllDeleBut
             // 
-            this.button3.Location = new System.Drawing.Point(620, 229);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(69, 40);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "全部删除";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.AllDeleBut.Location = new System.Drawing.Point(620, 229);
+            this.AllDeleBut.Name = "AllDeleBut";
+            this.AllDeleBut.Size = new System.Drawing.Size(69, 40);
+            this.AllDeleBut.TabIndex = 11;
+            this.AllDeleBut.Text = "全部删除";
+            this.AllDeleBut.UseVisualStyleBackColor = true;
+            this.AllDeleBut.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -433,7 +433,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(771, 422);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.AllDeleBut);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.添加项目);
             this.Controls.Add(this.groupBox2);
@@ -493,7 +493,7 @@
         private System.Windows.Forms.Button 添加项目;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button AllDeleBut;
         private System.Windows.Forms.Button button4;
     }
 }
