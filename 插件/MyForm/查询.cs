@@ -93,24 +93,14 @@ namespace 插件.MyCode
                 导入文件 = (Worksheet)WKs[item].Worksheets[item2];
                 目标文件 = (Worksheet)WKs[item3].Worksheets[item4];
 
-                // 修改点1：构建目标文件行号映射表
-                Dictionary<string, int> 目标行映射 = new Dictionary<string, int>();
                 Range targetEndRange = 目标文件.Cells[目标文件.Rows.Count, 写入列索引];
                 int targetEndRow = targetEndRange.End[XlDirection.xlUp].Row;
                 Range targetRng = 目标文件.Range[目标文件.Cells[1, 写入列索引], 目标文件.Cells[targetEndRow, 写入列索引]];
                 object[,] targetValues = targetRng.Value2;
-                for (int row = 1; row <= targetValues.GetLength(0); row++) // 行号从1开始
-                {
-                    string key = targetValues[row, 1]?.ToString();
-                    if (!string.IsNullOrEmpty(key) && !目标行映射.ContainsKey(key))
-                    {
-                        目标行映射.Add(key, row); // 记录实际行号
-                    }
-                }
+                List<string> 目标列表 = 转换列表(targetValues);
                 Marshal.ReleaseComObject(targetEndRange);
                 Marshal.ReleaseComObject(targetRng);
 
-                // 原始数据读取逻辑保持不变
                 Range EndRange = 导入文件.Cells[导入文件.Rows.Count, 导入列索引];
                 int EndRow = EndRange.End[XlDirection.xlUp].Row;
                 Range rng = 导入文件.Range[导入文件.Cells[1, 导入列索引], 导入文件.Cells[EndRow, 导入列索引]];
@@ -141,26 +131,28 @@ namespace 插件.MyCode
                 List<string> 已经写入值 = new List<string>();
                 List<string> 重复项 = new List<string> { };
 
-                for (int i = 0; i < 写入列表.Count; i++)
+                for (int i = 0; i < 目标列表.Count; i++)
                 {
-                    string key = 写入列表[i];
-                    // 修改点2：使用行号映射表查找真实行号
-                    if (已经写入值.Contains(key))
+                    string key = 目标列表[i];
+                    if (string.IsNullOrEmpty(key)) continue;
+                    if (写入列表.Contains(key))
                     {
-                        重复项.Add(key);
-                        continue;
-                    }
-                    if (目标行映射.TryGetValue(key, out int targetRow))
-                    {
+                        // 修改点2：使用行号映射表查找真实行号
+                        if (已经写入值.Contains(key))
+                        {
+                            重复项.Add(key);
+                        }
+                        已经写入值.Add(key);
                         for (int j = 0; j < 数据列表[i].Length; j++)
                         {
                             int 写入列 = 映射列Dic[映射列[j]];
                             // 修改点4：使用正确的目标行号
-                            Range r = 目标文件.Cells[targetRow, 写入列];
+                            Range r = 目标文件.Cells[i + 1, 写入列];
                             string 单元格值 = r.Value2?.ToString();
                             if (string.IsNullOrEmpty(单元格值))
                             {
-                                r.Value2 = 数据列表[i][j];
+                                int row = 写入列表.IndexOf(key);
+                                r.Value2 = 数据列表[row][j];
                             }
                             Marshal.ReleaseComObject(r); // 修改点5：及时释放对象
                         }
